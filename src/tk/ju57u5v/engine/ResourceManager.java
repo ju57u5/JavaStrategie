@@ -1,6 +1,11 @@
 package tk.ju57u5v.engine;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -31,6 +36,7 @@ public class ResourceManager {
 		try {
 			textures.put(pQuery, ImageIO.read(imagePath));
 		} catch(IOException exeption) {}
+		convertToGoodFormat(pQuery);
 	}
 	
 	public BufferedImage getScaledResource(String pQuery) {
@@ -57,5 +63,18 @@ public class ResourceManager {
 			g.drawRenderedImage(sbi, at);
 		}
 		return dbi;
+	}
+	
+	private void convertToGoodFormat(String pQuery) {
+		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice device = env.getDefaultScreenDevice();
+		GraphicsConfiguration config = device.getDefaultConfiguration();
+		BufferedImage buffy = config.createCompatibleImage(getResource(pQuery).getWidth(), getResource(pQuery).getWidth(), Transparency.TRANSLUCENT);
+		
+		Graphics g = buffy.getGraphics();
+		g.drawImage(getResource(pQuery),0,0,null);
+		g.dispose();
+		textures.put(pQuery, buffy);
+	
 	}
 }

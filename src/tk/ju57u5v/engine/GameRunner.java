@@ -31,21 +31,24 @@ public class GameRunner extends Thread {
 	private void render() {
 		strategy = game.window.getBufferStrategy();
 		if (strategy == null) {
-			game.window.createBufferStrategy(3);
+			game.window.createBufferStrategy(4);
 			return;
 		}
-		
-		Graphics g = strategy.getDrawGraphics();
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, game.window.getWidth(), game.window.getHeight());
-		if (!pause) {
-		
-		
-		}
-		renderer.update(g);
-		work();
-		g.dispose();
-		strategy.show();
+		 do {
+			do {
+				Graphics g = strategy.getDrawGraphics();
+				g.setColor(Color.WHITE);
+				g.fillRect(0, 0, game.window.getWidth(), game.window.getHeight());
+				if (!pause) {
+				
+				
+				}
+				renderer.update(g);
+				work();
+				//g.dispose();
+			} while (strategy.contentsRestored());
+			strategy.show();
+		 } while (strategy.contentsLost());
 	}
 	
 	public void work() {
