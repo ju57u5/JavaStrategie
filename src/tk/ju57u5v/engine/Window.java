@@ -1,14 +1,17 @@
 package tk.ju57u5v.engine;
 
+import java.awt.Canvas;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-public class Window extends JFrame{
+public class Window extends Canvas{
 	Game game;
 	BufferStrategy strategy;
+	
+	private JFrame frame = new JFrame();
 	
 	class WindowListener extends WindowAdapter
 	{
@@ -21,12 +24,15 @@ public class Window extends JFrame{
 	
 	public Window(Game game) {
 		this.game=game;
+		
 		this.addKeyListener(game);
-		setTitle("Strategie-JavaGame"); // Fenstertitel setzen
-		setSize(1200,900); 
-		addWindowListener(new WindowListener());
-		setLocationRelativeTo(null); 
-		setVisible(true);
+		
+		
+		frame.setTitle("Strategie-JavaGame"); // Fenstertitel setzen
+		frame.setSize(1200,900); 
+		frame.addWindowListener(new WindowListener());
+		frame.setLocationRelativeTo(null); 
+		frame.setVisible(true);
 		
 		
 	}

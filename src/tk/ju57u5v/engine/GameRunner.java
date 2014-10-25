@@ -3,6 +3,7 @@ package tk.ju57u5v.engine;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
@@ -13,6 +14,7 @@ public class GameRunner extends Thread {
 	private Renderer renderer; 
 	private boolean pause = false;
 	protected BufferStrategy strategy;
+	protected BufferedImage dbImage = new BufferedImage(1200, 900, BufferedImage.TYPE_INT_BGR);
 	
 	public GameRunner(Game game) {
 		this.game = game;
@@ -38,14 +40,14 @@ public class GameRunner extends Thread {
 			do {
 				Graphics g = strategy.getDrawGraphics();
 				g.setColor(Color.WHITE);
-				g.fillRect(0, 0, game.window.getWidth(), game.window.getHeight());
+				g.drawImage(dbImage, 0, 0, game.window);
 				if (!pause) {
 				
 				
 				}
-				renderer.update(g);
+				renderer.update(dbImage.getGraphics());
 				work();
-				//g.dispose();
+				g.dispose();
 			} while (strategy.contentsRestored());
 			strategy.show();
 		 } while (strategy.contentsLost());

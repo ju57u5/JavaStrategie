@@ -3,36 +3,35 @@ package tk.ju57u5v.engine;
 import java.awt.Graphics;
 
 public class Entity extends Position {
-	
+
 	protected Game game;
-	
+
 	public Entity(Game game) {
-		this.game=game;
+		this.game = game;
 	}
-	
-	public void setPosition (int x, int y) {
+
+	public void setPosition(int x, int y) {
 		super.setX(x);
 		super.setY(y);
 		game.kamera.setRelativPostion(this);
 	}
-	
-	public void setX (int x) {
+
+	public void setX(int x) {
 		super.setX(x);
 		game.kamera.setRelativPostion(this);
 	}
-	
-	public void setY (int y) {
+
+	public void setY(int y) {
 		super.setY(y);
 		game.kamera.setRelativPostion(this);
 	}
-	
-	public void update () {
-		
+
+	public void update() {
+
 	}
-	
-	public void render (Graphics g) {
-		
+
+	public void render(Graphics g) {
+
 	}
-	
-	
+
 }
