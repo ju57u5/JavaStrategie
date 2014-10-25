@@ -6,19 +6,31 @@ import java.util.ArrayList;
 
 public class GameRunner extends Thread {
 	
-	private Renderer renderer = new Renderer();
+	protected Game game;
+	private Renderer renderer; 
 	private boolean pause = false;
 	
-	public GameRunner() {
+	public GameRunner(Game game) {
+		this.game = game;
+		renderer = new Renderer(game);
 		this.start();
 	}
 	
 	public void run() {
-		if (!pause) {
-			
-		
+		while (true) {
+			game.getMainGraphics().drawRect(0, 0, game.getMainImage().getWidth(game.window), game.getMainImage().getHeight(game.window));
+			if (!pause) {
+				
+				
+			}
+			renderer.update();
+			work();
+			game.window.paint(game.window.getGraphics());
 		}
-		renderer.update();
+	}
+	
+	public void work() {
+		
 	}
 	
 	public void setPause (boolean pause) {
@@ -32,6 +44,10 @@ public class GameRunner extends Thread {
 	
 	public ArrayList<GameObject> getGameObjects () {
 		return this.renderer.gameObjects;
+	}
+	
+	public Renderer getRenderer() {
+		return renderer;
 	}
 	
 }

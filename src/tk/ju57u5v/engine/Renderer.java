@@ -9,9 +9,15 @@ public class Renderer {
 	
 	private boolean render = true;
 	private boolean update = true;
+	private Game game;
+	
+	public Renderer(Game game) {
+		this.game = game;
+	}
 	
 	public void registerEntity (Entity pEntity) {
 		entities.add(pEntity);
+		game.kamera.setRelativPostion(pEntity);
 	}
 	
 	public void update () {
@@ -29,7 +35,9 @@ public class Renderer {
 	private void updateAndRenderEntities () {
 		for (Entity ent : entities) {
 			ent.update();
-			ent.render();
+			if (game.kamera.isRenderNeeded(ent)) {
+				ent.render();
+			}
 		}
 	}
 	
@@ -41,7 +49,9 @@ public class Renderer {
 	
 	private void renderEntities () {
 		for (Entity ent : entities) {
-			ent.render();
+			if (game.kamera.isRenderNeeded(ent)) {
+				ent.render();
+			}
 		}
 	}
 	
