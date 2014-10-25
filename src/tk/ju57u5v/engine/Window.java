@@ -1,13 +1,14 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferStrategy;
 
-public class Window extends Frame{
+import javax.swing.JFrame;
+
+public class Window extends JFrame{
 	Game game;
+	BufferStrategy strategy;
 	
 	class WindowListener extends WindowAdapter
 	{
@@ -26,11 +27,10 @@ public class Window extends Frame{
 		addWindowListener(new WindowListener());
 		setLocationRelativeTo(null); 
 		setVisible(true);
+		
+		
 	}
 	
-	public void paint(Graphics g) {
-		super.paint(g);
-		
-		g.drawImage(game.getMainImage(),0,0,this);
-	}
+	
+	
 }

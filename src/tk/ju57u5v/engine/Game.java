@@ -26,7 +26,7 @@ public class Game implements KeyListener {
 	}
 	
 	public Graphics getMainGraphics() {
-		return mainBufferImage.getGraphics();
+		return gameRunner.strategy.getDrawGraphics();
 	}
 	
 	public Image getMainImage() {

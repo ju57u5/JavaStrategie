@@ -1,5 +1,7 @@
 package tk.ju57u5v.engine;
 
+import java.awt.Graphics;
+
 public class Entity extends Position {
 	
 	protected Game game;
@@ -28,7 +30,7 @@ public class Entity extends Position {
 		
 	}
 	
-	public void render () {
+	public void render (Graphics g) {
 		
 	}
 	

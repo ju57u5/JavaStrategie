@@ -1,5 +1,8 @@
 package tk.ju57u5v.engine;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
 
@@ -9,6 +12,7 @@ public class GameRunner extends Thread {
 	protected Game game;
 	private Renderer renderer; 
 	private boolean pause = false;
+	protected BufferStrategy strategy;
 	
 	public GameRunner(Game game) {
 		this.game = game;
@@ -18,15 +22,30 @@ public class GameRunner extends Thread {
 	
 	public void run() {
 		while (true) {
-			game.getMainGraphics().drawRect(0, 0, game.getMainImage().getWidth(game.window), game.getMainImage().getHeight(game.window));
-			if (!pause) {
-				
-				
-			}
-			renderer.update();
-			work();
-			game.window.paint(game.window.getGraphics());
+			
+			render();
+			
 		}
+	}
+	
+	private void render() {
+		strategy = game.window.getBufferStrategy();
+		if (strategy == null) {
+			game.window.createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g = strategy.getDrawGraphics();
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, game.window.getWidth(), game.window.getHeight());
+		if (!pause) {
+		
+		
+		}
+		renderer.update(g);
+		work();
+		g.dispose();
+		strategy.show();
 	}
 	
 	public void work() {

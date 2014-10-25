@@ -1,5 +1,6 @@
 package tk.ju57u5v.engine;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Renderer {
@@ -20,23 +21,23 @@ public class Renderer {
 		game.kamera.setRelativPostion(pEntity);
 	}
 	
-	public void update () {
+	public void update (Graphics g) {
 		if (render && update) {
-			updateAndRenderEntities();
-			renderGameObjects();
+			updateAndRenderEntities(g);
+			renderGameObjects(g);
 		} else if (update) {
 			updateEntities();
 		} else if (render) {
-			renderEntities();
-			renderGameObjects();
+			renderEntities(g);
+			renderGameObjects(g);
 		}
 	}
 	
-	private void updateAndRenderEntities () {
+	private void updateAndRenderEntities (Graphics g) {
 		for (Entity ent : entities) {
 			ent.update();
 			if (game.kamera.isRenderNeeded(ent)) {
-				ent.render();
+				ent.render(g);
 			}
 		}
 	}
@@ -47,17 +48,17 @@ public class Renderer {
 		}
 	}
 	
-	private void renderEntities () {
+	private void renderEntities (Graphics g) {
 		for (Entity ent : entities) {
 			if (game.kamera.isRenderNeeded(ent)) {
-				ent.render();
+				ent.render(g);
 			}
 		}
 	}
 	
-	private void renderGameObjects () {
+	private void renderGameObjects (Graphics g) {
 		for (GameObject gameObject : gameObjects) {
-			gameObject.render();
+			gameObject.render(g);
 		}
 	}
 	

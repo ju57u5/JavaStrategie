@@ -1,5 +1,7 @@
 package tk.ju57u5v.game;
 
+import java.awt.Graphics;
+
 import tk.ju57u5v.engine.Entity;
 import tk.ju57u5v.engine.Game;
 
@@ -13,7 +15,8 @@ public class Dorfzentrum extends Entity {
 		game.getGameRunner().getRenderer().registerEntity(this);
 	}
 	
-	public void render () {
-		game.getMainGraphics().drawImage( game.getResourceManager().getScaledResource("test"), getRelativX(), getRelativY(), game.getWindow());
+	@Override
+	public void render (Graphics g) {
+		g.drawImage( game.getResourceManager().getScaledResource("test"), getRelativX(), getRelativY(), game.getWindow());
 	}
 }
