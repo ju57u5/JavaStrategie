@@ -8,6 +8,7 @@ import tk.ju57u5v.engine.Game;
 public class StrategieGame extends Game implements MouseWheelListener {
 
 	public StrategieGame() {
+		super();
 		gameRunner = new GameRunner(this);
 		Dorfzentrum dorfzentrum = new Dorfzentrum(this);
 		dorfzentrum.setPosition(100, 100);

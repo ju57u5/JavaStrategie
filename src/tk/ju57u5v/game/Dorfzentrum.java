@@ -17,6 +17,6 @@ public class Dorfzentrum extends Entity {
 	
 	@Override
 	public void render (Graphics g) {
-		g.drawImage( game.getResourceManager().getScaledResource("test"), getRelativX(), getRelativY(), game.getWindow());
+		g.drawImage( game.getResourceManager().getScaledResource("test"), getRelativX(), getRelativY(), null);
 	}
 }

@@ -1,13 +1,15 @@
 package tk.ju57u5v.engine;
 
 import java.awt.Canvas;
+import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Window extends Canvas{
+public class Window extends JPanel{
 	Game game;
 	BufferStrategy strategy;
 	
@@ -25,7 +27,8 @@ public class Window extends Canvas{
 	public Window(Game game) {
 		this.game=game;
 		
-		this.addKeyListener(game);
+		frame.addKeyListener(game);
+		setIgnoreRepaint(true);
 		
 		
 		frame.setTitle("Strategie-JavaGame"); // Fenstertitel setzen
@@ -33,10 +36,16 @@ public class Window extends Canvas{
 		frame.addWindowListener(new WindowListener());
 		frame.setLocationRelativeTo(null); 
 		frame.setVisible(true);
-		
+		frame.setIgnoreRepaint(true);
+		frame.add(this);
+		setLocation(0, 0);
 		
 	}
 	
-	
-	
+	@Override
+	protected void paintComponent(Graphics g)  {
+		g.clearRect(0, 0, getWidth(), getHeight());
+		game.gameRunner.renderer.update(g);
+		repaint();
+	}
 }

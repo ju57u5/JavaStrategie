@@ -4,10 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
+
 
 public class Game implements KeyListener {
 
@@ -19,7 +16,7 @@ public class Game implements KeyListener {
 	protected boolean[] pressedKeys = new boolean[1000];
 
 	public Game() {
-
+		
 	}
 
 	public Graphics getMainGraphics() {

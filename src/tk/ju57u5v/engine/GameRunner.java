@@ -2,16 +2,19 @@ package tk.ju57u5v.engine;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 
 
 public class GameRunner extends Thread {
 	
 	protected Game game;
-	private Renderer renderer; 
+	Renderer renderer; 
 	private boolean pause = false;
 	protected BufferStrategy strategy;
 	protected BufferedImage dbImage = new BufferedImage(1200, 900, BufferedImage.TYPE_INT_BGR);
@@ -24,33 +27,43 @@ public class GameRunner extends Thread {
 	
 	public void run() {
 		while (true) {
-			
-			render();
-			
+			synchronized(getClass()) { 
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException ex) {
+				}
+				work();
+				render();
+			}
 		}
 	}
 	
 	private void render() {
-		strategy = game.window.getBufferStrategy();
+		/*strategy = game.window.getBufferStrategy();
 		if (strategy == null) {
-			game.window.createBufferStrategy(4);
+			game.window.createBufferStrategy(3);
 			return;
 		}
-		 do {
+		
+		do {
 			do {
 				Graphics g = strategy.getDrawGraphics();
-				g.setColor(Color.WHITE);
-				g.drawImage(dbImage, 0, 0, game.window);
+				
+				g.drawImage(dbImage, 0, 0, null);
 				if (!pause) {
 				
 				
 				}
-				renderer.update(dbImage.getGraphics());
+				//renderer.update(dbImage.getGraphics());
+				renderer.update(g);
 				work();
 				g.dispose();
+				
 			} while (strategy.contentsRestored());
+			
 			strategy.show();
-		 } while (strategy.contentsLost());
+		} while (strategy.contentsLost());
+		Toolkit.getDefaultToolkit().sync();*/
 	}
 	
 	public void work() {
