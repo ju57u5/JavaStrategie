@@ -33,39 +33,14 @@ public class GameRunner extends Thread {
 				} catch (InterruptedException ex) {
 				}
 				work();
-				render();
+				
 			}
 		}
 	}
 	
-	private void render() {
-		/*strategy = game.window.getBufferStrategy();
-		if (strategy == null) {
-			game.window.createBufferStrategy(3);
-			return;
-		}
-		
-		do {
-			do {
-				Graphics g = strategy.getDrawGraphics();
-				
-				g.drawImage(dbImage, 0, 0, null);
-				if (!pause) {
-				
-				
-				}
-				//renderer.update(dbImage.getGraphics());
-				renderer.update(g);
-				work();
-				g.dispose();
-				
-			} while (strategy.contentsRestored());
-			
-			strategy.show();
-		} while (strategy.contentsLost());
-		Toolkit.getDefaultToolkit().sync();*/
-	}
-	
+	/**
+	 * Wird bei jedem Update Ausgeführt; sollte überschrieben werden.
+	 */
 	public void work() {
 		
 	}

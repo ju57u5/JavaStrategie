@@ -12,6 +12,9 @@ public class StrategieGame extends Game implements MouseWheelListener {
 		gameRunner = new GameRunner(this);
 		Dorfzentrum dorfzentrum = new Dorfzentrum(this);
 		dorfzentrum.setPosition(100, 100);
+		Dorfzentrum dorfzentrum2 = new Dorfzentrum(this);
+		dorfzentrum2.setPosition(300, 300);
+		
 		window.addMouseWheelListener(this);
 	}
 

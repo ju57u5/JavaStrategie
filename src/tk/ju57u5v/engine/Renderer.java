@@ -3,6 +3,11 @@ package tk.ju57u5v.engine;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+/**
+ * Rendert alle Resourcen und Verwaltet zu rendernde Objecte.
+ * @author Justus
+ *
+ */
 public class Renderer {
 
 	ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -16,56 +21,64 @@ public class Renderer {
 		this.game = game;
 	}
 
+	/**
+	 * Registriert ein Entity.
+	 * @param pEntity
+	 */
 	public void registerEntity(Entity pEntity) {
 		entities.add(pEntity);
 		game.kamera.setRelativPostion(pEntity);
 	}
 
-	public void update(Graphics g) {
-		if (render && update) {
-			updateAndRenderEntities(g);
-			renderGameObjects(g);
-		} else if (update) {
-			updateEntities();
-		} else if (render) {
-			renderEntities(g);
-			renderGameObjects(g);
-		}
+	/**
+	 * Updated die Entities.
+	 */
+	public void update() {
+		updateEntities();
 	}
-
-	private void updateAndRenderEntities(Graphics g) {
-		for (Entity ent : entities) {
-			ent.update();
-			if (game.kamera.isRenderNeeded(ent)) {
-				ent.render(g);
-			}
-		}
+	
+	/**
+	 * Rendert die Entities und GameObjects, die Registriert wurden.
+	 * @param g
+	 */
+	public void render(Graphics g) {
+		renderEntities(g);
+		renderGameObjects(g);
 	}
+	
 
 	private void updateEntities() {
-		for (Entity ent : entities) {
-			ent.update();
+		for (int c = 0; c < entities.size();c++) {
+			entities.get(c).update();
 		}
 	}
 
 	private void renderEntities(Graphics g) {
-		for (Entity ent : entities) {
-			if (game.kamera.isRenderNeeded(ent)) {
-				ent.render(g);
+		for (int c = 0; c < entities.size();c++) {
+			if (game.kamera.isRenderNeeded(entities.get(c))) {
+				entities.get(c).render(g);
 			}
 		}
 	}
 
 	private void renderGameObjects(Graphics g) {
-		for (GameObject gameObject : gameObjects) {
-			gameObject.render(g);
+		for (int c = 0; c < gameObjects.size();c++) {
+			gameObjects.get(c).render(g);
 		}
 	}
 
+	/**
+	 * Soll gerendert werden?
+	 * @param render
+	 */
 	public void doRender(boolean render) {
 		this.render = render;
 	}
 
+	/**
+	 * Soll ein Update gemacht werden?
+	 * @param update
+	 */
 	public void doUpdate(boolean update) {
 		this.update = update;
 	}

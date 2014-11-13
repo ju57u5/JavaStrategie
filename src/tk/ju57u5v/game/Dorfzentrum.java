@@ -11,7 +11,7 @@ public class Dorfzentrum extends Entity {
 	
 	public Dorfzentrum(Game game) {
 		super(game);
-		game.getResourceManager().loadImage("test.png", "test");
+		game.getResourceManager().loadImage("test2.png", "test");
 		game.getGameRunner().getRenderer().registerEntity(this);
 	}
 	

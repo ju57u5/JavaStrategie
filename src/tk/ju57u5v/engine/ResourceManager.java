@@ -15,6 +15,11 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Managed die Resourcen der Engine.
+ * @author Justus
+ *
+ */
 public class ResourceManager {
 	
 	Map<String,BufferedImage> textures = new HashMap<String,BufferedImage>();
@@ -27,10 +32,21 @@ public class ResourceManager {
 		this.game = game;
 	}
 	
+	
+	/**
+	 * Gibt eine auf den Query geladene Resource als BufferedImage zurück.
+	 * @param pQuery
+	 * @return
+	 */
 	public BufferedImage getResource(String pQuery) {
 		return textures.get(pQuery);
 	}
 	
+	/**
+	 * Lädt ein Image aus dem "texture" Ordner auf den Query String. 
+	 * @param pResourceName
+	 * @param pQuery
+	 */
 	public void loadImage(String pResourceName, String pQuery) {
 		File imagePath = new File(texturePath,"/"+pResourceName);
 		try {
@@ -39,6 +55,11 @@ public class ResourceManager {
 		convertToGoodFormat(pQuery);
 	}
 	
+	/**
+	 * Gibt die Resource des Querys skaliert auf die akive Kamera zurück.
+	 * @param pQuery
+	 * @return
+	 */
 	public BufferedImage getScaledResource(String pQuery) {
 		return game.kamera.scaleResource(textures.get(pQuery));
 	}
@@ -54,7 +75,7 @@ public class ResourceManager {
 	 * @param fHeight y-factor for transformation / scaling
 	 * @return scaled image
 	 */
-	public static BufferedImage scale(BufferedImage sbi, int imageType, int dWidth, int dHeight, double fWidth, double fHeight) {
+	protected static BufferedImage scale(BufferedImage sbi, int imageType, int dWidth, int dHeight, double fWidth, double fHeight) {
 		BufferedImage dbi = null;
 		if(sbi != null) {
 			dbi = new BufferedImage(dWidth, dHeight, imageType);
@@ -65,6 +86,10 @@ public class ResourceManager {
 		return dbi;
 	}
 	
+	/**
+	 * Kovertiert die Resource in ein Renderfreundliches Format.
+	 * @param pQuery
+	 */
 	private void convertToGoodFormat(String pQuery) {
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice device = env.getDefaultScreenDevice();

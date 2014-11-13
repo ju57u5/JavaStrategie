@@ -1,5 +1,6 @@
 package tk.ju57u5v.engine;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
@@ -28,8 +29,6 @@ public class Window extends JPanel{
 		this.game=game;
 		
 		frame.addKeyListener(game);
-		setIgnoreRepaint(true);
-		
 		
 		frame.setTitle("Strategie-JavaGame"); // Fenstertitel setzen
 		frame.setSize(1200,900); 
@@ -45,7 +44,8 @@ public class Window extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g)  {
 		g.clearRect(0, 0, getWidth(), getHeight());
-		game.gameRunner.renderer.update(g);
+		game.gameRunner.renderer.update();
+		game.gameRunner.renderer.render(g);
 		repaint();
 	}
 }
