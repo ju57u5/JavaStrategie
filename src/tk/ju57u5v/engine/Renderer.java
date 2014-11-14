@@ -13,8 +13,8 @@ public class Renderer {
 	ArrayList<Entity> entities = new ArrayList<Entity>();
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
-	private boolean render = true;
-	private boolean update = true;
+	private boolean render = false;
+	private boolean update = false;
 	private Game game;
 
 	public Renderer(Game game) {
@@ -34,7 +34,9 @@ public class Renderer {
 	 * Updated die Entities.
 	 */
 	public void update() {
-		updateEntities();
+		if (update) {
+			updateEntities();
+		}
 	}
 	
 	/**
@@ -42,10 +44,11 @@ public class Renderer {
 	 * @param g
 	 */
 	public void render(Graphics g) {
-		renderEntities(g);
-		renderGameObjects(g);
+		if (render) {
+			renderEntities(g);
+			renderGameObjects(g);
+		}
 	}
-	
 
 	private void updateEntities() {
 		for (int c = 0; c < entities.size();c++) {
@@ -82,4 +85,5 @@ public class Renderer {
 	public void doUpdate(boolean update) {
 		this.update = update;
 	}
+	
 }

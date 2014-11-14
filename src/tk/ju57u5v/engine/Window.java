@@ -43,9 +43,13 @@ public class Window extends JPanel{
 	
 	@Override
 	protected void paintComponent(Graphics g)  {
-		g.clearRect(0, 0, getWidth(), getHeight());
-		game.gameRunner.renderer.update();
-		game.gameRunner.renderer.render(g);
+		if (game.gameRunner != null) {
+			if (game.gameRunner.renderer != null) {
+				g.clearRect(0, 0, getWidth(), getHeight());
+				game.gameRunner.renderer.update();
+				game.gameRunner.renderer.render(g);
+			}
+		}
 		repaint();
 	}
 }

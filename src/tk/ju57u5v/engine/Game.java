@@ -11,6 +11,7 @@ public class Game implements KeyListener {
 	protected Kamera kamera = new Kamera(this);
 	protected Window window = new Window(this);
 	protected ResourceManager resourceManager = new ResourceManager(this);
+	protected CodeManager codeManager = new CodeManager(this);
 	private Image mainBufferImage = window.createImage(1920, 1080);
 	protected GameRunner gameRunner = new GameRunner(this);
 	protected boolean[] pressedKeys = new boolean[1000];
@@ -18,7 +19,12 @@ public class Game implements KeyListener {
 	public Game() {
 		
 	}
-
+	
+	public void initalizeGame() {
+		gameRunner.renderer.doUpdate(true);
+		gameRunner.renderer.doRender(true);
+	}
+	
 	public Graphics getMainGraphics() {
 		return gameRunner.strategy.getDrawGraphics();
 	}

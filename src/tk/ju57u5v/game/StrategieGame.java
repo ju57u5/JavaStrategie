@@ -16,6 +16,8 @@ public class StrategieGame extends Game implements MouseWheelListener {
 		dorfzentrum2.setPosition(300, 300);
 		
 		window.addMouseWheelListener(this);
+		
+		initalizeGame();
 	}
 
 	public static void main(String[] args) {

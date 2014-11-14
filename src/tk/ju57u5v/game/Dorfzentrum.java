@@ -11,12 +11,12 @@ public class Dorfzentrum extends Entity {
 	
 	public Dorfzentrum(Game game) {
 		super(game);
-		game.getResourceManager().loadImage("test2.png", "test");
+		//game.getResourceManager().loadImage("test2.png", "test");
 		game.getGameRunner().getRenderer().registerEntity(this);
 	}
 	
 	@Override
 	public void render (Graphics g) {
-		g.drawImage( game.getResourceManager().getScaledResource("test"), getRelativX(), getRelativY(), null);
+		g.drawImage( game.getResourceManager().getResource("test"), getRelativX(), getRelativY(), null);
 	}
 }

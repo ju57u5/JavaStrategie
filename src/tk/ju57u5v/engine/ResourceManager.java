@@ -9,9 +9,11 @@ import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
@@ -22,11 +24,12 @@ import javax.imageio.ImageIO;
  */
 public class ResourceManager {
 	
-	Map<String,BufferedImage> textures = new HashMap<String,BufferedImage>();
-	File appdata = new File((System.getenv("APPDATA")));
-	File gamePath = new File(appdata,"/JavaStrategie");
-	File texturePath = new File(gamePath, "/textures");
-	Game game;
+	private Map<String,BufferedImage> textures = new HashMap<String,BufferedImage>();
+	private File appdata = new File((System.getenv("APPDATA")));
+	private File gamePath = new File(appdata,"/JavaStrategie");
+	private File texturePath = new File(gamePath, "/textures");
+	private File cfgPath = new File(gamePath, "/cfg");
+	private Game game;
 	
 	public ResourceManager(Game game) {
 		this.game = game;
@@ -101,5 +104,22 @@ public class ResourceManager {
 		g.dispose();
 		textures.put(pQuery, buffy);
 	
+	}
+	
+	public String getFile(String pFileName) {
+		String fileContent="";
+		Scanner scanner;
+		try {
+			File cfgFile = new File(cfgPath,pFileName);
+			scanner = new Scanner (cfgFile);
+			while (scanner.hasNext ()) {
+				fileContent += (scanner.nextLine ());
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			
+		}
+		
+		return fileContent;
 	}
 }
