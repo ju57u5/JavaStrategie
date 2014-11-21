@@ -13,6 +13,10 @@ public class Window extends JPanel{
 	BufferStrategy strategy;
 	
 	private JFrame frame = new JFrame();
+	private long timer = System.currentTimeMillis();
+	private int frames=0;
+	private int ups=0;
+	private String title="Strategie-JavaGame";
 	
 	class WindowListener extends WindowAdapter
 	{
@@ -28,7 +32,7 @@ public class Window extends JPanel{
 		
 		frame.addKeyListener(game);
 		
-		frame.setTitle("Strategie-JavaGame"); // Fenstertitel setzen
+		frame.setTitle(title); // Fenstertitel setzen
 		frame.setSize(1200,900); 
 		frame.addWindowListener(new WindowListener());
 		frame.setLocationRelativeTo(null); 
@@ -39,15 +43,25 @@ public class Window extends JPanel{
 		
 	}
 	
+	protected void setUps(int ups) {
+		this.ups = ups;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g)  {
 		if (game.gameRunner != null) {
 			if (game.gameRunner.renderer != null) {
 				g.clearRect(0, 0, getWidth(), getHeight());
-				game.gameRunner.renderer.update();
 				game.gameRunner.renderer.render(g);
 			}
 		}
+		frames++;
+		if (System.currentTimeMillis() - timer > 1000) {
+			timer += 1000;
+			frame.setTitle(title+"   |   "+ups+" ups "+frames+" fps");
+			frames=0;
+		}
+		
 		repaint();
 	}
 }

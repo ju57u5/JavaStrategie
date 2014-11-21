@@ -13,10 +13,13 @@ public class Dorfzentrum extends Entity {
 		super(game);
 		//game.getResourceManager().loadImage("test2.png", "test");
 		game.getGameRunner().getRenderer().registerEntity(this);
+		String[] walkAnimation = {"katze1","katze2","katze3","katze4"};
+		animationManager.createAnimation("walk", walkAnimation, 10);
+		animationManager.selectAnimation("walk");
 	}
 	
 	@Override
 	public void render (Graphics g) {
-		g.drawImage( game.getResourceManager().getResource("test"), getRelativX(), getRelativY(), null);
+		g.drawImage( game.getResourceManager().getResource(getAnimationQuery()), getRelativX(), getRelativY(), null);
 	}
 }

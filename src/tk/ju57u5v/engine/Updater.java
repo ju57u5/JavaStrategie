@@ -30,6 +30,7 @@ public class Updater extends JFrame {
 		this.basePath = basePath;
 		setTitle("Updating");
 		setSize(200, 100);
+		 setLocationRelativeTo(null); 
 	}
 
 	public void download(String fileURL, String destinationDirectory, boolean processBarEnabled) throws IOException {
@@ -69,7 +70,7 @@ public class Updater extends JFrame {
 		progressBar = new JProgressBar(0, getUpdateSize());
 		progressBar.setValue(0);
 		progressBar.setStringPainted(true);
-		add(progressBar);
+		this.add(progressBar);
 		setVisible(true);
 		
 		for (int c = 0; c < downloadUrls.size(); c++) {
@@ -79,6 +80,7 @@ public class Updater extends JFrame {
 				e.printStackTrace();
 			}
 		}
+		dispose();
 	}
 
 	private int getFileSize(String urlString) throws IOException {

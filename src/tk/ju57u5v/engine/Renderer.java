@@ -52,6 +52,7 @@ public class Renderer {
 
 	private void updateEntities() {
 		for (int c = 0; c < entities.size();c++) {
+			entities.get(c).animationManager.setTick(game.gameRunner.ticks);
 			entities.get(c).update();
 		}
 	}

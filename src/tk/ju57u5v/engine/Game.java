@@ -18,7 +18,6 @@ public class Game implements KeyListener {
 	protected boolean[] pressedKeys = new boolean[1000];
 
 	public Game() {
-		
 	}
 	
 	public void initalizeGame() {

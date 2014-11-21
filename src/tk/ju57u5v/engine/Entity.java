@@ -5,6 +5,7 @@ import java.awt.Graphics;
 public class Entity extends Position {
 
 	protected Game game;
+	protected AnimationManager animationManager = new AnimationManager();
 
 	public Entity(Game game) {
 		this.game = game;
@@ -39,6 +40,10 @@ public class Entity extends Position {
 	 */
 	public void render(Graphics g) {
 
+	}
+	
+	protected String getAnimationQuery() {
+		return animationManager.getcurrentPicture();
 	}
 
 }
