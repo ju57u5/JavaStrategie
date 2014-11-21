@@ -7,7 +7,7 @@ public class CodeManager {
 
 	public CodeManager(Game game) {
 		this.game = game;
-		processCFG("test.cfg");
+		processCFG("config.cfg");
 	}
 
 	public void processCFG(String pFileName) {
@@ -21,14 +21,15 @@ public class CodeManager {
 
 	public void processCode(String pCode) {
 		
-		String[] parts = pCode.toLowerCase().trim().split("\\s+");
+		String[] parts = pCode.trim().split("\\s+");
+		parts[0].toLowerCase();
 		
 		switch (parts[0]) {
 			case "echo":
 				echo(pCode);
 				break;
-			case "download":
-				download(parts);
+			case "update":
+				update(parts);
 				break;
 			case "register":
 				register(parts);
@@ -38,6 +39,12 @@ public class CodeManager {
 				break;
 			case "set":
 				set(parts);
+				break;
+			case "exec":
+				exec(parts);
+				break;
+			case "startupdate":
+				game.updater.updateFiles();
 				break;
 	
 			default:
@@ -53,22 +60,35 @@ public class CodeManager {
 		if (parts[2].equals("as")) {
 			game.resourceManager.loadImage(parts[1], parts[3]);
 		} else {
-			System.out.println("register <Filename> as <Query>");
+			System.out.println("Error, usage: register <Filename> as <Query>");
 		}
 	}
 
-	private void download(String[] parts) {
-		
+	private void update(String[] parts) {
+		if (parts[2].equals("to")) {
+			game.updater.registerUpdatableFile(parts[1], parts[3]);
+		} else {
+			System.out.println("Error, usage: update <URL> to <Path>");
+		}
 	}
 
 	private void echo(String pCode) {
 		String[] parts = pCode.split("\\s+");
-		String echo="";
-		for (int c=0;c<parts.length;c++) {
+		String echo=recombine(parts);
+		System.out.println(echo);
+	}
+	
+	private String recombine (String[] pStringArray) {
+		String combined = "";
+		for (int c=0;c<pStringArray.length;c++) {
 			if (c>0) {
-				echo += parts[c]+" ";
+				combined += pStringArray[c]+" ";
 			}
 		}
-		System.out.println(echo);
+		return combined;
+	}
+	
+	private void exec(String[] parts) {
+		processCFG(recombine(parts));
 	}
 }

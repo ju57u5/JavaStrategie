@@ -11,6 +11,7 @@ public class Game implements KeyListener {
 	protected Kamera kamera = new Kamera(this);
 	protected Window window = new Window(this);
 	protected ResourceManager resourceManager = new ResourceManager(this);
+	protected Updater updater = new Updater(resourceManager.getBasePath());
 	protected CodeManager codeManager = new CodeManager(this);
 	private Image mainBufferImage = window.createImage(1920, 1080);
 	protected GameRunner gameRunner = new GameRunner(this);

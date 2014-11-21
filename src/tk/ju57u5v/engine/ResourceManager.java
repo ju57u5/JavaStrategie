@@ -33,6 +33,7 @@ public class ResourceManager {
 	
 	public ResourceManager(Game game) {
 		this.game = game;
+		checkFolders();
 	}
 	
 	
@@ -121,5 +122,15 @@ public class ResourceManager {
 		}
 		
 		return fileContent;
+	}
+	
+	private void checkFolders() {
+		if (gamePath.isDirectory()) gamePath.mkdirs(); 
+		if (texturePath.isDirectory()) gamePath.mkdirs();
+		if (cfgPath.isDirectory()) gamePath.mkdirs();
+	}
+	
+	public String getBasePath() {
+		return gamePath.getAbsolutePath();
 	}
 }

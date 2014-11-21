@@ -1,7 +1,5 @@
 package tk.ju57u5v.engine;
 
-import java.awt.BorderLayout;
-import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

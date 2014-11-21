@@ -1,13 +1,8 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
-import com.sun.java.swing.plaf.windows.resources.windows;
 
 
 
