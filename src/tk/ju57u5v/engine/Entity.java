@@ -6,6 +6,10 @@ public class Entity extends Position {
 
 	protected Game game;
 	protected AnimationManager animationManager = new AnimationManager();
+	private int xMovement=0;
+	private int yMovement=0;
+	private int xMovementSpeed=0;
+	private int yMovementSpeed=0;
 
 	public Entity(Game game) {
 		this.game = game;
@@ -45,5 +49,25 @@ public class Entity extends Position {
 	protected String getAnimationQuery() {
 		return animationManager.getcurrentPicture();
 	}
-
+	
+	public void moveTo(int x, int y, int speed) {
+		this.xMovementSpeed=speed;
+		this.xMovement=x-getX();
+		this.yMovement=y-getY();
+		
+	}
+	
+	public void updateMovement() {
+		if (xMovement<0) {
+			//setX(getX()+movementSpeed);
+		} else {
+			//setX(getX()-movementSpeed);
+		}
+		
+		if (yMovement<0) {
+			//setY(movementSpeed);
+		} else {
+			//setY(movementSpeed);
+		}
+	}
 }

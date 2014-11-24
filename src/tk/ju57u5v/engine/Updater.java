@@ -2,12 +2,14 @@ package tk.ju57u5v.engine;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 
@@ -36,7 +38,10 @@ public class Updater extends JFrame {
 	public void download(String fileURL, String destinationDirectory, boolean processBarEnabled) throws IOException {
 		// File name that is being downloaded
 		String downloadedFileName = fileURL.substring(fileURL.lastIndexOf("/") + 1);
-
+		
+		File folder = new File (basePath + "/" + destinationDirectory + "/");
+		if (!folder.isDirectory()) folder.mkdirs();
+		
 		// Open connection to the file
 		URL url = new URL(fileURL);
 		InputStream is = url.openStream();

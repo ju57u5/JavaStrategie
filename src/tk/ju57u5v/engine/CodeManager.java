@@ -1,5 +1,7 @@
 package tk.ju57u5v.engine;
 
+import java.io.IOException;
+
 
 public class CodeManager {
 
@@ -46,6 +48,9 @@ public class CodeManager {
 			case "startupdate":
 				game.updater.updateFiles();
 				break;
+			case "download":
+				download(parts);
+				break;
 	
 			default:
 				break;
@@ -88,7 +93,20 @@ public class CodeManager {
 		return combined;
 	}
 	
-	private void exec(String[] parts) {
+	private void exec (String[] parts) {
 		processCFG(recombine(parts));
+	}
+	
+	private void download (String[] parts) {
+		if (parts[2].equals("to")) {
+			try {
+				game.updater.download(parts[1], parts[3], false);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		} else {
+			System.out.println("Error, usage: download <URL> to <Path>");
+		}
 	}
 }

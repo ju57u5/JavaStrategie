@@ -13,8 +13,8 @@ public class Dorfzentrum extends Entity {
 		super(game);
 		//game.getResourceManager().loadImage("test2.png", "test");
 		game.getGameRunner().getRenderer().registerEntity(this);
-		String[] walkAnimation = {"katze1","katze2","katze3","katze4"};
-		animationManager.createAnimation("walk", walkAnimation, 10);
+		//String[] walkAnimation = {"katze1","katze2","katze3","katze4"};
+		animationManager.createAnimation("walk", new String[]{"katze1","katze2","katze3","katze4"}, 7);
 		animationManager.selectAnimation("walk");
 	}
 	
