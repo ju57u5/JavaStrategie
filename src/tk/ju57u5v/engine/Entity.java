@@ -65,7 +65,7 @@ public class Entity extends Position {
 		yDifference = y - getY();
 		currentX = getX();
 		currentY = getY();
-		radian = getMoveRadian();
+		radian = Math.atan2(yDifference,xDifference);
 		movement = true;
 	}
 
@@ -94,12 +94,4 @@ public class Entity extends Position {
 		}
 	}
 	
-	private double getMoveRadian() {
-		double baseRadian=0;
-		if (xDifference>0 && yDifference>0) baseRadian=0;
-		if (xDifference<0 && yDifference>0) baseRadian=Math.toRadians(90);
-		if (xDifference<0 && yDifference<0) baseRadian=Math.toRadians(180);
-		if (xDifference>0 && yDifference<0) baseRadian=Math.toRadians(270);
-		return baseRadian+Math.atan(yDifference / xDifference);
-	}
 }
