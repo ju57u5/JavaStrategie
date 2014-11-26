@@ -8,7 +8,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window extends JPanel{
+public class Window extends JPanel {
 	Game game;
 	BufferStrategy strategy;
 	

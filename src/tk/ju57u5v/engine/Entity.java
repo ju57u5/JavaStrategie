@@ -6,10 +6,15 @@ public class Entity extends Position {
 
 	protected Game game;
 	protected AnimationManager animationManager = new AnimationManager();
-	private int xMovement=0;
-	private int yMovement=0;
-	private int xMovementSpeed=0;
-	private int yMovementSpeed=0;
+	private int xMovePosition = 0;
+	private int yMovePosition = 0;
+	private int movementSpeed = 2;
+	private double radian = 0;
+	private double currentX = 0;
+	private double currentY = 0;
+	private int xDifference = 0;
+	private int yDifference = 0;
+	private boolean movement = false;
 
 	public Entity(Game game) {
 		this.game = game;
@@ -21,7 +26,7 @@ public class Entity extends Position {
 		super.setY(y);
 		game.kamera.setRelativPostion(this);
 	}
-	
+
 	@Override
 	public void setX(int x) {
 		super.setX(x);
@@ -39,35 +44,62 @@ public class Entity extends Position {
 	}
 
 	/**
-	 * Rendert das Entity. Wenn es nicht überschrieben wird, wird eine Standartgrafik gerendert.
+	 * Rendert das Entity. Wenn es nicht überschrieben wird, wird eine
+	 * Standartgrafik gerendert.
+	 * 
 	 * @param g
 	 */
 	public void render(Graphics g) {
 
 	}
-	
+
 	protected String getAnimationQuery() {
 		return animationManager.getcurrentPicture();
 	}
-	
+
 	public void moveTo(int x, int y, int speed) {
-		this.xMovementSpeed=speed;
-		this.xMovement=x-getX();
-		this.yMovement=y-getY();
-		
+		this.movementSpeed = speed;
+		this.xMovePosition = x;
+		this.yMovePosition = y;
+		xDifference = x - getX();
+		yDifference = y - getY();
+		currentX = getX();
+		currentY = getY();
+		radian = getMoveRadian();
+		movement = true;
+	}
+
+	public void updateMovement() {
+		if (movement) {
+			currentX += Math.cos(radian) * movementSpeed;
+			currentY += Math.sin(radian) * movementSpeed;
+
+			if (xDifference > 0 && currentX > xMovePosition) {
+				currentX = xMovePosition;
+				movement = false;
+			} else if (xDifference < 0 && currentX < xMovePosition) {
+				currentX = xMovePosition;
+				movement = false;
+			}
+
+			if (yDifference > 0 && currentY > yMovePosition) {
+				currentY = yMovePosition;
+				movement = false;
+			} else if (yDifference < 0 && currentY < yMovePosition) {
+				currentY = yMovePosition;
+				movement = false;
+			}
+
+			setPosition((int) currentX, (int) currentY);
+		}
 	}
 	
-	public void updateMovement() {
-		if (xMovement<0) {
-			//setX(getX()+movementSpeed);
-		} else {
-			//setX(getX()-movementSpeed);
-		}
-		
-		if (yMovement<0) {
-			//setY(movementSpeed);
-		} else {
-			//setY(movementSpeed);
-		}
+	private double getMoveRadian() {
+		double baseRadian=0;
+		if (xDifference>0 && yDifference>0) baseRadian=0;
+		if (xDifference<0 && yDifference>0) baseRadian=Math.toRadians(90);
+		if (xDifference<0 && yDifference<0) baseRadian=Math.toRadians(180);
+		if (xDifference>0 && yDifference<0) baseRadian=Math.toRadians(270);
+		return baseRadian+Math.atan(yDifference / xDifference);
 	}
 }
