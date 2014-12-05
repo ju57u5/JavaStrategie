@@ -26,9 +26,13 @@ public class Kamera extends Position {
 	}
 
 	public void setRelativPostion(Entity pEntity) {
-
 		pEntity.setRelativX(pEntity.getX() - getX());
 		pEntity.setRelativY(pEntity.getY() - getY());
+	}
+	
+	public void setRelativPostion(GameObject pObject) {
+		pObject.setRelativX(pObject.getX() - getX());
+		pObject.setRelativY(pObject.getY() - getY());
 	}
 
 	public boolean isRenderNeeded(Entity entity) {
@@ -65,7 +69,6 @@ public class Kamera extends Position {
 	 * @return
 	 */
 	public int toRealX(int x) {
-		System.out.println("x: " + this.getX());
 		return x + this.getX();
 	}
 

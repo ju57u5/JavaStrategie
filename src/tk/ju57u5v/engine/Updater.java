@@ -81,9 +81,10 @@ public class Updater extends JFrame {
 		for (int c = 0; c < downloadUrls.size(); c++) {
 			try {
 				download(downloadUrls.get(c), downloadPaths.get(c), true);
+				System.out.println("Download of "+downloadUrls.get(c)+" worked!");
 			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				System.out.println("Download of "+downloadUrls.get(c)+" failed!");
+			} 
 		}
 		dispose();
 	}

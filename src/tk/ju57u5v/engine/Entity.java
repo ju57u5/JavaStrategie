@@ -2,10 +2,10 @@ package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
 
-public class Entity extends Position {
+public class Entity extends GameObject {
 
-	protected Game game;
-	protected AnimationManager animationManager = new AnimationManager();
+	
+	
 	private int xMovePosition = 0;
 	private int yMovePosition = 0;
 	private int movementSpeed = 2;
@@ -17,25 +17,7 @@ public class Entity extends Position {
 	private boolean movement = false;
 
 	public Entity(Game game) {
-		this.game = game;
-	}
-
-	@Override
-	public void setPosition(int x, int y) {
-		super.setPosition(x, y);
-		game.kamera.setRelativPostion(this);
-	}
-
-	@Override
-	public void setX(int x) {
-		super.setX(x);
-		game.kamera.setRelativPostion(this);
-	}
-
-	@Override
-	public void setY(int y) {
-		super.setY(y);
-		game.kamera.setRelativPostion(this);
+		super(game);
 	}
 	
 	public void stopMovement() {
@@ -44,20 +26,6 @@ public class Entity extends Position {
 
 	public void update() {
 
-	}
-
-	/**
-	 * Rendert das Entity. Wenn es nicht überschrieben wird, wird eine
-	 * Standartgrafik gerendert.
-	 * 
-	 * @param g
-	 */
-	public void render(Graphics g) {
-
-	}
-
-	protected String getAnimationQuery() {
-		return animationManager.getcurrentPicture();
 	}
 
 	public void moveTo(int x, int y, int speed) {

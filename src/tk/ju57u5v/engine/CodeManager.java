@@ -101,9 +101,10 @@ public class CodeManager {
 		if (parts[2].equals("to")) {
 			try {
 				game.updater.download(parts[1], parts[3], false);
+				System.out.println("Download of "+parts[1]+" worked!");
 			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				System.out.println("Download of "+parts[1]+" failed!");
+			} 
 			
 		} else {
 			System.out.println("Error, usage: download <URL> to <Path>");
