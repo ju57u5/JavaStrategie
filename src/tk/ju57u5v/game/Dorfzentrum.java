@@ -16,6 +16,7 @@ public class Dorfzentrum extends Entity {
 		//String[] walkAnimation = {"katze1","katze2","katze3","katze4"};
 		animationManager.createAnimation("walk", new String[]{"katze1","katze2","katze3","katze4"}, 7);
 		animationManager.selectAnimation("walk");
+		game.getResourceManager().setDimensionsFromResource("katze1", this);
 	}
 	
 	@Override

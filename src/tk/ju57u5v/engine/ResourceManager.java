@@ -56,7 +56,7 @@ public class ResourceManager {
 		try {
 			textures.put(pQuery, ImageIO.read(imagePath));
 		} catch(IOException exeption) {}
-		convertToGoodFormat(pQuery);
+		//convertToGoodFormat(pQuery);
 	}
 	
 	/**
@@ -66,6 +66,18 @@ public class ResourceManager {
 	 */
 	public BufferedImage getScaledResource(String pQuery) {
 		return game.kamera.scaleResource(textures.get(pQuery));
+	}
+	
+	public int getResourceWidth(String pQuery) {
+		return this.getResource(pQuery).getWidth();
+	}
+	
+	public int getResourceHeight(String pQuery) {
+		return this.getResource(pQuery).getHeight();
+	}
+	
+	public void setDimensionsFromResource(String pQuery, Entity e) {
+		e.setDimensions(getResourceWidth(pQuery), getResourceHeight(pQuery));
 	}
 	
 	/**

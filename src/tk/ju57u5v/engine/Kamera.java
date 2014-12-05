@@ -15,35 +15,31 @@ public class Kamera extends Position {
 
 	private void updateRelativPositions() {
 		for (Entity entity : game.gameRunner.getEntities()) {
-			entity.setRelativX(entity.getX() + getX());
-			entity.setRelativY(entity.getY() + getY());
+			entity.setRelativX(entity.getX() - getX());
+			entity.setRelativY(entity.getY() - getY());
 		}
 
 		for (GameObject gameObject : game.gameRunner.getGameObjects()) {
-			gameObject.setRelativX(gameObject.getX() + getX());
-			gameObject.setRelativY(gameObject.getY() + getY());
+			gameObject.setRelativX(gameObject.getX() - getX());
+			gameObject.setRelativY(gameObject.getY() - getY());
 		}
 	}
 
 	public void setRelativPostion(Entity pEntity) {
 
-		pEntity.setRelativX(pEntity.getX() + getX());
-		pEntity.setRelativY(pEntity.getY() + getY());
+		pEntity.setRelativX(pEntity.getX() - getX());
+		pEntity.setRelativY(pEntity.getY() - getY());
 	}
 
 	public boolean isRenderNeeded(Entity entity) {
-		return (TwoDMath.isInRect(entity.getRelativX(), entity.getRelativY(),
-				this.getX(), this.getY(), this.getWidth(), this.getHeight()));
+		return (TwoDMath.isRectInRect(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight(),this.getX(), this.getY(), this.getWidth(), this.getHeight()));
 	}
 
 	public BufferedImage scaleResource(BufferedImage resource) {
 		double scaleX = ((double) getWidth() / (double) game.window.getWidth());
-		double scaleY = ((double) getHeight() / (double) game.window
-				.getHeight());
+		double scaleY = ((double) getHeight() / (double) game.window.getHeight());
 
-		return ResourceManager.scale(resource, resource.getType(),
-				(int) (resource.getWidth() * scaleX),
-				(int) (resource.getHeight() * scaleY), scaleX, scaleY);
+		return ResourceManager.scale(resource, resource.getType(), (int) (resource.getWidth() * scaleX), (int) (resource.getHeight() * scaleY), scaleX, scaleY);
 	}
 
 	@Override
@@ -60,6 +56,27 @@ public class Kamera extends Position {
 	public void setY(int y) {
 		super.setY(y);
 		updateRelativPositions();
+	}
+
+	/**
+	 * Converts a Relative x Coordinate to a Real x Coordinate
+	 * 
+	 * @param x
+	 * @return
+	 */
+	public int toRealX(int x) {
+		System.out.println("x: " + this.getX());
+		return x + this.getX();
+	}
+
+	/**
+	 * Converts a Relative y Coordinate to a Real y Coordinate
+	 * 
+	 * @param y
+	 * @return
+	 */
+	public int toRealY(int y) {
+		return y + this.getY();
 	}
 
 }

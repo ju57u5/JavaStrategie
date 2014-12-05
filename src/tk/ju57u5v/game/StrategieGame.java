@@ -21,9 +21,9 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 		
 		window.addMouseWheelListener(this);
 		window.addMouseListener(this);
-		
+		kamera.setPosition(300, 300);
 		initalizeGame();
-		dorfzentrum.moveTo(50, 50, 2);
+		
 	}
 
 	public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		dorfzentrum.moveTo(e.getX(), e.getY(),1);
+		dorfzentrum.moveTo(kamera.toRealX(e.getX()), kamera.toRealY(e.getY()),1);
 	}
 
 	@Override

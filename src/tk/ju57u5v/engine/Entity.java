@@ -22,8 +22,7 @@ public class Entity extends Position {
 
 	@Override
 	public void setPosition(int x, int y) {
-		super.setX(x);
-		super.setY(y);
+		super.setPosition(x, y);
 		game.kamera.setRelativPostion(this);
 	}
 
@@ -37,6 +36,10 @@ public class Entity extends Position {
 	public void setY(int y) {
 		super.setY(y);
 		game.kamera.setRelativPostion(this);
+	}
+	
+	public void stopMovement() {
+		movement = false;
 	}
 
 	public void update() {
