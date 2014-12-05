@@ -21,7 +21,6 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 		
 		window.addMouseWheelListener(this);
 		window.addMouseListener(this);
-		kamera.setPosition(300, 300);
 		initalizeGame();
 		
 	}

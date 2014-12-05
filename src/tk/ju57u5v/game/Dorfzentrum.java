@@ -15,12 +15,22 @@ public class Dorfzentrum extends Entity {
 		game.getGameRunner().getRenderer().registerEntity(this);
 		//String[] walkAnimation = {"katze1","katze2","katze3","katze4"};
 		animationManager.createAnimation("walk", new String[]{"katze1","katze2","katze3","katze4"}, 7);
+		animationManager.createAnimation("stand", new String[]{"katze1"}, 1);
 		animationManager.selectAnimation("walk");
-		game.getResourceManager().setDimensionsFromResource("katze1", this);
+		game.getResourceManager().setDimensionsFromResource("katze3", this);
 	}
 	
 	@Override
 	public void render (Graphics g) {
-		g.drawImage( game.getResourceManager().getResource(getAnimationQuery()), getRelativX(), getRelativY(), null);
+			g.drawImage( game.getResourceManager().getResource(getAnimationQuery()), getRelativX(), getRelativY(), null);
+	}
+	
+	@Override
+	public void update() {
+		if (isMoving()) {
+			animationManager.selectAnimation("walk");
+		} else {
+			animationManager.selectAnimation("stand");
+		}
 	}
 }

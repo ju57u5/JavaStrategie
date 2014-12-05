@@ -65,4 +65,8 @@ public class Entity extends GameObject {
 		}
 	}
 	
+	public boolean isMoving() {
+		return movement;
+	}
+	
 }
