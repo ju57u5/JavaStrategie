@@ -137,9 +137,9 @@ public class ResourceManager {
 	}
 	
 	private void checkFolders() {
-		if (gamePath.isDirectory()) gamePath.mkdirs(); 
-		if (texturePath.isDirectory()) gamePath.mkdirs();
-		if (cfgPath.isDirectory()) gamePath.mkdirs();
+		if (!gamePath.isDirectory()) gamePath.mkdirs(); 
+		if (!texturePath.isDirectory()) gamePath.mkdirs();
+		if (!cfgPath.isDirectory()) gamePath.mkdirs();
 	}
 	
 	public String getBasePath() {

@@ -16,10 +16,10 @@ public class GameRunner extends tk.ju57u5v.engine.GameRunner {
 	}
 	
 	private void doKeys() {
-		if (game.isKeyPressed(KeyEvent.VK_RIGHT)) game.getKamera().setX(game.getKamera().getX()-5);
-		if (game.isKeyPressed(KeyEvent.VK_LEFT)) game.getKamera().setX(game.getKamera().getX()+5);
-		if (game.isKeyPressed(KeyEvent.VK_DOWN)) game.getKamera().setY(game.getKamera().getY()-5);
-		if (game.isKeyPressed(KeyEvent.VK_UP)) game.getKamera().setY(game.getKamera().getY()+5);
+		if (game.isKeyPressed(KeyEvent.VK_RIGHT)) game.getKamera().setX(game.getKamera().getX()+5);
+		if (game.isKeyPressed(KeyEvent.VK_LEFT)) game.getKamera().setX(game.getKamera().getX()-5);
+		if (game.isKeyPressed(KeyEvent.VK_DOWN)) game.getKamera().setY(game.getKamera().getY()+5);
+		if (game.isKeyPressed(KeyEvent.VK_UP)) game.getKamera().setY(game.getKamera().getY()-5);
 		
 	}
 }
