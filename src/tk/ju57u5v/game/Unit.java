@@ -3,14 +3,14 @@ package tk.ju57u5v.game;
 import tk.ju57u5v.engine.Entity;
 import tk.ju57u5v.engine.Game;
 
-public class Einheit extends Entity{
+public class Unit extends Entity{
 	
 	private int speed=1;
 	private int health=10;
 	private int damage=1;
 	private int attackSpeed=1;
 	
-	public Einheit(Game game) {
+	public Unit(Game game) {
 		super(game);
 	}
 	
@@ -46,5 +46,7 @@ public class Einheit extends Entity{
 		return attackSpeed;
 	}
 	
-	
+	public void moveTo(int x, int y) {
+		this.moveTo(x, y, speed);
+	}
 }

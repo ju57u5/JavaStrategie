@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import tk.ju57u5v.engine.input.MouseHandler;
 
 public class Game implements KeyListener {
 
@@ -13,6 +13,7 @@ public class Game implements KeyListener {
 	protected ResourceManager resourceManager = new ResourceManager(this);
 	protected Updater updater = new Updater(resourceManager.getBasePath());
 	protected CodeManager codeManager = new CodeManager(this);
+	protected MouseHandler mouseHandler = new MouseHandler();
 	private Image mainBufferImage = window.createImage(1920, 1080);
 	protected GameRunner gameRunner = new GameRunner(this);
 	protected boolean[] pressedKeys = new boolean[1000];
@@ -21,6 +22,7 @@ public class Game implements KeyListener {
 	}
 	
 	public void initalizeGame() {
+		window.addMouseListener(mouseHandler);
 		resourceManager.checkConfig();
 		codeManager.processCFG("config.cfg");
 		gameRunner.renderer.doUpdate(true);
@@ -67,7 +69,7 @@ public class Game implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
+		
 	}
 
 	public boolean isKeyPressed(int keyCode) {

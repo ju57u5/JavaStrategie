@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class Renderer {
 
 	ArrayList<Entity> entities = new ArrayList<Entity>();
+	public ArrayList<Entity> getEntities() {
+		return entities;
+	}
+
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
 	private boolean render = false;

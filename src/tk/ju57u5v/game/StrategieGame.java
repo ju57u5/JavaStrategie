@@ -5,9 +5,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import tk.ju57u5v.engine.Entity;
 import tk.ju57u5v.engine.Game;
+import tk.ju57u5v.engine.TwoDMath;
 
-public class StrategieGame extends Game implements MouseWheelListener,MouseListener {
+public class StrategieGame extends Game implements MouseWheelListener,MouseListener,tk.ju57u5v.engine.input.MouseListener {
 
 	Dorfzentrum dorfzentrum;
 	
@@ -23,6 +25,7 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 		dorfzentrum.setPosition(100, 100);
 		Dorfzentrum dorfzentrum2 = new Dorfzentrum(this);
 		dorfzentrum2.setPosition(300, 300);
+		mouseHandler.addMouseListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -63,4 +66,21 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void mousedrag(int startx, int starty, int endx, int endy) {
+		for (int c=0;c<gameRunner.getRenderer().getEntities().size();c++) {
+			Entity e = gameRunner.getRenderer().getEntities().get(c);
+			if (TwoDMath.isRectInRect(e.getX(), e.getY(), e.getWidth(), e.getHeight(), kamera.toRealX(startx), kamera.toRealY(starty), endx-startx, endy-starty)) {
+				System.out.println("fuck you");
+			}
+		}
+	}
+
+	@Override
+	public void mouseclick(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

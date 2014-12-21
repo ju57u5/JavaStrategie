@@ -10,7 +10,7 @@ public class CodeManager extends tk.ju57u5v.engine.CodeManager {
 		super(game);
 	}
 	
-	public void processUnitSettings(String pFileName, Einheit unit) {
+	public void processUnitSettings(String pFileName, Unit unit) {
 		String content = game.getResourceManager().getFile(pFileName);
 		
 		String[] commands = content.split(";");
@@ -19,7 +19,7 @@ public class CodeManager extends tk.ju57u5v.engine.CodeManager {
 		}
 	}
 	
-	private void processUnitSetting(String pCode, Einheit unit) {
+	private void processUnitSetting(String pCode, Unit unit) {
 		String[] parts = pCode.trim().split(":");
 		parts[0].toLowerCase().trim();
 		
@@ -30,7 +30,7 @@ public class CodeManager extends tk.ju57u5v.engine.CodeManager {
 		}
 	}
 	
-	public void processBuildingSettings(String pFileName, Haus building) {
+	public void processBuildingSettings(String pFileName, Building building) {
 		String content = game.getResourceManager().getFile(pFileName);
 		
 		String[] commands = content.split(";");
@@ -39,7 +39,7 @@ public class CodeManager extends tk.ju57u5v.engine.CodeManager {
 		}
 	}
 	
-	private void processBuildingSetting(String pCode, Haus building) {
+	private void processBuildingSetting(String pCode, Building building) {
 		String[] parts = pCode.trim().split(":");
 		parts[0].toLowerCase().trim();
 		
