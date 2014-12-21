@@ -25,10 +25,13 @@ import javax.imageio.ImageIO;
 public class ResourceManager {
 	
 	private Map<String,BufferedImage> textures = new HashMap<String,BufferedImage>();
+	private HashMap <String, Animation> animations = new HashMap<String, Animation>();
+	
 	private File appdata = new File((System.getenv("APPDATA")));
 	private File gamePath = new File(appdata,"/JavaStrategie");
 	private File texturePath = new File(gamePath, "/textures");
 	private File cfgPath = new File(gamePath, "/cfg");
+	private File config = new File(gamePath, "/cfg");	
 	private Game game;
 	
 	public ResourceManager(Game game) {
@@ -138,11 +141,35 @@ public class ResourceManager {
 	
 	private void checkFolders() {
 		if (!gamePath.isDirectory()) gamePath.mkdirs(); 
-		if (!texturePath.isDirectory()) gamePath.mkdirs();
-		if (!cfgPath.isDirectory()) gamePath.mkdirs();
+		if (!texturePath.isDirectory()) texturePath.mkdirs();
+		if (!cfgPath.isDirectory()) cfgPath.mkdirs();
+	}
+	
+	public void checkConfig() {
+		if (!config.isFile()) {
+			/*try {
+				game.updater.download("http://ju57u5v.tk/JavaStrategie/cfg/config.cfg","cfg",false);
+			} catch (IOException e) {
+				System.out.println("Failed to download initial config. Quiting");
+				System.exit(1);
+				e.printStackTrace();
+			}*/
+		}
 	}
 	
 	public String getBasePath() {
 		return gamePath.getAbsolutePath();
+	}
+	
+	public void saveAnimation(String query, Animation animation) {
+		animations.put(query, animation);
+	}
+	
+	public Animation getAnimation(String query) {
+		return animations.get(query);
+	}
+	
+	public void createAnimation (String animationQuery, String[] querys, int duration) {
+		animations.put(animationQuery, new Animation(querys, duration));
 	}
 }

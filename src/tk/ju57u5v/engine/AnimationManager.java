@@ -27,4 +27,8 @@ public class AnimationManager {
 	public void setTick (long tick) {
 		this.tick = tick;
 	}
+	
+	public void putAnimationString (String animationQuery, Animation animation) {
+		animations.put(animationQuery, animation);
+	}
 }

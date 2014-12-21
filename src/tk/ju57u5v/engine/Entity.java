@@ -1,6 +1,5 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Graphics;
 
 public class Entity extends GameObject {
 
@@ -26,6 +25,10 @@ public class Entity extends GameObject {
 
 	public void update() {
 
+	}
+	
+	protected void initialise() {
+		game.gameRunner.renderer.registerEntity(this);
 	}
 
 	public void moveTo(int x, int y, int speed) {
@@ -69,4 +72,7 @@ public class Entity extends GameObject {
 		return movement;
 	}
 	
+	protected void getSavedAnimation(String query) {
+		animationManager.putAnimationString(query, game.resourceManager.getAnimation(query));
+	}
 }

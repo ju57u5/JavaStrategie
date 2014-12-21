@@ -22,12 +22,13 @@ public class Renderer {
 	}
 
 	/**
-	 * Registriert ein Entity.
+	 * Registriert ein Entity und gibt den Index des Entities zurück.
 	 * @param pEntity
 	 */
-	public void registerEntity(Entity pEntity) {
+	public int registerEntity(Entity pEntity) {
 		entities.add(pEntity);
 		game.kamera.setRelativPostion(pEntity);
+		return entities.size()-1;
 	}
 
 	/**

@@ -21,6 +21,8 @@ public class Game implements KeyListener {
 	}
 	
 	public void initalizeGame() {
+		resourceManager.checkConfig();
+		codeManager.processCFG("config.cfg");
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);
 	}

@@ -9,7 +9,7 @@ public class CodeManager {
 
 	public CodeManager(Game game) {
 		this.game = game;
-		processCFG("config.cfg");
+		
 	}
 
 	public void processCFG(String pFileName) {
@@ -50,6 +50,9 @@ public class CodeManager {
 				break;
 			case "download":
 				download(parts);
+				break;
+			case "animation":
+				animation(parts);
 				break;
 	
 			default:
@@ -101,7 +104,7 @@ public class CodeManager {
 		if (parts[2].equals("to")) {
 			try {
 				game.updater.download(parts[1], parts[3], false);
-				System.out.println("Download of "+parts[1]+" worked!");
+				System.out.println("Download of "+parts[1]+" done!");
 			} catch (IOException e) {
 				System.out.println("Download of "+parts[1]+" failed!");
 			} 
@@ -109,5 +112,14 @@ public class CodeManager {
 		} else {
 			System.out.println("Error, usage: download <URL> to <Path>");
 		}
+	}
+	
+	private void animation (String[] parts) {
+		String[] querys = new String[parts.length-3];
+		for (int c=3;c<parts.length;c++) {
+			querys[c-3]=parts[c];
+		}
+		
+		game.resourceManager.saveAnimation(parts[1], new Animation(querys, Integer.parseInt(parts[2])));
 	}
 }

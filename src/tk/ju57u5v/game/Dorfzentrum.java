@@ -12,10 +12,11 @@ public class Dorfzentrum extends Entity {
 	public Dorfzentrum(Game game) {
 		super(game);
 		
-		game.getGameRunner().getRenderer().registerEntity(this);
-		
-		animationManager.createAnimation("walk", new String[]{"katze1","katze2","katze3","katze4"}, 7);
-		animationManager.createAnimation("stand", new String[]{"katze1"}, 1);
+		initialise();
+		getSavedAnimation("walk");
+		getSavedAnimation("stand");
+		//animationManager.createAnimation("walk", new String[]{"katze1","katze2","katze3","katze4"}, 7);
+		//animationManager.createAnimation("stand", new String[]{"katze1"}, 1);
 		animationManager.selectAnimation("walk");
 		game.getResourceManager().setDimensionsFromResource("katze3", this);
 	}
