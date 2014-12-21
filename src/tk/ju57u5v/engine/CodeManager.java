@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class CodeManager {
 
-	private Game game;
+	protected Game game;
 
 	public CodeManager(Game game) {
 		this.game = game;
@@ -122,4 +122,6 @@ public class CodeManager {
 		
 		game.resourceManager.saveAnimation(parts[1], new Animation(querys, Integer.parseInt(parts[2])));
 	}
+	
+	
 }

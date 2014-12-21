@@ -13,8 +13,8 @@ public class Dorfzentrum extends Entity {
 		super(game);
 		
 		initialise();
-		getSavedAnimation("walk");
-		getSavedAnimation("stand");
+		getSavedAnimation("walk","dorfzentrum_walk");
+		getSavedAnimation("stand","dorfzentrum_stand");
 		//animationManager.createAnimation("walk", new String[]{"katze1","katze2","katze3","katze4"}, 7);
 		//animationManager.createAnimation("stand", new String[]{"katze1"}, 1);
 		animationManager.selectAnimation("walk");

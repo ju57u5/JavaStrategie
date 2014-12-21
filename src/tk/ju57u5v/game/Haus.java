@@ -10,7 +10,17 @@ public class Haus extends GameObject{
 	
 	public Haus(Game game) {
 		super(game);
-		// TODO Auto-generated constructor stub
 	}
+
+
+	public int getHealth() {
+		return health;
+	}
+
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
 	
 }

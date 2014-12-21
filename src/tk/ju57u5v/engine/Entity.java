@@ -72,7 +72,7 @@ public class Entity extends GameObject {
 		return movement;
 	}
 	
-	protected void getSavedAnimation(String query) {
-		animationManager.putAnimationString(query, game.resourceManager.getAnimation(query));
+	protected void getSavedAnimation(String newQuery, String query) {
+		animationManager.putAnimationString(newQuery, game.resourceManager.getAnimation(query));
 	}
 }
