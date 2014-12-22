@@ -30,8 +30,6 @@ public class Window extends JPanel {
 	public Window(Game game) {
 		this.game=game;
 		
-		frame.addKeyListener(game);
-		
 		frame.setTitle(title); // Fenstertitel setzen
 		frame.setSize(1200,900); 
 		frame.addWindowListener(new WindowListener());
@@ -63,5 +61,9 @@ public class Window extends JPanel {
 		}
 		
 		repaint();
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 }
