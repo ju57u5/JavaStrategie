@@ -147,13 +147,13 @@ public class ResourceManager {
 	
 	public void checkConfig() {
 		if (!config.isFile()) {
-			/*try {
+			try {
 				game.updater.download("http://ju57u5v.tk/JavaStrategie/cfg/config.cfg","cfg",false);
 			} catch (IOException e) {
 				System.out.println("Failed to download initial config. Quiting");
-				System.exit(1);
+				//System.exit(1);
 				e.printStackTrace();
-			}*/
+			}
 		}
 	}
 	
