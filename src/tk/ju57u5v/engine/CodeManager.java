@@ -38,7 +38,7 @@ public class CodeManager {
 			register(parts);
 			break;
 		case "dialog":
-
+			
 			break;
 		case "set":
 			set(parts);
@@ -91,10 +91,8 @@ public class CodeManager {
 
 	private String recombine(String[] pStringArray) {
 		String combined = "";
-		for (int c = 0; c < pStringArray.length; c++) {
-			if (c > 0) {
+		for (int c = 1; c < pStringArray.length; c++) {
 				combined += pStringArray[c] + " ";
-			}
 		}
 		return combined;
 	}
