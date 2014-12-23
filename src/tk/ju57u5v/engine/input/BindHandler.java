@@ -39,4 +39,9 @@ public class BindHandler implements KeyListener {
 		binds[keycode] = bind;
 	}
 
+	public void unactiveAll() {
+		for (int c=0; c<pressedKeys.length;c++) {
+			pressedKeys[c] = false;
+		}
+	}
 }

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import tk.ju57u5v.engine.Entity;
 import tk.ju57u5v.engine.Game;
 
-public class Dorfzentrum extends Entity {
+public class Dorfzentrum extends Unit {
 	
 	
 	
@@ -15,8 +15,6 @@ public class Dorfzentrum extends Entity {
 		initialise();
 		getSavedAnimation("walk","dorfzentrum_walk");
 		getSavedAnimation("stand","dorfzentrum_stand");
-		//animationManager.createAnimation("walk", new String[]{"katze1","katze2","katze3","katze4"}, 7);
-		//animationManager.createAnimation("stand", new String[]{"katze1"}, 1);
 		animationManager.selectAnimation("walk");
 		game.getResourceManager().setDimensionsFromResource("katze3", this);
 	}

@@ -15,6 +15,7 @@ import javax.swing.JProgressBar;
 
 public class Updater extends JFrame {
 
+	private Game game;
 	private int downloadedBytes = 0;
 	private JProgressBar progressBar;
 	private String basePath;
@@ -28,7 +29,8 @@ public class Updater extends JFrame {
 		}
 	}
 
-	public Updater(String basePath) {
+	public Updater(Game game, String basePath) {
+		this.game = game;
 		this.basePath = basePath;
 		setTitle("Updating");
 		setSize(200, 100);
@@ -81,9 +83,9 @@ public class Updater extends JFrame {
 		for (int c = 0; c < downloadUrls.size(); c++) {
 			try {
 				download(downloadUrls.get(c), downloadPaths.get(c), true);
-				System.out.println("Download of "+downloadUrls.get(c)+" done!");
+				game.console.log("Download of "+downloadUrls.get(c)+" done!");
 			} catch (IOException e) {
-				System.out.println("Download of "+downloadUrls.get(c)+" failed!");
+				game.console.log("Download of "+downloadUrls.get(c)+" failed!");
 			} 
 		}
 		dispose();

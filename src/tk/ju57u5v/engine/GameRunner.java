@@ -32,6 +32,7 @@ public class GameRunner extends Thread {
 				lastTime = now;
 				while (delta >= 1) {
 					game.gameRunner.renderer.update();
+					update();
 					work();
 					updates++;
 					delta--;
@@ -72,6 +73,10 @@ public class GameRunner extends Thread {
 		return renderer;
 	}
 	
-	
+	private void update() {
+		if (game.bindHandler.bindActive("+console")) {
+			game.console.getFrame().setVisible(true);
+		}
+	}
 
 }

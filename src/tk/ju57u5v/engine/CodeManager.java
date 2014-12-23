@@ -71,7 +71,7 @@ public class CodeManager {
 		if (parts[2].equals("as")) {
 			game.resourceManager.loadImage(parts[1], parts[3]);
 		} else {
-			System.out.println("Error, usage: register <Filename> as <Query>");
+			game.console.log("Error, usage: register <Filename> as <Query>");
 		}
 	}
 
@@ -79,14 +79,14 @@ public class CodeManager {
 		if (parts[2].equals("to")) {
 			game.updater.registerUpdatableFile(parts[1], parts[3]);
 		} else {
-			System.out.println("Error, usage: update <URL> to <Path>");
+			game.console.log("Error, usage: update <URL> to <Path>");
 		}
 	}
 
 	private void echo(String pCode) {
 		String[] parts = pCode.split("\\s+");
 		String echo = recombine(parts);
-		System.out.println(echo);
+		game.console.log(echo);
 	}
 
 	private String recombine(String[] pStringArray) {
@@ -107,13 +107,13 @@ public class CodeManager {
 		if (parts[2].equals("to")) {
 			try {
 				game.updater.download(parts[1], parts[3], false);
-				System.out.println("Download of " + parts[1] + " done!");
+				game.console.log("Download of " + parts[1] + " done!");
 			} catch (IOException e) {
-				System.out.println("Download of " + parts[1] + " failed!");
+				game.console.log("Download of " + parts[1] + " failed!");
 			}
 
 		} else {
-			System.out.println("Error, usage: download <URL> to <Path>");
+			game.console.log("Error, usage: download <URL> to <Path>");
 		}
 	}
 
@@ -134,6 +134,6 @@ public class CodeManager {
 			keycode = parts[1].trim().toUpperCase().toCharArray()[0];
 		}
 		game.bindHandler.bind(keycode, parts[2].trim());
-		System.out.println("Bound " + parts[2] + " to " + parts[1]);
+		game.console.log("Bound " + parts[2] + " to " + parts[1]);
 	}
 }

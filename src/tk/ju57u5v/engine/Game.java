@@ -14,11 +14,12 @@ public class Game {
 	protected Kamera kamera = new Kamera(this);
 	protected Window window = new Window(this);
 	protected ResourceManager resourceManager = new ResourceManager(this);
-	protected Updater updater = new Updater(resourceManager.getBasePath());
+	protected Updater updater = new Updater(this, resourceManager.getBasePath());
 	protected CodeManager codeManager = new CodeManager(this);
 	protected MouseHandler mouseHandler = new MouseHandler(this);
 	protected BindHandler bindHandler = new BindHandler();
 	protected Player player = new Player();
+	protected Console console = new Console(this);
 	private Image mainBufferImage = window.createImage(1920, 1080);
 	protected GameRunner gameRunner = new GameRunner(this);
 

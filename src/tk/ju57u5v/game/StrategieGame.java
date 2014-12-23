@@ -16,7 +16,7 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 	public StrategieGame() {
 		super();
 		gameRunner = new GameRunner(this);
-		
+		player = new Player();
 		
 		window.addMouseWheelListener(this);
 		window.addMouseListener(this);
@@ -40,7 +40,7 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		getGameRunner().getRenderer().getEntities().get(player.getPlayerEntityID()).moveTo(kamera.toRealX(e.getX()), kamera.toRealY(e.getY()),1);
+		((Player) player).activeGroup.moveTo(kamera.toRealX(e.getX()), kamera.toRealY(e.getY()));
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 		for (int c=0;c<gameRunner.getRenderer().getEntities().size();c++) {
 			Entity e = gameRunner.getRenderer().getEntities().get(c);
 			if (TwoDMath.isRectInRect(e.getX(), e.getY(), e.getWidth(), e.getHeight(), kamera.toRealX(startx), kamera.toRealY(starty), endx-startx, endy-starty)) {
-				player.setPlayerEntityID(c);
+				((Player) player).activeGroup.addUnit((Unit) e);
 			}
 		}
 	}
