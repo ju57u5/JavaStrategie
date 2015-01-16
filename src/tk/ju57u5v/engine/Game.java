@@ -2,13 +2,9 @@ package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import tk.ju57u5v.engine.console.CodeManager;
 import tk.ju57u5v.engine.console.Console;
 import tk.ju57u5v.engine.input.BindHandler;
-import tk.ju57u5v.engine.input.BindListener;
 import tk.ju57u5v.engine.input.MouseHandler;
 
 public class Game {

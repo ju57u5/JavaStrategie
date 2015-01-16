@@ -19,8 +19,9 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	private TextArea consoleOutput;
 	private TextField consoleInput;
 	private Game game;
-	ArrayList<String> history = new ArrayList<String>();
-	int historyPointer = -1;
+	private ArrayList<String> history = new ArrayList<String>();
+	private int historyPointer = -1;
+	private ConVarManager conVarManager = new ConVarManager(game);
 
 	public Console(Game game) {
 		this.game = game;
@@ -47,7 +48,6 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 		this.add(consoleOutput);
 		this.add(consoleInput);
-
 	}
 
 	public void log(String log) {
@@ -130,5 +130,21 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 		//	consoleInput.requestFocus();
+	}
+	
+	public String getString(String name) {
+		return conVarManager.getString(name);
+	}
+	
+	public int getInt(String name) {
+		return conVarManager.getInt(name);
+	}
+	
+	public double getDouble(String name) {
+		return conVarManager.getDouble(name);
+	}
+	
+	public boolean getBoolean(String name) {
+		return conVarManager.getBoolean(name);
 	}
 }

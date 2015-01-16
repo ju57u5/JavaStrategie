@@ -34,7 +34,7 @@ public class Updater extends JFrame {
 		this.basePath = basePath;
 		setTitle("Updating");
 		setSize(200, 100);
-		 setLocationRelativeTo(null); 
+		setLocationRelativeTo(null); 
 	}
 
 	public void download(String fileURL, String destinationDirectory, boolean processBarEnabled) throws IOException {
