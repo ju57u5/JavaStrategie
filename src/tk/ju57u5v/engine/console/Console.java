@@ -70,6 +70,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 			history.add(command);
 			historyPointer = history.size();
 			consoleInput.setText("");
+			this.log("]"+command);
 			
 			String[] commands = command.split(";");
 			for (String com : commands) {
@@ -146,5 +147,24 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	
 	public boolean getBoolean(String name) {
 		return conVarManager.getBoolean(name);
+	}
+	
+	public void set (String name, String value) {
+		conVarManager.set(name, value);
+	}
+
+	public ConVarManager getConVarManager() {
+		return conVarManager;
+	}
+	
+	public void def(String name, String defaultValue, String description) {
+		conVarManager.def(name, defaultValue, description);
+	}
+	
+	public void logVarInfo(String name) {
+		String value = getString(name);
+		String defaultValue = conVarManager.getDefaultValue(name);
+		String description = conVarManager.getDescription(name);
+		game.getConsole().log(name + " == '" + value + "' (def: "+defaultValue+") - "+description);
 	}
 }

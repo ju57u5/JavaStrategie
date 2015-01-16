@@ -6,6 +6,8 @@ import tk.ju57u5v.engine.Game;
 
 public class ConVarManager {
 	private HashMap<String, String> vars = new HashMap<String, String>();
+	private HashMap<String, String> defaults = new HashMap<String, String>();
+	private HashMap<String, String> descriptions = new HashMap<String, String>();
 	private Game game;
 
 	public ConVarManager(Game game) {
@@ -14,6 +16,12 @@ public class ConVarManager {
 
 	public void set(String name, String value) {
 		vars.put(name, value);
+	}
+	
+	public void def(String name, String defaultValue, String description) {
+		vars.put(name, defaultValue);
+		defaults.put(name, defaultValue);
+		descriptions.put(name, description);
 	}
 
 	public String getString(String name) {
@@ -24,14 +32,16 @@ public class ConVarManager {
 		try {
 			return Integer.parseInt(vars.get(name));
 		} catch (NumberFormatException e) {
+			if (getDefaultValue(name)!=null) return Integer.parseInt(defaults.get(name));
 			return 0;
 		}
 	}
 
 	public double getDouble(String name) {
 		try {
-			return Double.parseDouble(name);
+			return Double.parseDouble(vars.get(name));
 		} catch (NumberFormatException e) {
+			if (getDefaultValue(name)!=null) return Double.parseDouble(defaults.get(name));
 			return 0.0;
 		}
 	}
@@ -40,7 +50,20 @@ public class ConVarManager {
 		try {
 			return Integer.parseInt(vars.get(name)) != 0;
 		} catch (NumberFormatException e) {
+			if (getDefaultValue(name)!=null) return Integer.parseInt(defaults.get(name)) != 0;
 			return false;
 		}
+	}
+	
+	public String getDefaultValue(String name) {
+		return defaults.get(name);
+	}
+	
+	public String getDescription(String name) {
+		return descriptions.get(name);
+	}
+
+	public HashMap<String, String> getVars() {
+		return vars;
 	}
 }
