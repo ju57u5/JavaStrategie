@@ -29,6 +29,8 @@ public class Game {
 		window.addMouseMotionListener(mouseHandler);
 		window.getFrame().addKeyListener(bindHandler);
 		resourceManager.checkConfig();
+		//Load Convars
+		codeManager.processCFG("varsafe.cfg");
 		codeManager.processCFG("config.cfg");
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);

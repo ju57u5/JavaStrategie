@@ -21,10 +21,13 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	private Game game;
 	private ArrayList<String> history = new ArrayList<String>();
 	private int historyPointer = -1;
-	private ConVarManager conVarManager = new ConVarManager(game);
+	private ConVarManager conVarManager;
 
 	public Console(Game game) {
 		this.game = game;
+		
+		conVarManager = new ConVarManager(game);
+		
 		frame.setTitle("Console"); // Fenstertitel setzen
 		frame.setSize(900, 600);
 		frame.addWindowListener(this);

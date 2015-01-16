@@ -106,10 +106,6 @@ public class CodeManager {
 			}
 		});
 
-		addCommand("startupdate", (game, pCode, parts) -> {
-			game.getUpdater().updateFiles();
-		});
-
 		addCommand("bind", (game, pCode, parts) -> {
 			int keycode;
 			if (TwoDMath.isNumeric(parts[1].trim())) {
@@ -152,6 +148,18 @@ public class CodeManager {
 		addCommand("def", (game, pCode, parts) -> {
 			game.getConsole().def(parts[1].trim(), parts[2].trim(), recombine(parts, 3));
 			game.getConsole().logVarInfo(parts[1]);
+		});
+
+		addCommand("startupdate", (game, pCode, parts) -> {
+			game.getUpdater().updateFiles(false);
+		});
+
+		addCommand("forceupdate", (game, pCode, parts) -> {
+			game.getUpdater().updateFiles(true);
+		});
+		
+		addCommand("savevars", (game, pCode, parts) -> {
+			game.getConsole().getConVarManager().safeVars();
 		});
 	}
 }

@@ -73,20 +73,23 @@ public class Updater extends JFrame {
 		downloadPaths.add(downloadPath);
 	}
 
-	public void updateFiles() {
-		progressBar = new JProgressBar(0, getUpdateSize());
-		progressBar.setValue(0);
-		progressBar.setStringPainted(true);
-		this.add(progressBar);
-		setVisible(true);
-		
-		for (int c = 0; c < downloadUrls.size(); c++) {
-			try {
-				download(downloadUrls.get(c), downloadPaths.get(c), true);
-				game.console.log("Download of "+downloadUrls.get(c)+" done!");
-			} catch (IOException e) {
-				game.console.log("Download of "+downloadUrls.get(c)+" failed!");
-			} 
+	public void updateFiles(boolean forceUpdate) {
+		if (game.console.getInt("version") > game.console.getInt("currentVersion") || forceUpdate) {
+			progressBar = new JProgressBar(0, getUpdateSize());
+			progressBar.setValue(0);
+			progressBar.setStringPainted(true);
+			this.add(progressBar);
+			setVisible(true);
+			
+			for (int c = 0; c < downloadUrls.size(); c++) {
+				try {
+					download(downloadUrls.get(c), downloadPaths.get(c), true);
+					game.console.log("Download of "+downloadUrls.get(c)+" done!");
+				} catch (IOException e) {
+					game.console.log("Download of "+downloadUrls.get(c)+" failed!");
+				} 
+			}
+			game.getConsole().set("currentversion", game.console.getString("version"));
 		}
 		dispose();
 	}

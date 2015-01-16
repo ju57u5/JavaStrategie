@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -31,7 +33,7 @@ public class ResourceManager {
 	private File gamePath = new File(appdata,"/JavaStrategie");
 	private File texturePath = new File(gamePath, "/textures");
 	private File cfgPath = new File(gamePath, "/cfg");
-	private File config = new File(gamePath, "/cfg");	
+	private File config = new File(gamePath, "/cfg/config.cfg");	
 	private Game game;
 	
 	public ResourceManager(Game game) {
@@ -151,7 +153,7 @@ public class ResourceManager {
 				game.updater.download("http://ju57u5v.tk/JavaStrategie/cfg/config.cfg","cfg",false);
 			} catch (IOException e) {
 				System.out.println("Failed to download initial config. Quiting");
-				//System.exit(1);
+				System.exit(1);
 				e.printStackTrace();
 			}
 		}
@@ -161,6 +163,11 @@ public class ResourceManager {
 		return gamePath.getAbsolutePath();
 	}
 	
+	public String getCfgPath() {
+		return cfgPath.getAbsolutePath();
+	}
+
+
 	public void saveAnimation(String query, Animation animation) {
 		animations.put(query, animation);
 	}
@@ -171,5 +178,18 @@ public class ResourceManager {
 	
 	public void createAnimation (String animationQuery, String[] querys, int duration) {
 		animations.put(animationQuery, new Animation(querys, duration));
+	}
+	
+	public void writeToFile(String filename, String s) {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(game.getResourceManager().getCfgPath()+"/"+filename, "UTF-8");
+			writer.println(s);
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 }
