@@ -4,7 +4,7 @@ import tk.ju57u5v.engine.Game;
 
 
 
-public class CodeManager extends tk.ju57u5v.engine.CodeManager {
+public class CodeManager extends tk.ju57u5v.engine.console.CodeManager {
 
 	public CodeManager(Game game) {
 		super(game);

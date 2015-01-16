@@ -69,6 +69,7 @@ public class StrategieGame extends Game implements MouseWheelListener,MouseListe
 	
 	@Override
 	public void mousedrag(int startx, int starty, int endx, int endy) {
+		//((Player) player).activeGroup.clear();
 		for (int c=0;c<gameRunner.getRenderer().getEntities().size();c++) {
 			Entity e = gameRunner.getRenderer().getEntities().get(c);
 			if (TwoDMath.isRectInRect(e.getX(), e.getY(), e.getWidth(), e.getHeight(), kamera.toRealX(startx), kamera.toRealY(starty), endx-startx, endy-starty)) {

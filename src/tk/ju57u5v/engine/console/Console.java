@@ -1,4 +1,4 @@
-package tk.ju57u5v.engine;
+package tk.ju57u5v.engine.console;
 
 import java.awt.TextArea;
 import java.awt.TextField;
@@ -7,11 +7,14 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Console extends JPanel implements KeyListener {
+import tk.ju57u5v.engine.Game;
+
+public class Console extends JPanel implements KeyListener, WindowListener {
 	private JFrame frame = new JFrame();
 	private TextArea consoleOutput;
 	private TextField consoleInput;
@@ -19,17 +22,11 @@ public class Console extends JPanel implements KeyListener {
 	ArrayList<String> history = new ArrayList<String>();
 	int historyPointer = -1;
 
-	class WindowListener extends WindowAdapter {
-		public void windowClosing(WindowEvent e) {
-			e.getWindow().setVisible(false); // Fenster "killen"
-		}
-	}
-
 	public Console(Game game) {
 		this.game = game;
 		frame.setTitle("Console"); // Fenstertitel setzen
 		frame.setSize(900, 600);
-		frame.addWindowListener(new WindowListener());
+		frame.addWindowListener(this);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(false);
 		frame.setIgnoreRepaint(true);
@@ -73,10 +70,10 @@ public class Console extends JPanel implements KeyListener {
 			history.add(command);
 			historyPointer = history.size();
 			consoleInput.setText("");
-
+			
 			String[] commands = command.split(";");
 			for (String com : commands) {
-				game.codeManager.processCode(com);
+				game.getCodeManager().processCode(com);
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			frame.setVisible(false);
@@ -98,5 +95,40 @@ public class Console extends JPanel implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		//	consoleInput.requestFocus();
 	}
 }

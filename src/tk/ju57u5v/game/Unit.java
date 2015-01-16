@@ -9,6 +9,7 @@ public class Unit extends Entity{
 	private int health=10;
 	private int damage=1;
 	private int attackSpeed=1;
+	private boolean alive=false;
 	
 	public Unit(Game game) {
 		super(game);

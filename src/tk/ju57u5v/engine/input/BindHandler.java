@@ -8,6 +8,7 @@ public class BindHandler implements KeyListener {
 	ArrayList<BindListener> listeners = new ArrayList<BindListener>();
 	protected boolean[] pressedKeys = new boolean[1000];
 	protected String[] binds = new String[1000];
+	// TODO Mit Hashmap ersetzen
 
 	@Override
 	public void keyTyped(KeyEvent e) {

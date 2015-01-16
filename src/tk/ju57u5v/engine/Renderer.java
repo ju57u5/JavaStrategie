@@ -10,12 +10,8 @@ import java.util.ArrayList;
  */
 public class Renderer {
 
-	ArrayList<Entity> entities = new ArrayList<Entity>();
-	public ArrayList<Entity> getEntities() {
-		return entities;
-	}
-
-	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+	protected ArrayList<Entity> entities = new ArrayList<Entity>();
+	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
 	private boolean render = false;
 	private boolean update = false;
@@ -93,4 +89,7 @@ public class Renderer {
 		this.update = update;
 	}
 	
+	public ArrayList<Entity> getEntities() {
+		return entities;
+	}
 }

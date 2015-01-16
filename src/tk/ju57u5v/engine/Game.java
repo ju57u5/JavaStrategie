@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import tk.ju57u5v.engine.console.CodeManager;
+import tk.ju57u5v.engine.console.Console;
 import tk.ju57u5v.engine.input.BindHandler;
 import tk.ju57u5v.engine.input.BindListener;
 import tk.ju57u5v.engine.input.MouseHandler;
@@ -63,4 +65,18 @@ public class Game {
 	public BindHandler getBindHandler() {
 		return bindHandler;
 	}
+
+	public CodeManager getCodeManager() {
+		return codeManager;
+	}
+
+	public Updater getUpdater() {
+		return updater;
+	}
+
+	public Console getConsole() {
+		return console;
+	}
+	
+	
 }
