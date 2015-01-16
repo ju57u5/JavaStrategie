@@ -12,7 +12,7 @@ public class BindHandler implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class BindHandler implements KeyListener {
 		for (int c = 0; c < binds.length; c++) {
 			if (binds[c] != null) {
 				if (binds[c].equals(bind)) {
-					return pressedKeys[c];
+					if(pressedKeys[c]) return true;
 				}
 			}
 		}
@@ -38,6 +38,10 @@ public class BindHandler implements KeyListener {
 
 	public void bind(int keycode, String bind) {
 		binds[keycode] = bind;
+	}
+	
+	public void unbind (int keycode) {
+		binds[keycode] = null;
 	}
 
 	public void unactiveAll() {

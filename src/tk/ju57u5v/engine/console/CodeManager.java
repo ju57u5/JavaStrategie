@@ -104,6 +104,17 @@ public class CodeManager {
 			game.getBindHandler().bind(keycode, parts[2].trim());
 			game.getConsole().log("Bound " + parts[2] + " to " + parts[1]);
 		});
+		
+		addCommand("unbind", (game, pCode, parts) -> {
+			int keycode;
+			if (TwoDMath.isNumeric(parts[1].trim())) {
+				keycode = Integer.parseInt(parts[1].trim());
+			} else {
+				keycode = parts[1].trim().toUpperCase().toCharArray()[0];
+			}
+			game.getBindHandler().unbind(keycode);
+			game.getConsole().log("Unbound " + parts[1]);
+		});
 
 		addCommand("animation", (game, pCode, parts) -> {
 			String[] querys = new String[parts.length - 3];
