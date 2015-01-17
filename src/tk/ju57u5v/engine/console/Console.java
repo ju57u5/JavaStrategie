@@ -105,7 +105,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 		else if (eingabelaenge != 0) {
 			boolean found = false;
 			for (HashMap.Entry<String, Command> entry : game.getCodeManager().getCommands().entrySet()) {
-				if (entry.getKey().startsWith(consoleInput.getText()) && !entry.getKey().equals(consoleInput.getText())) {
+				if (entry.getKey().startsWith(consoleInput.getText()+e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText()+e.getKeyChar())) {
 					consoleInput.setText(entry.getKey());
 					consoleInput.select(eingabelaenge+1, consoleInput.getText().length());
 					e.consume();
@@ -115,7 +115,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 			}
 			if (!found) {
 				for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
-					if (entry.getKey().startsWith(consoleInput.getText()) && !entry.getKey().equals(consoleInput.getText())) {
+					if (entry.getKey().startsWith(consoleInput.getText()+e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText()+e.getKeyChar())) {
 						consoleInput.setText(entry.getKey());
 						consoleInput.select(eingabelaenge+1, consoleInput.getText().length());
 						e.consume();

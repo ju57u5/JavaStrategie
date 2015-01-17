@@ -113,7 +113,7 @@ public class CodeManager {
 			if (TwoDMath.isNumeric(parts[1].trim())) {
 				keycode = Integer.parseInt(parts[1].trim());
 			} else {
-				keycode = parts[1].trim().toUpperCase().toCharArray()[0];
+				keycode = parts[1].trim().toUpperCase().charAt(0);
 			}
 			game.getBindHandler().bind(keycode, parts[2].trim());
 			game.getConsole().log("Bound " + parts[2] + " to " + parts[1]);
@@ -124,7 +124,7 @@ public class CodeManager {
 			if (TwoDMath.isNumeric(parts[1].trim())) {
 				keycode = Integer.parseInt(parts[1].trim());
 			} else {
-				keycode = parts[1].trim().toUpperCase().toCharArray()[0];
+				keycode = parts[1].trim().toUpperCase().charAt(0);
 			}
 			game.getBindHandler().unbind(keycode);
 			game.getConsole().log("Unbound " + parts[1]);
