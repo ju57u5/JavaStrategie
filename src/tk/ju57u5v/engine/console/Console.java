@@ -4,31 +4,30 @@ import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.WindowListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import tk.ju57u5v.engine.Game;
 
 public class Console extends JPanel implements KeyListener, WindowListener {
+
+	private Game game;
 	private JFrame frame = new JFrame();
 	private TextArea consoleOutput;
 	private TextField consoleInput;
-	private Game game;
 	private ArrayList<String> history = new ArrayList<String>();
 	private int historyPointer = -1;
 	private ConVarManager conVarManager;
 
 	public Console(Game game) {
 		this.game = game;
-		
+
 		conVarManager = new ConVarManager(game);
-		
+
 		frame.setTitle("Console"); // Fenstertitel setzen
 		frame.setSize(900, 600);
 		frame.addWindowListener(this);
@@ -45,7 +44,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 		consoleInput = new TextField(1);
 		consoleInput.setBounds(0, 540, 900, 20);
-		//Tab wechselt nicht den Focus
+		// Tab wechselt nicht den Focus
 		consoleInput.setFocusTraversalKeysEnabled(false);
 
 		consoleInput.addKeyListener(this);
@@ -66,7 +65,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
+		
 	}
 
 	@Override
@@ -81,29 +80,53 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 			history("DOWN");
 		} else if (e.getKeyCode() == KeyEvent.VK_TAB) {
 			autoVervollstaendigung();
-			e.consume();//Keine weitere Verarbeitung als Zeichen
+			e.consume();// Keine weitere Verarbeitung als Zeichen
 		}
+		if (e.getKeyCode() != KeyEvent.VK_DELETE && e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_CONTROL)
+			vorschlag(e);
 	}
-	
+
 	private void autoVervollstaendigung() {
-		boolean found = false;
-		for (HashMap.Entry<String, Command> entry : game.getCodeManager().getCommands().entrySet()) {
-			if (entry.getKey().startsWith(consoleInput.getText())) {
-				consoleInput.setText(entry.getKey());
-				found=true;
+		consoleInput.select(consoleInput.getText().length(), consoleInput.getText().length());
+	}
+
+	private void vorschlag(KeyEvent e) {
+		int eingabelaenge = consoleInput.getText().length();
+		if (!consoleInput.getSelectedText().equals("")) {
+			eingabelaenge = consoleInput.getSelectionStart(); 
+			
+			if (consoleInput.getText().charAt(consoleInput.getSelectionStart())==e.getKeyChar()) {
+				consoleInput.select(consoleInput.getSelectionStart()+1, consoleInput.getText().length());
+				e.consume();
 			}
+			
 		}
-		if (!found) { 
-			for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
-				if (entry.getKey().startsWith(consoleInput.getText())) {
+		
+		else if (eingabelaenge != 0) {
+			boolean found = false;
+			for (HashMap.Entry<String, Command> entry : game.getCodeManager().getCommands().entrySet()) {
+				if (entry.getKey().startsWith(consoleInput.getText()) && !entry.getKey().equals(consoleInput.getText())) {
 					consoleInput.setText(entry.getKey());
+					consoleInput.select(eingabelaenge+1, consoleInput.getText().length());
+					e.consume();
 					found=true;
+					break;
+				}
+			}
+			if (!found) {
+				for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
+					if (entry.getKey().startsWith(consoleInput.getText()) && !entry.getKey().equals(consoleInput.getText())) {
+						consoleInput.setText(entry.getKey());
+						consoleInput.select(eingabelaenge+1, consoleInput.getText().length());
+						e.consume();
+						found=true;
+						break;
+					}
 				}
 			}
 		}
-		if (found) consoleInput.setCaretPosition(consoleInput.getText().length());
 	}
-	
+
 	private void history(String direction) {
 		if (direction.equals("UP")) {
 			if (!(historyPointer == 0)) {
@@ -111,7 +134,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 			}
 			consoleInput.setText(history.get(historyPointer));
 		} else {
-			if ((historyPointer == history.size()-1)) {
+			if ((historyPointer == history.size() - 1)) {
 				consoleInput.setText("");
 			} else {
 				historyPointer++;
@@ -119,20 +142,20 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 			}
 		}
 	}
-	
+
 	private void processCommand() {
 		String command = consoleInput.getText();
 		history.add(command);
 		historyPointer = history.size();
 		consoleInput.setText("");
-		this.log("]"+command);
-		
+		this.log("]" + command);
+
 		String[] commands = command.split(";");
 		for (String com : commands) {
 			game.getCodeManager().processCode(com);
 		}
 	}
-	
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 
@@ -140,27 +163,27 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		
+
 	}
 
 	@Override
@@ -170,41 +193,41 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		
+
 	}
-	
+
 	public String getString(String name) {
 		return conVarManager.getString(name);
 	}
-	
+
 	public int getInt(String name) {
 		return conVarManager.getInt(name);
 	}
-	
+
 	public double getDouble(String name) {
 		return conVarManager.getDouble(name);
 	}
-	
+
 	public boolean getBoolean(String name) {
 		return conVarManager.getBoolean(name);
 	}
-	
-	public void set (String name, String value) {
+
+	public void set(String name, String value) {
 		conVarManager.set(name, value);
 	}
 
 	public ConVarManager getConVarManager() {
 		return conVarManager;
 	}
-	
+
 	public void def(String name, String defaultValue, String description) {
 		conVarManager.def(name, defaultValue, description);
 	}
-	
+
 	public void logVarInfo(String name) {
 		String value = getString(name);
 		String defaultValue = conVarManager.getDefaultValue(name);
 		String description = conVarManager.getDescription(name);
-		game.getConsole().log(name + " == '" + value + "' (def: "+defaultValue+") - "+description);
+		game.getConsole().log(name + " == '" + value + "' (def: " + defaultValue + ") - " + description);
 	}
 }
