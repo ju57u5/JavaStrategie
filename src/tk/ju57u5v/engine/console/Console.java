@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
@@ -44,6 +45,8 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 		consoleInput = new TextField(1);
 		consoleInput.setBounds(0, 540, 900, 20);
+		//Tab wechselt nicht den Focus
+		consoleInput.setFocusTraversalKeysEnabled(false);
 
 		consoleInput.addKeyListener(this);
 		consoleOutput.addKeyListener(this);
@@ -69,24 +72,45 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			String command = consoleInput.getText();
-			history.add(command);
-			historyPointer = history.size();
-			consoleInput.setText("");
-			this.log("]"+command);
-			
-			String[] commands = command.split(";");
-			for (String com : commands) {
-				game.getCodeManager().processCode(com);
-			}
+			processCommand();
 		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			frame.setVisible(false);
 		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			history("UP");
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			history("DOWN");
+		} else if (e.getKeyCode() == KeyEvent.VK_TAB) {
+			autoVervollstaendigung();
+			e.consume();//Keine weitere Verarbeitung als Zeichen
+		}
+	}
+	
+	private void autoVervollstaendigung() {
+		boolean found = false;
+		for (HashMap.Entry<String, Command> entry : game.getCodeManager().getCommands().entrySet()) {
+			if (entry.getKey().startsWith(consoleInput.getText())) {
+				consoleInput.setText(entry.getKey());
+				found=true;
+			}
+		}
+		if (!found) { 
+			for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
+				if (entry.getKey().startsWith(consoleInput.getText())) {
+					consoleInput.setText(entry.getKey());
+					found=true;
+				}
+			}
+		}
+		if (found) consoleInput.setCaretPosition(consoleInput.getText().length());
+	}
+	
+	private void history(String direction) {
+		if (direction.equals("UP")) {
 			if (!(historyPointer == 0)) {
 				historyPointer--;
 			}
 			consoleInput.setText(history.get(historyPointer));
-		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		} else {
 			if ((historyPointer == history.size()-1)) {
 				consoleInput.setText("");
 			} else {
@@ -95,7 +119,20 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 			}
 		}
 	}
-
+	
+	private void processCommand() {
+		String command = consoleInput.getText();
+		history.add(command);
+		historyPointer = history.size();
+		consoleInput.setText("");
+		this.log("]"+command);
+		
+		String[] commands = command.split(";");
+		for (String com : commands) {
+			game.getCodeManager().processCode(com);
+		}
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 
@@ -128,12 +165,12 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		
+		consoleInput.requestFocus();
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		//	consoleInput.requestFocus();
+		
 	}
 	
 	public String getString(String name) {

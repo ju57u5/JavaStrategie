@@ -40,14 +40,16 @@ public class CodeManager {
 		}
 		
 		//Handel Convars without set-Method
-		for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
-			if (entry.getKey().equals(parts[0])) {
-				if (parts.length < 2 || parts[1].trim().equals("")) {
-					game.getConsole().logVarInfo(parts[0]);
-				} else {
-					game.getConsole().set(parts[0], parts[1]);
+		if (!executed) {
+			for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
+				if (entry.getKey().equals(parts[0])) {
+					if (parts.length < 2 || parts[1].trim().equals("")) {
+						game.getConsole().logVarInfo(parts[0]);
+					} else {
+						game.getConsole().set(parts[0], parts[1]);
+					}
+					executed=true;
 				}
-				executed=true;
 			}
 		}
 		
@@ -66,7 +68,7 @@ public class CodeManager {
 		commands.put(query, command);
 	}
 
-	public void registerCommands() {
+	private void registerCommands() {
 		addCommand("echo", (game, pCode, parts) -> {
 			String echo = recombine(parts, 1);
 			game.getConsole().log(echo);
@@ -161,5 +163,9 @@ public class CodeManager {
 		addCommand("savevars", (game, pCode, parts) -> {
 			game.getConsole().getConVarManager().safeVars();
 		});
+	}
+
+	public HashMap<String, Command> getCommands() {
+		return commands;
 	}
 }
