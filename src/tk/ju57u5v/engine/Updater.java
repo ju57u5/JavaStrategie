@@ -89,7 +89,7 @@ public class Updater extends JFrame {
 					game.console.log("Download of "+downloadUrls.get(c)+" failed!");
 				} 
 			}
-			game.getConsole().set("currentversion", game.console.getString("version"));
+			game.getConsole().set("currentVersion", game.console.getString("version"));
 		}
 		dispose();
 	}

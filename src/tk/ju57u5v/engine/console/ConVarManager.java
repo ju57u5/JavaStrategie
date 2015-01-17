@@ -74,7 +74,7 @@ public class ConVarManager {
 		String commands = "";
 		for (HashMap.Entry<String, String> entry : this.getVars().entrySet()) {
 			String varName = entry.getKey();
-			commands += "def " + varName + " " + getDefaultValue(varName) + " " + getDescription(varName) + ";\n";
+			commands += "def " + varName + " " + getDefaultValue(varName) + " " + getDescription(varName) + ";\n" + "set " + varName + " " + getString(varName) + ";\n";
 		}
 		game.getResourceManager().writeToFile("varsafe.cfg", commands);
 	}
