@@ -60,8 +60,8 @@ public class ResourceManager {
 		File imagePath = new File(texturePath,"/"+pResourceName);
 		try {
 			textures.put(pQuery, ImageIO.read(imagePath));
+			convertToGoodFormat(pQuery);
 		} catch(IOException exeption) {}
-		//convertToGoodFormat(pQuery);
 	}
 	
 	/**
@@ -115,9 +115,17 @@ public class ResourceManager {
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice device = env.getDefaultScreenDevice();
 		GraphicsConfiguration config = device.getDefaultConfiguration();
-		BufferedImage buffy = config.createCompatibleImage(getResource(pQuery).getWidth(), getResource(pQuery).getWidth(), Transparency.TRANSLUCENT);
 		
-		Graphics g = buffy.getGraphics();
+		//Schein auf Schulpcs zu Problemen zu kommen wenn es nicht eingehalten wird
+		if (env == null || device == null || config == null) 
+			return;
+		
+		if (getResource(pQuery).getColorModel().equals(config.getColorModel()))
+			return;
+		
+		BufferedImage buffy = config.createCompatibleImage(getResource(pQuery).getWidth(), getResource(pQuery).getHeight(), getResource(pQuery).getTransparency());
+		
+		Graphics2D g = (Graphics2D) buffy.getGraphics();
 		g.drawImage(getResource(pQuery),0,0,null);
 		g.dispose();
 		textures.put(pQuery, buffy);

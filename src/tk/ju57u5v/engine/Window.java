@@ -1,6 +1,7 @@
 package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -42,8 +43,8 @@ public class Window extends JPanel implements WindowListener {
 		if (game.gameRunner != null) {
 			if (game.gameRunner.renderer != null) {
 				g.clearRect(0, 0, getWidth(), getHeight());
-				game.gameRunner.renderer.render(g);
-				game.mouseHandler.drawDrag(g);
+				game.gameRunner.renderer.render((Graphics2D) g);
+				game.mouseHandler.drawDrag((Graphics2D) g);
 			}
 		}
 		frames++;

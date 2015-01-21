@@ -1,6 +1,6 @@
 package tk.ju57u5v.engine.input;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -95,7 +95,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 
 	}
 
-	public void drawDrag(Graphics g) {
+	public void drawDrag(Graphics2D g) {
 		int firstx = startx < currentx ? startx : currentx;
 		int firsty = starty < currenty ? starty : currenty;
 		int secondx = startx >= currentx ? startx : currentx;

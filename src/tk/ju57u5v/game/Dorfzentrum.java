@@ -1,8 +1,6 @@
 package tk.ju57u5v.game;
 
-import java.awt.Graphics;
-
-import tk.ju57u5v.engine.Entity;
+import java.awt.Graphics2D;
 import tk.ju57u5v.engine.Game;
 
 public class Dorfzentrum extends Unit {
@@ -20,7 +18,7 @@ public class Dorfzentrum extends Unit {
 	}
 	
 	@Override
-	public void render (Graphics g) {
+	public void render (Graphics2D g) {
 			g.drawImage( game.getResourceManager().getResource(getAnimationQuery()), getRelativX(), getRelativY(), null);
 	}
 	

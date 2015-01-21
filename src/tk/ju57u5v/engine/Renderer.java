@@ -1,6 +1,7 @@
 package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +45,7 @@ public class Renderer {
 	 * Rendert die Entities und GameObjects, die Registriert wurden.
 	 * @param g
 	 */
-	public void render(Graphics g) {
+	public void render(Graphics2D g) {
 		if (render) {
 			renderEntities(g);
 			renderGameObjects(g);
@@ -59,7 +60,7 @@ public class Renderer {
 		}
 	}
 
-	private void renderEntities(Graphics g) {
+	private void renderEntities(Graphics2D g) {
 		for (int c = 0; c < entities.size();c++) {
 			if (game.kamera.isRenderNeeded(entities.get(c))) {
 				entities.get(c).render(g);
@@ -67,7 +68,7 @@ public class Renderer {
 		}
 	}
 
-	private void renderGameObjects(Graphics g) {
+	private void renderGameObjects(Graphics2D g) {
 		for (int c = 0; c < gameObjects.size();c++) {
 			gameObjects.get(c).render(g);
 		}
