@@ -182,6 +182,10 @@ public class CodeManager {
 		addCommand("map", (game, pCode, parts) -> {
 			game.getMapLoader().loadMap(parts[1]);
 		});
+		
+		addCommand("unloadmap", (game, pCode, parts) -> {
+			game.getMapLoader().unloadMap();
+		});
 	}
 
 	public HashMap<String, Command> getCommands() {
