@@ -19,9 +19,12 @@ public class MapLoader {
 		this.game = game;
 	}
 
+	/**
+	 * Lädt eine Map aus dem Mapfolder
+	 * @param name
+	 */
 	public void loadMap(String name) {
 		try {
-			String className = "tk.ju57u5v.oakland.Map";
 			File mapFile = new File(game.getResourceManager().getBasePath(), "maps/" + name);
 			JarFile mapJar = new JarFile(mapFile);
 
@@ -30,6 +33,8 @@ public class MapLoader {
 			URL urls[] = { new URL(jarURL) };
 
 			URLClassLoader classLoader = new URLClassLoader(urls);
+			game.getCodeManager().processCFG(classLoader.getResourceAsStream("map.cfg"));
+			String className = game.getConsole().getString("mapClass");
 
 			try {
 				Constructor<?> mapConstructor;
@@ -57,6 +62,10 @@ public class MapLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	public void unloadMap () {
+		currentMap.onUnLoad();
+		currentMap=null;
 	}
 }

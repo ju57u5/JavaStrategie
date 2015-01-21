@@ -80,6 +80,9 @@ public class Game {
 	public Console getConsole() {
 		return console;
 	}
-	
+
+	public MapLoader getMapLoader() {
+		return mapLoader;
+	}
 	
 }

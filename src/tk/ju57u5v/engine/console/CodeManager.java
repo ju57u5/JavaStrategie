@@ -1,7 +1,9 @@
 package tk.ju57u5v.engine.console;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+
 import tk.ju57u5v.engine.Animation;
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.TwoDMath;
@@ -18,6 +20,15 @@ public class CodeManager {
 
 	public void processCFG(String pFileName) {
 		String content = game.getResourceManager().getFile(pFileName);
+
+		String[] commands = content.split(";");
+		for (String command : commands) {
+			processCode(command);
+		}
+	}
+	
+	public void processCFG(InputStream stream) {
+		String content = game.getResourceManager().getFile(stream);
 
 		String[] commands = content.split(";");
 		for (String command : commands) {
@@ -166,6 +177,10 @@ public class CodeManager {
 		
 		addCommand("savevars", (game, pCode, parts) -> {
 			game.getConsole().getConVarManager().safeVars();
+		});
+		
+		addCommand("map", (game, pCode, parts) -> {
+			game.getMapLoader().loadMap(parts[1]);
 		});
 	}
 

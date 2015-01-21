@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -145,6 +146,19 @@ public class ResourceManager {
 		} catch (FileNotFoundException e) {
 			
 		}
+		
+		return fileContent;
+	}
+	
+	public String getFile(InputStream stream) {
+		String fileContent="";
+		Scanner scanner;
+		
+		scanner = new Scanner (stream);
+		while (scanner.hasNext ()) {
+			fileContent += (scanner.nextLine ());
+		}
+		scanner.close();
 		
 		return fileContent;
 	}
