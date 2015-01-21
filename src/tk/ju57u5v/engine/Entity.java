@@ -2,7 +2,6 @@ package tk.ju57u5v.engine;
 
 
 public class Entity extends GameObject {
-
 	
 	
 	private int xMovePosition = 0;
@@ -29,6 +28,10 @@ public class Entity extends GameObject {
 	
 	protected void initialise() {
 		game.gameRunner.renderer.registerEntity(this);
+	}
+	
+	public void unload() {
+		game.gameRunner.renderer.removeEntity(this);
 	}
 
 	public void moveTo(int x, int y, int speed) {

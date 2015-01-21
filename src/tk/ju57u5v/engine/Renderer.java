@@ -93,4 +93,16 @@ public class Renderer {
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
+	
+	public void removeEntity(Entity e) {
+		entities.remove(e);
+	}
+	
+	public void removeGameObject(GameObject g) {
+		entities.remove(g);
+	}
+	
+	public void registerGameObject(GameObject g) {
+		gameObjects.add(g);
+	}
 }

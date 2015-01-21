@@ -43,4 +43,12 @@ public class GameObject extends Position {
 	public void render(Graphics2D g) {
 
 	}
+	
+	public void unload() {
+		game.gameRunner.renderer.removeGameObject(this);
+	}
+	
+	protected void initialise() {
+		game.gameRunner.renderer.registerGameObject(this);
+	}
 }

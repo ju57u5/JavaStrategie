@@ -9,8 +9,8 @@ import tk.ju57u5v.engine.GameObject;
 public class Map {
 	
 	static String mapName;
-	private ArrayList<Entity> mapEntities = new ArrayList<Entity>();
-	private ArrayList<GameObject> mapGameObjects = new ArrayList<GameObject>();
+	protected ArrayList<Entity> mapEntities = new ArrayList<Entity>();
+	protected ArrayList<GameObject> mapGameObjects = new ArrayList<GameObject>();
 	protected Game game;
 	
 	public Map (Game game) {
