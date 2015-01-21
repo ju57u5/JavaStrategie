@@ -24,6 +24,10 @@ public class MapLoader {
 	 * @param name
 	 */
 	public void loadMap(String name) {
+		//Wenn eine Map geladen ist unloade sie
+		if (currentMap != null)
+			currentMap.onUnLoad();
+		
 		try {
 			File mapFile = new File(game.getResourceManager().getBasePath(), "maps/" + name);
 			JarFile mapJar = new JarFile(mapFile);
