@@ -30,6 +30,10 @@ public class CodeManager {
 		String[] parts = pCode.trim().split("\\s+");
 		parts[0].toLowerCase();
 		boolean executed = false;
+		
+		//Auskommentierter Code:
+		if (parts[0].startsWith("//") || parts[0].startsWith("#"))
+			return;
 
 		for (HashMap.Entry<String, Command> entry : commands.entrySet()) {
 			if (entry.getKey().equals(parts[0])) {

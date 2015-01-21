@@ -2,10 +2,12 @@ package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
 import java.awt.Image;
+
 import tk.ju57u5v.engine.console.CodeManager;
 import tk.ju57u5v.engine.console.Console;
 import tk.ju57u5v.engine.input.BindHandler;
 import tk.ju57u5v.engine.input.MouseHandler;
+import tk.ju57u5v.engine.world.MapLoader;
 
 public class Game {
 
@@ -17,6 +19,7 @@ public class Game {
 	protected MouseHandler mouseHandler = new MouseHandler(this);
 	protected BindHandler bindHandler = new BindHandler();
 	protected Player player = new Player();
+	protected MapLoader mapLoader = new MapLoader(this);
 	protected Console console = new Console(this);
 	private Image mainBufferImage = window.createImage(1920, 1080);
 	protected GameRunner gameRunner = new GameRunner(this);
@@ -31,7 +34,9 @@ public class Game {
 		resourceManager.checkConfig();
 		//Load Convars
 		codeManager.processCFG("varsafe.cfg");
+		//Load Config
 		codeManager.processCFG("config.cfg");
+		mapLoader.loadMap("oakland.jar");
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);
 	}

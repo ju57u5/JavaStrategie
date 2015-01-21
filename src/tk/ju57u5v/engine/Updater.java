@@ -91,7 +91,7 @@ public class Updater extends JFrame {
 			}
 			game.getConsole().set("currentVersion", game.console.getString("version"));
 		}
-		dispose();
+		this.dispose();
 	}
 
 	private int getFileSize(String urlString) throws IOException {
