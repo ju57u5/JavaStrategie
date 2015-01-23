@@ -30,7 +30,6 @@ public class MapLoader {
 		
 		try {
 			File mapFile = new File(game.getResourceManager().getBasePath(), "maps/" + name);
-			JarFile mapJar = new JarFile(mapFile);
 
 			URL fileURL = mapFile.toURI().toURL();
 			String jarURL = "jar:" + fileURL + "!/";
