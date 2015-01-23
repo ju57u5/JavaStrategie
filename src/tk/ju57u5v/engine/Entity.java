@@ -1,39 +1,96 @@
 package tk.ju57u5v.engine;
 
-
 public class Entity extends GameObject {
-	
-	
+
+	/**
+	 * x-Position, zu der sich das Entity bewegt
+	 */
 	private int xMovePosition = 0;
+
+	/**
+	 * y-Position, zu der sich das Entity bewegt
+	 */
 	private int yMovePosition = 0;
+
+	/**
+	 * Geschwindigkeit, mit der sich das Entity bewegt
+	 */
 	private int movementSpeed = 2;
+
+	/**
+	 * Winkel, in dem sich das Entity bewegt im Bogenmaß
+	 */
 	private double radian = 0;
+
+	/**
+	 * aktuelle (temporäre) x-Position des Entitys während des Bewegens
+	 */
 	private double currentX = 0;
+
+	/**
+	 * aktuelle (temporäre) y-Position des Entitys während des Bewegens
+	 */
 	private double currentY = 0;
+
+	/**
+	 * gibt die x-Differenz zur xMovePosition an
+	 */
 	private int xDifference = 0;
+
+	/**
+	 * gibt die y-Differenz zur yMovePosition an
+	 */
 	private int yDifference = 0;
+
+	/**
+	 * gibt an ob sich das Entity bewegt
+	 */
 	private boolean movement = false;
 
+	// Methoden
+	/**
+	 * Constructor
+	 * 
+	 * @param game
+	 */
 	public Entity(Game game) {
 		super(game);
 	}
-	
+
+	/**
+	 * beendet das Movement des Entitys
+	 */
 	public void stopMovement() {
 		movement = false;
 	}
 
+	/**
+	 * Update-Methode des Entitys (sollte überschrieben werden)
+	 */
 	public void update() {
 
 	}
-	
+
+	/**
+	 * Intitialisiert das Entity
+	 */
 	protected void initialise() {
 		game.gameRunner.renderer.registerEntity(this);
 	}
-	
+
+	/**
+	 * Entlädt das Entity
+	 */
 	public void unload() {
 		game.gameRunner.renderer.removeEntity(this);
 	}
 
+	/**
+	 * Bewegt das Entity zur Postion(x,y) mit der Geschwindigkeit speed
+	 * @param x
+	 * @param y
+	 * @param speed
+	 */
 	public void moveTo(int x, int y, int speed) {
 		this.movementSpeed = speed;
 		this.xMovePosition = x;
@@ -42,10 +99,13 @@ public class Entity extends GameObject {
 		yDifference = y - getY();
 		currentX = getX();
 		currentY = getY();
-		radian = Math.atan2(yDifference,xDifference);
+		radian = Math.atan2(yDifference, xDifference);
 		movement = true;
 	}
 
+	/**
+	 * updated das Movement
+	 */
 	public void updateMovement() {
 		if (movement) {
 			currentX += Math.cos(radian) * movementSpeed;
@@ -70,11 +130,20 @@ public class Entity extends GameObject {
 			setPosition((int) currentX, (int) currentY);
 		}
 	}
-	
+
+	/**
+	 * Gibt zurück ob sich das Entity bewegt
+	 * @return
+	 */
 	public boolean isMoving() {
 		return movement;
 	}
-	
+
+	/**
+	 * Speichert eine Animation des globalen Animationmanagers mit der query unter newQuery
+	 * @param newQuery
+	 * @param query
+	 */
 	protected void getSavedAnimation(String newQuery, String query) {
 		animationManager.putAnimationString(newQuery, game.resourceManager.getAnimation(query));
 	}
