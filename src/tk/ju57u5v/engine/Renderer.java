@@ -115,7 +115,9 @@ public class Renderer {
 	 */
 	private void renderGameObjects(Graphics2D g) {
 		for (int c = 0; c < gameObjects.size(); c++) {
-			gameObjects.get(c).render(g);
+			if (game.kamera.isRenderNeeded(gameObjects.get(c))) {
+				gameObjects.get(c).render(g);
+			}
 		}
 	}
 
