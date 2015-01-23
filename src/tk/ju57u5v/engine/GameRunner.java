@@ -1,15 +1,11 @@
 package tk.ju57u5v.engine;
 
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class GameRunner extends Thread {
 
 	protected Game game;
 	Renderer renderer;
-	protected BufferStrategy strategy;
-	protected BufferedImage dbImage = new BufferedImage(1200, 900, BufferedImage.TYPE_INT_BGR);
 	long ticks = 0;
 	
 	public GameRunner(Game game) {
