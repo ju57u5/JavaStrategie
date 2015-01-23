@@ -31,7 +31,8 @@ public class Map {
 	/**
 	 * Constructor
 	 * 
-	 * @param game Hauptklasse des Spiels
+	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public Map(Game game) {
 		this.game = game;

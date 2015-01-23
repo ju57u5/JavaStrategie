@@ -16,7 +16,7 @@ public class MapLoader {
 	 * Verknüpfung zur Hauptklasse
 	 */
 	private Game game;
-	
+
 	/**
 	 * Aktuelle Map
 	 */
@@ -24,7 +24,9 @@ public class MapLoader {
 
 	/**
 	 * Constructor
-	 * @param game Hauptklasse des Spiels
+	 * 
+	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public MapLoader(Game game) {
 		this.game = game;
@@ -32,13 +34,15 @@ public class MapLoader {
 
 	/**
 	 * Lädt eine Map aus dem Mapfolder
-	 * @param name Name der Map Datei
+	 * 
+	 * @param name
+	 *            Name der Map Datei
 	 */
 	public void loadMap(String name) {
-		//Wenn eine Map geladen ist unloade sie
+		// Wenn eine Map geladen ist unloade sie
 		if (currentMap != null)
 			currentMap.onUnLoad();
-		
+
 		try {
 			File mapFile = new File(game.getResourceManager().getBasePath(), "maps/" + name);
 
@@ -77,12 +81,12 @@ public class MapLoader {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Entlädt die aktuelle Map
 	 */
-	public void unloadMap () {
+	public void unloadMap() {
 		currentMap.onUnLoad();
-		currentMap=null;
+		currentMap = null;
 	}
 }
