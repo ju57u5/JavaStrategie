@@ -12,9 +12,20 @@ import tk.ju57u5v.engine.Game;
 
 public class MapLoader {
 
+	/**
+	 * Verknüpfung zur Hauptklasse
+	 */
 	private Game game;
+	
+	/**
+	 * Aktuelle Map
+	 */
 	private Map currentMap;
 
+	/**
+	 * Constructor
+	 * @param game
+	 */
 	public MapLoader(Game game) {
 		this.game = game;
 	}
@@ -67,6 +78,9 @@ public class MapLoader {
 		}
 	}
 	
+	/**
+	 * Entlädt die aktuelle Map
+	 */
 	public void unloadMap () {
 		currentMap.onUnLoad();
 		currentMap=null;
