@@ -14,6 +14,7 @@ public class Kamera extends Position {
 	 * Consturctor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public Kamera(Game game) {
 		this.game = game;
@@ -41,6 +42,7 @@ public class Kamera extends Position {
 	 * Setzt die realtive Position eines Entitys
 	 * 
 	 * @param pEntity
+	 *            Entity
 	 */
 	public void setRelativPostion(Entity pEntity) {
 		pEntity.setRelativX(pEntity.getX() - getX());
@@ -51,6 +53,7 @@ public class Kamera extends Position {
 	 * Setzt die relative Position eines GameObjects
 	 * 
 	 * @param pObject
+	 *            GameObject
 	 */
 	public void setRelativPostion(GameObject pObject) {
 		pObject.setRelativX(pObject.getX() - getX());
@@ -61,6 +64,7 @@ public class Kamera extends Position {
 	 * Prüft ob ein Entity geupdated werden muss
 	 * 
 	 * @param entity
+	 *            Entity
 	 * @return
 	 */
 	public boolean isRenderNeeded(Entity entity) {
@@ -70,7 +74,8 @@ public class Kamera extends Position {
 	/**
 	 * Prüft ob ein GameObject geupdated werden muss
 	 * 
-	 * @param entity
+	 * @param gameObject
+	 *            GameObject
 	 * @return
 	 */
 	public boolean isRenderNeeded(GameObject gameObject) {
@@ -81,6 +86,7 @@ public class Kamera extends Position {
 	 * Skaliert eine Resource anhand des Zooms der Kamera
 	 * 
 	 * @param resource
+	 *            Resource die skaliert werden soll
 	 * @return
 	 */
 	public BufferedImage scaleResource(BufferedImage resource) {
@@ -119,6 +125,7 @@ public class Kamera extends Position {
 	 * Konvertiert eine relative x-Koordinate zu einer Realen
 	 * 
 	 * @param x
+	 *            x-Koordinate
 	 * @return
 	 */
 	public int toRealX(int x) {
@@ -129,6 +136,7 @@ public class Kamera extends Position {
 	 * Konvertiert eine relative y-Koordinate zu einer Realen
 	 * 
 	 * @param y
+	 *            y-Koordinate
 	 * @return
 	 */
 	public int toRealY(int y) {

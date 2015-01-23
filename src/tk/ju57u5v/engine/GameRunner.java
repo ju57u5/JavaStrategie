@@ -24,6 +24,7 @@ public class GameRunner extends Thread {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public GameRunner(Game game) {
 		this.game = game;
@@ -75,6 +76,7 @@ public class GameRunner extends Thread {
 	 * Pausiert die Gameupdates
 	 * 
 	 * @param pause
+	 *            Status der Pausierung
 	 */
 	public void setPause(boolean pause) {
 		renderer.doUpdate(!pause); // Wenn Pause an ist werden die Entitys nicht

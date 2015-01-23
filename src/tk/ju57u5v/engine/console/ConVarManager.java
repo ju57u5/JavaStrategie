@@ -39,7 +39,9 @@ public class ConVarManager {
 	 * Setzt den Wert einer Convar
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @param value
+	 *            Wert der Convar
 	 */
 	public void set(String name, String value) {
 		vars.put(name, value);
@@ -49,8 +51,11 @@ public class ConVarManager {
 	 * Definiert eine Convar
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @param defaultValue
+	 *            Standartwert der Convar
 	 * @param description
+	 *            Beschreibung der Convar
 	 */
 	public void def(String name, String defaultValue, String description) {
 		vars.put(name, defaultValue);
@@ -62,6 +67,7 @@ public class ConVarManager {
 	 * Gibt eine Convar als String zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public String getString(String name) {
@@ -72,6 +78,7 @@ public class ConVarManager {
 	 * Gibt eine Convar als Int zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public int getInt(String name) {
@@ -88,6 +95,7 @@ public class ConVarManager {
 	 * Gibt eine Convar als Double zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public double getDouble(String name) {
@@ -104,6 +112,7 @@ public class ConVarManager {
 	 * Gibt eine Convar als Boolean zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public boolean getBoolean(String name) {
@@ -120,6 +129,7 @@ public class ConVarManager {
 	 * Gibt den Standartwert einer Convar zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public String getDefaultValue(String name) {
@@ -130,6 +140,7 @@ public class ConVarManager {
 	 * Gibt die Beschreibung einer Convar zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public String getDescription(String name) {

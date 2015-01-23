@@ -21,9 +21,10 @@ public class AnimationManager {
 
 	// Methoden
 	/**
-	 * Erstellt eine Animation un fügt sie dem Manager hinzu
+	 * Erstellt eine Animation und fügt sie dem Manager hinzu
 	 * 
 	 * @param animationQuery
+	 *            Query der Animation
 	 * @param querys
 	 *            Bildquerys im ResourcenManager
 	 * @param duration
@@ -36,6 +37,7 @@ public class AnimationManager {
 	 * Setzt den Query, der auf die aktuelle Animation verweißt
 	 * 
 	 * @param animationQuery
+	 *            Query der Animation
 	 */
 	public void selectAnimation(String animationQuery) {
 		currentAnimation = animationQuery;
@@ -57,6 +59,7 @@ public class AnimationManager {
 	 * Setzt den Tick des Spiels im Manager
 	 * 
 	 * @param tick
+	 *            Tick des Spiels
 	 */
 	public void setTick(long tick) {
 		this.tick = tick;
@@ -65,8 +68,10 @@ public class AnimationManager {
 	/**
 	 * Fügt dem Manager eine Animation hinzu
 	 * 
-	 * @param animationQuery
 	 * @param animation
+	 *            Query Query der Animation
+	 * @param animation
+	 *            Animation
 	 */
 	public void putAnimationString(String animationQuery, Animation animation) {
 		animations.put(animationQuery, animation);

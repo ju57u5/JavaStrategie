@@ -19,6 +19,7 @@ public class GameObject extends Position {
 	/**
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public GameObject(Game game) {
 		this.game = game;
@@ -63,6 +64,7 @@ public class GameObject extends Position {
 	 * Rendert das GameObject. (sollte Überschrieben werden)
 	 * 
 	 * @param g
+	 *            Graphics2D Object des Spiels
 	 */
 	public void render(Graphics2D g) {
 

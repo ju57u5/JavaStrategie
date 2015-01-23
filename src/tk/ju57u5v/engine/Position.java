@@ -37,7 +37,9 @@ public class Position {
 	 * Setzt die Position
 	 * 
 	 * @param x
+	 *            x-Koordinate
 	 * @param y
+	 *            y-Koordinate
 	 */
 	public void setPosition(int x, int y) {
 		this.x = x;
@@ -48,6 +50,7 @@ public class Position {
 	 * Setzt x-Koordinate
 	 * 
 	 * @param x
+	 *            x-Koordinate
 	 */
 	public void setX(int x) {
 		this.x = x;
@@ -57,6 +60,7 @@ public class Position {
 	 * Setzt y-Koordinate
 	 * 
 	 * @param y
+	 *            y-Koordinate
 	 */
 	public void setY(int y) {
 		this.y = y;
@@ -120,7 +124,9 @@ public class Position {
 	 * Setzt die Höhe und Breite (Dimensionen)
 	 * 
 	 * @param width
+	 *            Breite
 	 * @param height
+	 *            Höhe
 	 */
 	public void setDimensions(int width, int height) {
 		this.width = width;
@@ -131,6 +137,7 @@ public class Position {
 	 * Setzt die Breite
 	 * 
 	 * @param width
+	 *            Breite
 	 */
 	public void setWidth(int width) {
 		this.width = width;
@@ -140,6 +147,7 @@ public class Position {
 	 * Setzt die Höhe
 	 * 
 	 * @param height
+	 *            Höhe
 	 */
 	public void setHeight(int height) {
 		this.height = height;
@@ -149,6 +157,7 @@ public class Position {
 	 * Setzt die relative x-Koordinate
 	 * 
 	 * @param relativX
+	 *            relative x-Koordinate
 	 */
 	public void setRelativX(int relativX) {
 		this.relativX = relativX;
@@ -158,6 +167,7 @@ public class Position {
 	 * Setzt die relative y-Koordinate
 	 * 
 	 * @param relativY
+	 *            relative y-Koordinate
 	 */
 	public void setRelativY(int relativY) {
 		this.relativY = relativY;

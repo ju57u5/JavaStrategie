@@ -13,6 +13,7 @@ public class EntityGroup {
 	 * Fügt ein Entity der Gruppe hinzu
 	 * 
 	 * @param e
+	 *            Entity zum hinzufügen
 	 */
 	public void add(Entity e) {
 		entities.add(e);

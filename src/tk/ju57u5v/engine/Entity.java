@@ -52,6 +52,7 @@ public class Entity extends GameObject {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public Entity(Game game) {
 		super(game);
@@ -89,8 +90,11 @@ public class Entity extends GameObject {
 	 * Bewegt das Entity zur Postion(x,y) mit der Geschwindigkeit speed
 	 * 
 	 * @param x
+	 *            x-Postion des Entitys
 	 * @param y
+	 *            y-Postion des Entitys
 	 * @param speed
+	 *            Geschwindigkeit der Bewegung
 	 */
 	public void moveTo(int x, int y, int speed) {
 		this.movementSpeed = speed;
@@ -146,7 +150,9 @@ public class Entity extends GameObject {
 	 * unter newQuery
 	 * 
 	 * @param newQuery
+	 *            Query im lokalen Manager
 	 * @param query
+	 *            Query im globalen Manager
 	 */
 	protected void getSavedAnimation(String newQuery, String query) {
 		animationManager.putAnimationString(newQuery, game.resourceManager.getAnimation(query));

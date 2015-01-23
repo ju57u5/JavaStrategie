@@ -17,7 +17,9 @@ public class Animation {
 	 * Constructor
 	 * 
 	 * @param querys
+	 *            Querys der Bilder der Animation
 	 * @param duration
+	 *            Länge an Ticks, die ein Bild gezeigt wird
 	 */
 	public Animation(String[] querys, int duration) {
 		this.querys = querys;
@@ -28,6 +30,7 @@ public class Animation {
 	 * Gibt das aktuelle Bild der Animation zurück
 	 * 
 	 * @param tick
+	 *            Tick des Spiels
 	 * @return
 	 */
 	public String getcurrentPicture(long tick) {

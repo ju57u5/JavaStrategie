@@ -91,6 +91,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Logt einen Text in der Konsole
 	 * 
 	 * @param log
+	 *            Text der geloggt wird
 	 */
 	public void log(String log) {
 		consoleOutput.append("\n" + log);
@@ -99,7 +100,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	/**
 	 * Gibt das Fenster der Console zurück
 	 * 
-	 * @return
+	 * @return Fenster der Console
 	 */
 	public JFrame getFrame() {
 		return frame;
@@ -147,6 +148,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Makiert ein
 	 * 
 	 * @param e
+	 *            KeyEvent der Eingabe
 	 */
 	private void vorschlag(KeyEvent e) {
 		int eingabelaenge = consoleInput.getText().length();
@@ -267,6 +269,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Gibt eine Convar als String zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public String getString(String name) {
@@ -277,6 +280,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Gibt eine Convar als Int zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public int getInt(String name) {
@@ -287,6 +291,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Gibt eine Convar als Double zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public double getDouble(String name) {
@@ -297,6 +302,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Gibt eine Convar als Boolean zurück
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @return
 	 */
 	public boolean getBoolean(String name) {
@@ -307,7 +313,9 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Setzt eine Convar
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @param value
+	 *            Wert der Convar
 	 */
 	public void set(String name, String value) {
 		conVarManager.set(name, value);
@@ -316,7 +324,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	/**
 	 * Gibt den ConvarManager zurück
 	 * 
-	 * @return
+	 * @return ConvarManager des Spiels
 	 */
 	public ConVarManager getConVarManager() {
 		return conVarManager;
@@ -326,8 +334,11 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Definiert eine Variable
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 * @param defaultValue
+	 *            Standartwert der Variable
 	 * @param description
+	 *            Beschreibung der Convar
 	 */
 	public void def(String name, String defaultValue, String description) {
 		conVarManager.def(name, defaultValue, description);
@@ -337,6 +348,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Loggt den Infotext einer Variable in der Console
 	 * 
 	 * @param name
+	 *            Name der Convar
 	 */
 	public void logVarInfo(String name) {
 		String value = getString(name);

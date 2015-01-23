@@ -34,6 +34,7 @@ public class CodeManager {
 	 * Verarbeitet eine Config Datei aus dem Config Ordner
 	 * 
 	 * @param pFileName
+	 *            Name der Datei
 	 */
 	public void processCFG(String pFileName) {
 		String content = game.getResourceManager().getFile(pFileName);
@@ -48,6 +49,7 @@ public class CodeManager {
 	 * Verarbeitet einen Config Datei aus einem InputStream
 	 * 
 	 * @param stream
+	 *            Stream der Datei
 	 */
 	public void processCFG(InputStream stream) {
 		String content = game.getResourceManager().getFile(stream);
@@ -62,6 +64,7 @@ public class CodeManager {
 	 * Verarbeitet einen Kommando
 	 * 
 	 * @param pCode
+	 *            Kommando als String
 	 */
 	public void processCode(String pCode) {
 
@@ -104,7 +107,9 @@ public class CodeManager {
 	 * Recombiniert ein StringArray zu einem String ab dem Index start
 	 * 
 	 * @param pStringArray
+	 *            Array zum Recombinieren
 	 * @param start
+	 *            Startindex ab dem Recombiniert wird
 	 * @return
 	 */
 	private String recombine(String[] pStringArray, int start) {
@@ -119,7 +124,9 @@ public class CodeManager {
 	 * Fügt ein Kommando hinzu
 	 * 
 	 * @param query
+	 *            Query des Kommandos
 	 * @param command
+	 *            Kommando Interface
 	 */
 	public void addCommand(String query, Command command) {
 		commands.put(query, command);
