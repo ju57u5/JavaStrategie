@@ -2,24 +2,47 @@ package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.image.BufferStrategy;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Window extends JPanel implements WindowListener {
-	Game game;
-	BufferStrategy strategy;
 	
+	/**
+	 * Verknüpfung zur Hauptklasse
+	 */
+	private Game game;
+	
+	/**
+	 * Frame des Spiels
+	 */
 	private JFrame frame = new JFrame();
+	
+	/**
+	 * Timer Variable, um die FPS zu überprüfen
+	 */
 	private long timer = System.currentTimeMillis();
+	
+	/**
+	 * FPS
+	 */
 	private int frames=0;
+	
+	/**
+	 * UPS
+	 */
 	private int ups=0;
+	
+	/**
+	 * Titel des Fensters
+	 */
 	private String title="Strategie-JavaGame";
 	
+	/**
+	 * Constructor
+	 * @param game
+	 */
 	public Window(Game game) {
 		this.game=game;
 		
@@ -31,13 +54,19 @@ public class Window extends JPanel implements WindowListener {
 		frame.setIgnoreRepaint(true);
 		frame.add(this);
 		setLocation(0, 0);
-		
 	}
 	
+	/**
+	 * Setzt die UPS (genutzt vom Gamerunner)
+	 * @param ups
+	 */
 	protected void setUps(int ups) {
 		this.ups = ups;
 	}
 	
+	/**
+	 * Rendert alle Komponenten des Spiels über den Renderer
+	 */
 	@Override
 	protected void paintComponent(Graphics g)  {
 		if (game.gameRunner != null) {
@@ -56,6 +85,10 @@ public class Window extends JPanel implements WindowListener {
 		repaint();
 	}
 
+	/**
+	 * Gibt das SpielFenster zurück
+	 * @return
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}

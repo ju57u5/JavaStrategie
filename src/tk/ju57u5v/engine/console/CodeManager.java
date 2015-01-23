@@ -10,14 +10,29 @@ import tk.ju57u5v.engine.TwoDMath;
 
 public class CodeManager {
 
+	/**
+	 * Verknüpfung zur Hauptklasse
+	 */
 	protected Game game;
+	
+	/**
+	 * Speicher alle Kommandos
+	 */
 	private HashMap<String, Command> commands = new HashMap<String, Command>();
 
+	/**
+	 * Constructor
+	 * @param game
+	 */
 	public CodeManager(Game game) {
 		this.game = game;
 		registerCommands();
 	}
 
+	/**
+	 * Verarbeitet eine Config Datei aus dem Config Ordner
+	 * @param pFileName
+	 */
 	public void processCFG(String pFileName) {
 		String content = game.getResourceManager().getFile(pFileName);
 
@@ -27,6 +42,10 @@ public class CodeManager {
 		}
 	}
 	
+	/**
+	 * Verarbeitet einen Config Datei aus einem InputStream
+	 * @param stream
+	 */
 	public void processCFG(InputStream stream) {
 		String content = game.getResourceManager().getFile(stream);
 
@@ -36,6 +55,10 @@ public class CodeManager {
 		}
 	}
 
+	/**
+	 * Verarbeitet einen Kommando
+	 * @param pCode
+	 */
 	public void processCode(String pCode) {
 
 		String[] parts = pCode.trim().split("\\s+");
@@ -64,6 +87,7 @@ public class CodeManager {
 						game.getConsole().set(parts[0], parts[1]);
 					}
 					executed=true;
+					break; // Wir wollen nicht alle Commandos durchgehen
 				}
 			}
 		}
@@ -71,6 +95,12 @@ public class CodeManager {
 		if (!executed) game.getConsole().log("Unknown Command: " + pCode);
 	}
 
+	/**
+	 * Recombiniert ein StringArray zu einem String ab dem Index start
+	 * @param pStringArray
+	 * @param start
+	 * @return
+	 */
 	private String recombine(String[] pStringArray, int start) {
 		String combined = "";
 		for (int c = start; c < pStringArray.length; c++) {
@@ -79,10 +109,18 @@ public class CodeManager {
 		return combined;
 	}
 
+	/**
+	 * Fügt ein Kommando hinzu
+	 * @param query
+	 * @param command
+	 */
 	public void addCommand(String query, Command command) {
 		commands.put(query, command);
 	}
 
+	/**
+	 * Registriert alle Commandos
+	 */
 	private void registerCommands() {
 		addCommand("echo", (game, pCode, parts) -> {
 			String echo = recombine(parts, 1);
@@ -188,6 +226,10 @@ public class CodeManager {
 		});
 	}
 
+	/**
+	 * Gibt alle Commandos in einer ArrayList zurück
+	 * @return
+	 */
 	public HashMap<String, Command> getCommands() {
 		return commands;
 	}

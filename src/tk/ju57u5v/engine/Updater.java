@@ -15,13 +15,42 @@ import javax.swing.JProgressBar;
 
 public class Updater extends JFrame {
 
+	/**
+	 * Verknüpfung zur Hauptklasse
+	 */
 	private Game game;
+
+	/**
+	 * Anzahl der gedownloadeten Bytes des Updates
+	 */
 	private int downloadedBytes = 0;
+
+	/**
+	 * ProgessBar des Updaters
+	 */
 	private JProgressBar progressBar;
+
+	/**
+	 * Basis Pfad des Spiels
+	 */
 	private String basePath;
+
+	/**
+	 * Download Urls des Updates
+	 */
 	private ArrayList<String> downloadUrls = new ArrayList<String>();
+
+	/**
+	 * Pfade der Update Downloads
+	 */
 	private ArrayList<String> downloadPaths = new ArrayList<String>();
 
+	/**
+	 * Update Window-Listener
+	 * 
+	 * @author Justus
+	 *
+	 */
 	class WindowListener extends WindowAdapter {
 		public void windowClosing(WindowEvent e) {
 			e.getWindow().dispose();
@@ -29,21 +58,36 @@ public class Updater extends JFrame {
 		}
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param game
+	 * @param basePath
+	 */
 	public Updater(Game game, String basePath) {
 		this.game = game;
 		this.basePath = basePath;
 		setTitle("Updating");
 		setSize(200, 100);
-		setLocationRelativeTo(null); 
+		setLocationRelativeTo(null);
 	}
 
+	/**
+	 * Downloaded eine Datei in den Basispfad
+	 * 
+	 * @param fileURL
+	 * @param destinationDirectory
+	 * @param processBarEnabled
+	 * @throws IOException
+	 */
 	public void download(String fileURL, String destinationDirectory, boolean processBarEnabled) throws IOException {
 		// File name that is being downloaded
 		String downloadedFileName = fileURL.substring(fileURL.lastIndexOf("/") + 1);
-		
-		File folder = new File (basePath + "/" + destinationDirectory + "/");
-		if (!folder.isDirectory()) folder.mkdirs();
-		
+
+		File folder = new File(basePath + "/" + destinationDirectory + "/");
+		if (!folder.isDirectory())
+			folder.mkdirs();
+
 		// Open connection to the file
 		URL url = new URL(fileURL);
 		InputStream is = url.openStream();
@@ -68,11 +112,22 @@ public class Updater extends JFrame {
 		is.close();
 	}
 
+	/**
+	 * Registriert eine Datei als Update
+	 * 
+	 * @param downloadUrl
+	 * @param downloadPath
+	 */
 	public void registerUpdatableFile(String downloadUrl, String downloadPath) {
 		downloadUrls.add(downloadUrl);
 		downloadPaths.add(downloadPath);
 	}
 
+	/**
+	 * Führt das Update durch
+	 * 
+	 * @param forceUpdate
+	 */
 	public void updateFiles(boolean forceUpdate) {
 		if (game.console.getInt("version") > game.console.getInt("currentVersion") || forceUpdate) {
 			progressBar = new JProgressBar(0, getUpdateSize());
@@ -80,20 +135,27 @@ public class Updater extends JFrame {
 			progressBar.setStringPainted(true);
 			this.add(progressBar);
 			setVisible(true);
-			
+
 			for (int c = 0; c < downloadUrls.size(); c++) {
 				try {
 					download(downloadUrls.get(c), downloadPaths.get(c), true);
-					game.console.log("Download of "+downloadUrls.get(c)+" done!");
+					game.console.log("Download of " + downloadUrls.get(c) + " done!");
 				} catch (IOException e) {
-					game.console.log("Download of "+downloadUrls.get(c)+" failed!");
-				} 
+					game.console.log("Download of " + downloadUrls.get(c) + " failed!");
+				}
 			}
 			game.getConsole().set("currentVersion", game.console.getString("version"));
 		}
 		this.dispose();
 	}
 
+	/**
+	 * Fragt die Dateigröße vom Webserver ab
+	 * 
+	 * @param urlString
+	 * @return
+	 * @throws IOException
+	 */
 	private int getFileSize(String urlString) throws IOException {
 		int size;
 		URL url = new URL(urlString);
@@ -107,8 +169,13 @@ public class Updater extends JFrame {
 		}
 	}
 
+	/**
+	 * Ermittelt die Gesamtgröße des Updates
+	 * 
+	 * @return
+	 */
 	private int getUpdateSize() {
-		int size=0;
+		int size = 0;
 		for (int c = 0; c < downloadUrls.size(); c++) {
 			try {
 				size += getFileSize(downloadUrls.get(c));
