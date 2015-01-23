@@ -5,29 +5,75 @@ import java.util.HashMap;
 import tk.ju57u5v.engine.Game;
 
 public class ConVarManager {
+
+	/**
+	 * HashMap mit den Convars
+	 */
 	private HashMap<String, String> vars = new HashMap<String, String>();
+
+	/**
+	 * HashMap mit den Default Zuständen der Convars
+	 */
 	private HashMap<String, String> defaults = new HashMap<String, String>();
+
+	/**
+	 * HashMap mit den Beschreibungen der Convars
+	 */
 	private HashMap<String, String> descriptions = new HashMap<String, String>();
+
+	/**
+	 * Verknüpfung zur Hauptklasse
+	 */
 	private Game game;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param game
+	 */
 	public ConVarManager(Game game) {
 		this.game = game;
 	}
 
+	/**
+	 * Setzt den Wert einer Convar
+	 * 
+	 * @param name
+	 * @param value
+	 */
 	public void set(String name, String value) {
 		vars.put(name, value);
 	}
 
+	/**
+	 * Definiert eine Convar
+	 * 
+	 * @param name
+	 * @param defaultValue
+	 * @param description
+	 */
 	public void def(String name, String defaultValue, String description) {
 		vars.put(name, defaultValue);
 		defaults.put(name, defaultValue);
 		descriptions.put(name, description);
 	}
 
+	/**
+	 * Gibt eine Convar als String zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public String getString(String name) {
 		return vars.get(name);
 	}
 
+	/**
+	 * Gibt eine Convar als Int zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public int getInt(String name) {
 		try {
 			return Integer.parseInt(vars.get(name));
@@ -38,6 +84,12 @@ public class ConVarManager {
 		}
 	}
 
+	/**
+	 * Gibt eine Convar als Double zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public double getDouble(String name) {
 		try {
 			return Double.parseDouble(vars.get(name));
@@ -48,6 +100,12 @@ public class ConVarManager {
 		}
 	}
 
+	/**
+	 * Gibt eine Convar als Boolean zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public boolean getBoolean(String name) {
 		try {
 			return Integer.parseInt(vars.get(name)) != 0;
@@ -58,18 +116,38 @@ public class ConVarManager {
 		}
 	}
 
+	/**
+	 * Gibt den Standartwert einer Convar zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public String getDefaultValue(String name) {
 		return defaults.get(name);
 	}
 
+	/**
+	 * Gibt die Beschreibung einer Convar zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public String getDescription(String name) {
 		return descriptions.get(name);
 	}
 
+	/**
+	 * Gibt die HashMap der Variablen zurück
+	 * 
+	 * @return
+	 */
 	public HashMap<String, String> getVars() {
 		return vars;
 	}
 
+	/**
+	 * Speichert die Variablen im Config Ordner in der Datei "varsafe.cfg"
+	 */
 	public void safeVars() {
 		String commands = "";
 		for (HashMap.Entry<String, String> entry : this.getVars().entrySet()) {

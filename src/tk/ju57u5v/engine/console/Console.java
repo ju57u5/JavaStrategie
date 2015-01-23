@@ -15,14 +15,46 @@ import tk.ju57u5v.engine.Game;
 
 public class Console extends JPanel implements KeyListener, WindowListener {
 
+	/**
+	 * Verknüpfung zur Hauptklasse
+	 */
 	private Game game;
+
+	/**
+	 * Frame des Updaters
+	 */
 	private JFrame frame = new JFrame();
+
+	/**
+	 * Output TextArea der Console
+	 */
 	private TextArea consoleOutput;
+
+	/**
+	 * Input TextField der Console
+	 */
 	private TextField consoleInput;
+
+	/**
+	 * History der eingegebenen Commandos in einer ArrayList
+	 */
 	private ArrayList<String> history = new ArrayList<String>();
+
+	/**
+	 * Pointer der history
+	 */
 	private int historyPointer = -1;
+
+	/**
+	 * Manager der ConsolenVariablen
+	 */
 	private ConVarManager conVarManager;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param game
+	 */
 	public Console(Game game) {
 		this.game = game;
 
@@ -55,19 +87,32 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 		this.add(consoleInput);
 	}
 
+	/**
+	 * Logt einen Text in der Konsole
+	 * 
+	 * @param log
+	 */
 	public void log(String log) {
 		consoleOutput.append("\n" + log);
 	}
 
+	/**
+	 * Gibt das Fenster der Console zurück
+	 * 
+	 * @return
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 	}
 
+	/**
+	 * Handelt die Consolen Tastatur Inputs
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -81,45 +126,58 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_TAB) {
 			autoVervollstaendigung();
 			e.consume();// Keine weitere Verarbeitung als Zeichen
+		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && (!consoleInput.getSelectedText().equals(""))) {
+			autoVervollstaendigung();
+			;
 		}
 		if (e.getKeyCode() != KeyEvent.VK_DELETE && e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_CONTROL)
 			vorschlag(e);
 	}
 
+	/**
+	 * Autovervollständigt den Kommando im consoleInput
+	 */
 	private void autoVervollstaendigung() {
 		consoleInput.select(consoleInput.getText().length(), consoleInput.getText().length());
+		consoleInput.setCaretPosition(consoleInput.getText().length());
 	}
 
+	/**
+	 * Durchsucht die Kommandos und Variablen nach einem Vorschlag und fügt ihn
+	 * Makiert ein
+	 * 
+	 * @param e
+	 */
 	private void vorschlag(KeyEvent e) {
 		int eingabelaenge = consoleInput.getText().length();
 		if (!consoleInput.getSelectedText().equals("")) {
-			eingabelaenge = consoleInput.getSelectionStart(); 
-			
-			if (consoleInput.getText().charAt(consoleInput.getSelectionStart())==e.getKeyChar()) {
-				consoleInput.select(consoleInput.getSelectionStart()+1, consoleInput.getText().length());
+			eingabelaenge = consoleInput.getSelectionStart();
+
+			if (consoleInput.getText().charAt(consoleInput.getSelectionStart()) == e.getKeyChar()) {
+				consoleInput.select(consoleInput.getSelectionStart() + 1, consoleInput.getText().length());
 				e.consume();
 			}
-			
+
 		}
-		
+
 		else if (eingabelaenge != 0) {
 			boolean found = false;
 			for (HashMap.Entry<String, Command> entry : game.getCodeManager().getCommands().entrySet()) {
-				if (entry.getKey().startsWith(consoleInput.getText()+e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText()+e.getKeyChar())) {
+				if (entry.getKey().startsWith(consoleInput.getText() + e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText() + e.getKeyChar())) {
 					consoleInput.setText(entry.getKey());
-					consoleInput.select(eingabelaenge+1, consoleInput.getText().length());
+					consoleInput.select(eingabelaenge + 1, consoleInput.getText().length());
 					e.consume();
-					found=true;
+					found = true;
 					break;
 				}
 			}
 			if (!found) {
 				for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
-					if (entry.getKey().startsWith(consoleInput.getText()+e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText()+e.getKeyChar())) {
+					if (entry.getKey().startsWith(consoleInput.getText() + e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText() + e.getKeyChar())) {
 						consoleInput.setText(entry.getKey());
-						consoleInput.select(eingabelaenge+1, consoleInput.getText().length());
+						consoleInput.select(eingabelaenge + 1, consoleInput.getText().length());
 						e.consume();
-						found=true;
+						found = true;
 						break;
 					}
 				}
@@ -127,6 +185,12 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 		}
 	}
 
+	/**
+	 * Setzt die History in consoleInput ein.
+	 * 
+	 * @param direction
+	 *            "UP" oder "DOWN"
+	 */
 	private void history(String direction) {
 		if (direction.equals("UP")) {
 			if (!(historyPointer == 0)) {
@@ -143,6 +207,9 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 		}
 	}
 
+	/**
+	 * Führt einen Kommando aus consoleInput aus
+	 */
 	private void processCommand() {
 		String command = consoleInput.getText();
 		history.add(command);
@@ -196,34 +263,81 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 	}
 
+	/**
+	 * Gibt eine Convar als String zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public String getString(String name) {
 		return conVarManager.getString(name);
 	}
 
+	/**
+	 * Gibt eine Convar als Int zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public int getInt(String name) {
 		return conVarManager.getInt(name);
 	}
 
+	/**
+	 * Gibt eine Convar als Double zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public double getDouble(String name) {
 		return conVarManager.getDouble(name);
 	}
 
+	/**
+	 * Gibt eine Convar als Boolean zurück
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public boolean getBoolean(String name) {
 		return conVarManager.getBoolean(name);
 	}
 
+	/**
+	 * Setzt eine Convar
+	 * 
+	 * @param name
+	 * @param value
+	 */
 	public void set(String name, String value) {
 		conVarManager.set(name, value);
 	}
 
+	/**
+	 * Gibt den ConvarManager zurück
+	 * 
+	 * @return
+	 */
 	public ConVarManager getConVarManager() {
 		return conVarManager;
 	}
 
+	/**
+	 * Definiert eine Variable
+	 * 
+	 * @param name
+	 * @param defaultValue
+	 * @param description
+	 */
 	public void def(String name, String defaultValue, String description) {
 		conVarManager.def(name, defaultValue, description);
 	}
 
+	/**
+	 * Loggt den Infotext einer Variable in der Console
+	 * 
+	 * @param name
+	 */
 	public void logVarInfo(String name) {
 		String value = getString(name);
 		String defaultValue = conVarManager.getDefaultValue(name);

@@ -8,67 +8,69 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Window extends JPanel implements WindowListener {
-	
+
 	/**
 	 * Verknüpfung zur Hauptklasse
 	 */
 	private Game game;
-	
+
 	/**
 	 * Frame des Spiels
 	 */
 	private JFrame frame = new JFrame();
-	
+
 	/**
 	 * Timer Variable, um die FPS zu überprüfen
 	 */
 	private long timer = System.currentTimeMillis();
-	
+
 	/**
 	 * FPS
 	 */
-	private int frames=0;
-	
+	private int frames = 0;
+
 	/**
 	 * UPS
 	 */
-	private int ups=0;
-	
+	private int ups = 0;
+
 	/**
 	 * Titel des Fensters
 	 */
-	private String title="Strategie-JavaGame";
-	
+	private String title = "Strategie-JavaGame";
+
 	/**
 	 * Constructor
+	 * 
 	 * @param game
 	 */
 	public Window(Game game) {
-		this.game=game;
-		
+		this.game = game;
+
 		frame.setTitle(title); // Fenstertitel setzen
-		frame.setSize(1200,900); 
+		frame.setSize(1200, 900);
 		frame.addWindowListener(this);
-		frame.setLocationRelativeTo(null); 
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setIgnoreRepaint(true);
 		frame.add(this);
 		setLocation(0, 0);
 	}
-	
+
 	/**
 	 * Setzt die UPS (genutzt vom Gamerunner)
+	 * 
 	 * @param ups
 	 */
 	protected void setUps(int ups) {
 		this.ups = ups;
 	}
-	
+
 	/**
 	 * Rendert alle Komponenten des Spiels über den Renderer
 	 */
 	@Override
-	protected void paintComponent(Graphics g)  {
+	protected void paintComponent(Graphics g) {
 		if (game.gameRunner != null) {
 			if (game.gameRunner.renderer != null) {
 				g.clearRect(0, 0, getWidth(), getHeight());
@@ -79,14 +81,15 @@ public class Window extends JPanel implements WindowListener {
 		frames++;
 		if (System.currentTimeMillis() - timer > 1000) {
 			timer += 1000;
-			frame.setTitle(title+"   |   "+ups+" ups "+frames+" fps");
-			frames=0;
+			frame.setTitle(title + "   |   " + ups + " ups " + frames + " fps");
+			frames = 0;
 		}
 		repaint();
 	}
 
 	/**
 	 * Gibt das SpielFenster zurück
+	 * 
 	 * @return
 	 */
 	public JFrame getFrame() {
@@ -95,7 +98,7 @@ public class Window extends JPanel implements WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		
+
 	}
 
 	@Override
@@ -106,22 +109,22 @@ public class Window extends JPanel implements WindowListener {
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		
+
 	}
 
 	@Override

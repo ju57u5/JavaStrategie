@@ -34,60 +34,65 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * interne Variable eines Mouseclicks auf der x-Achse
 	 */
 	private int clickx = 0;
-	
+
 	/**
 	 * interne Variable eines Mouseclicks auf der y-Achse
 	 */
 	private int clicky = 0;
-	
+
 	/**
-	 * interne Variable, die bei einem Drag die aktuelle Position des Mauszeigers auf der x-Achse beschreibt
+	 * interne Variable, die bei einem Drag die aktuelle Position des
+	 * Mauszeigers auf der x-Achse beschreibt
 	 */
 	private int currentx = 0;
-	
+
 	/**
-	 * interne Variable, die bei einem Drag die aktuelle Position des Mauszeigers auf der y-Achse beschreibt
+	 * interne Variable, die bei einem Drag die aktuelle Position des
+	 * Mauszeigers auf der y-Achse beschreibt
 	 */
 	private int currenty = 0;
-	
+
 	/**
 	 * interne Variable, die angibt ob ein Drag stattfindet
 	 */
 	private boolean dragging = false;
-	
+
 	/**
 	 * interne Variable, die angibt ob ein Drag gezeichnet wird
 	 */
 	private boolean drawDrag = false;
-	
+
 	/**
-	 * interne Variable, die angibt ob ein Drag mit der rechten Maustaste erfasst wird
+	 * interne Variable, die angibt ob ein Drag mit der rechten Maustaste
+	 * erfasst wird
 	 */
 	private boolean rightDrag = true;
-	
+
 	/**
-	 * interne Variable, die angibt ob ein Drag mit der linken Maustaste erfasst wird
+	 * interne Variable, die angibt ob ein Drag mit der linken Maustaste erfasst
+	 * wird
 	 */
 	private boolean leftDrag = true;
-	
+
 	/**
 	 * interne Variable, die angibt, mit welchem Button gedraggt wird
 	 */
 	int dragButton = 0;
-	
+
 	/**
 	 * Verknüpfung zum Haupelement der Engine
 	 */
 	private Game game;
-	
+
 	/**
 	 * ArrayList mit allen MouseListenern, die registriert wurden
 	 */
 	ArrayList<tk.ju57u5v.engine.input.MouseListener> listeners = new ArrayList<tk.ju57u5v.engine.input.MouseListener>();
 
-	//Methoden
+	// Methoden
 	/**
 	 * Construktor
+	 * 
 	 * @param game
 	 */
 	public MouseHandler(Game game) {
@@ -166,7 +171,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * Benachrichtigt die Listener über einen Drag oder Klick
 	 * 
 	 * @param type
-	 * Gibt den Typ der Benachrichtigung an: "click", bzw. "drag"
+	 *            Gibt den Typ der Benachrichtigung an: "click", bzw. "drag"
 	 * @param e
 	 */
 	private void notifyListeners(String type, MouseEvent e) {

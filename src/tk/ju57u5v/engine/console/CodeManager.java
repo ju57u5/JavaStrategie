@@ -14,7 +14,7 @@ public class CodeManager {
 	 * Verknüpfung zur Hauptklasse
 	 */
 	protected Game game;
-	
+
 	/**
 	 * Speicher alle Kommandos
 	 */
@@ -22,6 +22,7 @@ public class CodeManager {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param game
 	 */
 	public CodeManager(Game game) {
@@ -31,6 +32,7 @@ public class CodeManager {
 
 	/**
 	 * Verarbeitet eine Config Datei aus dem Config Ordner
+	 * 
 	 * @param pFileName
 	 */
 	public void processCFG(String pFileName) {
@@ -41,9 +43,10 @@ public class CodeManager {
 			processCode(command);
 		}
 	}
-	
+
 	/**
 	 * Verarbeitet einen Config Datei aus einem InputStream
+	 * 
 	 * @param stream
 	 */
 	public void processCFG(InputStream stream) {
@@ -57,6 +60,7 @@ public class CodeManager {
 
 	/**
 	 * Verarbeitet einen Kommando
+	 * 
 	 * @param pCode
 	 */
 	public void processCode(String pCode) {
@@ -64,20 +68,20 @@ public class CodeManager {
 		String[] parts = pCode.trim().split("\\s+");
 		parts[0].toLowerCase();
 		boolean executed = false;
-		
-		//Auskommentierter Code:
+
+		// Auskommentierter Code:
 		if (parts[0].startsWith("//") || parts[0].startsWith("#"))
 			return;
 
 		for (HashMap.Entry<String, Command> entry : commands.entrySet()) {
 			if (entry.getKey().equals(parts[0])) {
 				commands.get(entry.getKey()).call(game, pCode, parts);
-				executed=true;
+				executed = true;
 				break; // Wir wollen nicht alle Commandos durchgehen
 			}
 		}
-		
-		//Handel Convars without set-Method
+
+		// Handel Convars without set-Method
 		if (!executed) {
 			for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
 				if (entry.getKey().equals(parts[0])) {
@@ -86,17 +90,19 @@ public class CodeManager {
 					} else {
 						game.getConsole().set(parts[0], parts[1]);
 					}
-					executed=true;
+					executed = true;
 					break; // Wir wollen nicht alle Commandos durchgehen
 				}
 			}
 		}
-		
-		if (!executed) game.getConsole().log("Unknown Command: " + pCode);
+
+		if (!executed)
+			game.getConsole().log("Unknown Command: " + pCode);
 	}
 
 	/**
 	 * Recombiniert ein StringArray zu einem String ab dem Index start
+	 * 
 	 * @param pStringArray
 	 * @param start
 	 * @return
@@ -111,6 +117,7 @@ public class CodeManager {
 
 	/**
 	 * Fügt ein Kommando hinzu
+	 * 
 	 * @param query
 	 * @param command
 	 */
@@ -144,7 +151,7 @@ public class CodeManager {
 		});
 
 		addCommand("exec", (game, pCode, parts) -> {
-			processCFG(recombine(parts,1));
+			processCFG(recombine(parts, 1));
 		});
 
 		addCommand("download", (game, pCode, parts) -> {
@@ -199,7 +206,7 @@ public class CodeManager {
 			game.getConsole().set(parts[1].trim(), parts[2].trim());
 			game.getConsole().log(parts[1].trim() + " == '" + parts[2].trim() + "'");
 		});
-		
+
 		addCommand("def", (game, pCode, parts) -> {
 			game.getConsole().def(parts[1].trim(), parts[2].trim(), recombine(parts, 3));
 			game.getConsole().logVarInfo(parts[1]);
@@ -212,15 +219,15 @@ public class CodeManager {
 		addCommand("forceupdate", (game, pCode, parts) -> {
 			game.getUpdater().updateFiles(true);
 		});
-		
+
 		addCommand("savevars", (game, pCode, parts) -> {
 			game.getConsole().getConVarManager().safeVars();
 		});
-		
+
 		addCommand("map", (game, pCode, parts) -> {
 			game.getMapLoader().loadMap(parts[1]);
 		});
-		
+
 		addCommand("unloadmap", (game, pCode, parts) -> {
 			game.getMapLoader().unloadMap();
 		});
@@ -228,6 +235,7 @@ public class CodeManager {
 
 	/**
 	 * Gibt alle Commandos in einer ArrayList zurück
+	 * 
 	 * @return
 	 */
 	public HashMap<String, Command> getCommands() {
