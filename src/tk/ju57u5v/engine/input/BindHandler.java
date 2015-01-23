@@ -42,6 +42,7 @@ public class BindHandler implements KeyListener {
 	 * Prüft ob ein Bind aktiv ist
 	 * 
 	 * @param bind
+	 *            Query des Binds
 	 * @return
 	 */
 	public boolean bindActive(String bind) {
@@ -60,7 +61,9 @@ public class BindHandler implements KeyListener {
 	 * Binded einen KeyCode zu einem String
 	 * 
 	 * @param keycode
+	 *            Keycode des Binds
 	 * @param bind
+	 *            Query des Binds
 	 */
 	public void bind(int keycode, String bind) {
 		binds[keycode] = bind;
@@ -70,6 +73,7 @@ public class BindHandler implements KeyListener {
 	 * Unbinded einen Keycode
 	 * 
 	 * @param keycode
+	 *            Keycode des Binds
 	 */
 	public void unbind(int keycode) {
 		binds[keycode] = null;

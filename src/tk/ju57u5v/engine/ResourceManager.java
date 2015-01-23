@@ -73,6 +73,7 @@ public class ResourceManager {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public ResourceManager(Game game) {
 		this.game = game;
@@ -83,6 +84,7 @@ public class ResourceManager {
 	 * Gibt eine auf den Query geladene Resource als BufferedImage zurück.
 	 * 
 	 * @param pQuery
+	 *            Query der Textur
 	 * @return
 	 */
 	public BufferedImage getResource(String pQuery) {
@@ -93,7 +95,9 @@ public class ResourceManager {
 	 * Lädt ein Image aus dem "texture" Ordner auf den Query String.
 	 * 
 	 * @param pResourceName
+	 *            Name der Textur
 	 * @param pQuery
+	 *            Query der Textur
 	 */
 	public void loadImage(String pResourceName, String pQuery) {
 		File imagePath = new File(texturePath, "/" + pResourceName);
@@ -108,6 +112,7 @@ public class ResourceManager {
 	 * Gibt die Resource des Querys skaliert auf die akive Kamera zurück.
 	 * 
 	 * @param pQuery
+	 *            Query der Textur
 	 * @return
 	 */
 	public BufferedImage getScaledResource(String pQuery) {
@@ -118,6 +123,7 @@ public class ResourceManager {
 	 * Gibt die Breite einer Textur zurück
 	 * 
 	 * @param pQuery
+	 *            Query der Textur
 	 * @return
 	 */
 	public int getResourceWidth(String pQuery) {
@@ -128,6 +134,7 @@ public class ResourceManager {
 	 * Gibt die Höhe einer Textur zurück
 	 * 
 	 * @param pQuery
+	 *            Query der Textur
 	 * @return
 	 */
 	public int getResourceHeight(String pQuery) {
@@ -138,7 +145,9 @@ public class ResourceManager {
 	 * Setzt die Dimensionen eines Entitys anhand seiner Textur
 	 * 
 	 * @param pQuery
+	 *            Query der Textur
 	 * @param e
+	 *            Entity dessen Dimensionen gesetzt werden
 	 */
 	public void setDimensionsFromResource(String pQuery, Entity e) {
 		e.setDimensions(getResourceWidth(pQuery), getResourceHeight(pQuery));
@@ -148,7 +157,9 @@ public class ResourceManager {
 	 * Setzt die Dimensionen eines GameObjects anhand seiner Textur
 	 * 
 	 * @param pQuery
+	 *            Query der Textur
 	 * @param e
+	 *            GameObject dessen Dimensionen gesetzt werden
 	 */
 	public void setDimensionsFromResource(String pQuery, GameObject e) {
 		e.setDimensions(getResourceWidth(pQuery), getResourceHeight(pQuery));
@@ -186,6 +197,7 @@ public class ResourceManager {
 	 * Kovertiert die Resource in ein Renderfreundliches Format.
 	 * 
 	 * @param pQuery
+	 *            Query der Textur
 	 */
 	private void convertToGoodFormat(String pQuery) {
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -214,6 +226,7 @@ public class ResourceManager {
 	 * zurück
 	 * 
 	 * @param pFileName
+	 *            Name der Config-Datei
 	 * @return
 	 */
 	public String getFile(String pFileName) {
@@ -238,6 +251,7 @@ public class ResourceManager {
 	 * zurück
 	 * 
 	 * @param stream
+	 *            Stream der Datei
 	 * @return
 	 */
 	public String getFile(InputStream stream) {
@@ -303,7 +317,9 @@ public class ResourceManager {
 	 * Speichert eine Animation global
 	 * 
 	 * @param query
+	 *            Query der Animation
 	 * @param animation
+	 *            Animation die gespeichert wird
 	 */
 	public void saveAnimation(String query, Animation animation) {
 		animations.put(query, animation);
@@ -313,6 +329,7 @@ public class ResourceManager {
 	 * Gibt eine Animation zurück
 	 * 
 	 * @param query
+	 *            Query der Animation
 	 * @return
 	 */
 	public Animation getAnimation(String query) {
@@ -323,8 +340,11 @@ public class ResourceManager {
 	 * Erstellt eine Animation und Speichert sie
 	 * 
 	 * @param animationQuery
+	 *            Query der Animation
 	 * @param querys
+	 *            Querys der Texturen der Animation
 	 * @param duration
+	 *            Ticks, die ein Bild der Animation angezeigt wird
 	 */
 	public void createAnimation(String animationQuery, String[] querys, int duration) {
 		animations.put(animationQuery, new Animation(querys, duration));
@@ -335,7 +355,9 @@ public class ResourceManager {
 	 * filename
 	 * 
 	 * @param filename
+	 *            Name der Datei
 	 * @param s
+	 *            Inhalt der in die Datei geschrieben wird
 	 */
 	public void writeToFile(String filename, String s) {
 		PrintWriter writer;

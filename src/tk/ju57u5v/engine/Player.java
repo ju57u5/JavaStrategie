@@ -20,6 +20,7 @@ public class Player {
 	 * Setzt die Spieler-ID
 	 * 
 	 * @param playerEntityID
+	 *            ID des Spielers
 	 */
 	public void setPlayerEntityID(int playerEntityID) {
 		this.playerEntityID = playerEntityID;

@@ -30,6 +30,7 @@ public class ConVarManager {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public ConVarManager(Game game) {
 		this.game = game;

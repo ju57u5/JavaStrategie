@@ -6,6 +6,7 @@ public interface BindListener {
 	 * Wird aufgerufen, wenn ein Bind aktiv wird
 	 * 
 	 * @param bindQuery
+	 *            Query des Binds
 	 */
 	public void bindActivated(String bindQuery);
 

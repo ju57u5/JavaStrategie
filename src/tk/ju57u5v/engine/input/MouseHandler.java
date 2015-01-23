@@ -94,6 +94,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * Construktor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public MouseHandler(Game game) {
 		this.game = game;
@@ -150,9 +151,10 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	}
 
 	/**
-	 * Setzt den zustand des Draggens
+	 * Setzt den Zustand des Draggens
 	 * 
 	 * @param dragging
+	 *            Zustand des Draggens
 	 */
 	public void setDragging(boolean dragging) {
 		this.dragging = dragging;
@@ -162,6 +164,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * Fügt ein Klasse mit dem Interface MouseListener als Listener hinzu
 	 * 
 	 * @param listener
+	 *            Listener der Mouse Inputs
 	 */
 	public void addMouseListener(tk.ju57u5v.engine.input.MouseListener listener) {
 		listeners.add(listener);
@@ -205,6 +208,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * Malt, wenn eingeschaltet, ein Rechteck des Drags
 	 * 
 	 * @param g
+	 *            Graphics2D Object des Spiels
 	 */
 	public void drawDrag(Graphics2D g) {
 		int firstx = startx < currentx ? startx : currentx;
@@ -221,6 +225,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * Legt fest ob ein Drag mit der rechten Maustaste erfasst werden soll.
 	 * 
 	 * @param rightDrag
+	 *            Gibt an ob ein Drag mit der rechten Maustaste erfasst wird
 	 */
 	public void setRightDrag(boolean rightDrag) {
 		this.rightDrag = rightDrag;
@@ -230,6 +235,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * Legt fest ob ein Drag mit der linken Maustaste erfasst werden soll.
 	 * 
 	 * @param leftDrag
+	 *            Gibt an ob ein Drag mit der linken Maustaste erfasst wird
 	 */
 	public void setLeftDrag(boolean leftDrag) {
 		this.leftDrag = leftDrag;
@@ -239,6 +245,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * Legt fest ob ein erfasster Drag als Rechteck gezeichnet werden soll.
 	 * 
 	 * @param drawDrag
+	 *            Gibt an ob ein Drag gezeichnet wird
 	 */
 	public void setDrawDrag(boolean drawDrag) {
 		this.drawDrag = drawDrag;

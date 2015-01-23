@@ -24,7 +24,7 @@ public class MapLoader {
 
 	/**
 	 * Constructor
-	 * @param game
+	 * @param game Hauptklasse des Spiels
 	 */
 	public MapLoader(Game game) {
 		this.game = game;
@@ -32,7 +32,7 @@ public class MapLoader {
 
 	/**
 	 * Lädt eine Map aus dem Mapfolder
-	 * @param name
+	 * @param name Name der Map Datei
 	 */
 	public void loadMap(String name) {
 		//Wenn eine Map geladen ist unloade sie

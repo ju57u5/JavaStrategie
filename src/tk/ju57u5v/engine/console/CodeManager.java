@@ -24,6 +24,7 @@ public class CodeManager {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public CodeManager(Game game) {
 		this.game = game;

@@ -28,6 +28,7 @@ public class AnimationManager {
 	 * @param querys
 	 *            Bildquerys im ResourcenManager
 	 * @param duration
+	 *            Dauer eines Bildes der Animation
 	 */
 	public void createAnimation(String animationQuery, String[] querys, int duration) {
 		animations.put(animationQuery, new Animation(querys, duration));
@@ -68,8 +69,8 @@ public class AnimationManager {
 	/**
 	 * Fügt dem Manager eine Animation hinzu
 	 * 
-	 * @param animation
-	 *            Query Query der Animation
+	 * @param animationQuery
+	 *            Query der Animation
 	 * @param animation
 	 *            Animation
 	 */

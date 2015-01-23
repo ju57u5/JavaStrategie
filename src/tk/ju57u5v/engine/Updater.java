@@ -62,7 +62,9 @@ public class Updater extends JFrame {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 * @param basePath
+	 *            BasisPfad des Spiels
 	 */
 	public Updater(Game game, String basePath) {
 		this.game = game;
@@ -76,9 +78,13 @@ public class Updater extends JFrame {
 	 * Downloaded eine Datei in den Basispfad
 	 * 
 	 * @param fileURL
+	 *            Url der Datei
 	 * @param destinationDirectory
+	 *            Destiantion der Datei
 	 * @param processBarEnabled
+	 *            Wird die Prozessbar geupdated
 	 * @throws IOException
+	 *             Fall die Datei nicht gespeichert werden kann
 	 */
 	public void download(String fileURL, String destinationDirectory, boolean processBarEnabled) throws IOException {
 		// File name that is being downloaded
@@ -116,7 +122,9 @@ public class Updater extends JFrame {
 	 * Registriert eine Datei als Update
 	 * 
 	 * @param downloadUrl
+	 *            Url von der die Datei gedownloaded wird
 	 * @param downloadPath
+	 *            Pfad zu der die Datei gedownloaded wird
 	 */
 	public void registerUpdatableFile(String downloadUrl, String downloadPath) {
 		downloadUrls.add(downloadUrl);
@@ -127,6 +135,7 @@ public class Updater extends JFrame {
 	 * Führt das Update durch
 	 * 
 	 * @param forceUpdate
+	 *            Wird das Update erzwungen
 	 */
 	public void updateFiles(boolean forceUpdate) {
 		if (game.console.getInt("version") > game.console.getInt("currentVersion") || forceUpdate) {

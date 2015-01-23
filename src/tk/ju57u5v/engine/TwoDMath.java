@@ -6,11 +6,17 @@ public class TwoDMath {
 	 * PRüft ob ein Punkt in einem Rechteck ist
 	 * 
 	 * @param x
+	 *            x-Koordinate des Punktes
 	 * @param y
+	 *            y-Koordinate des Punktes
 	 * @param rectX
+	 *            x-Koordinate des Rechteckes
 	 * @param rectY
+	 *            y-Koordinate des Rechteckes
 	 * @param rectWidth
+	 *            Breite des Rechteckes
 	 * @param rectHeight
+	 *            Höhe des Rechteckes
 	 * @return
 	 */
 	public static boolean isInRect(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
@@ -21,13 +27,21 @@ public class TwoDMath {
 	 * Prüft ob ein Rechteck in einem Rechteck ist
 	 * 
 	 * @param x1
+	 *            x-Koordinate des 1.Rechteckes
 	 * @param y1
+	 *            y-Koordinate des 1.Rechteckes
 	 * @param width1
+	 *            Breite des 1.Rechteckes
 	 * @param height1
+	 *            Höhe des 1.Rechteckes
 	 * @param x2
+	 *            x-Koordinate des 2.Rechteckes
 	 * @param y2
+	 *            y-Koordinate des 2.Rechteckes
 	 * @param width2
+	 *            Breite des 2.Rechteckes
 	 * @param height2
+	 *            Höhe des 2.Rechteckes
 	 * @return
 	 */
 	public static boolean isRectInRect(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
@@ -35,9 +49,10 @@ public class TwoDMath {
 	}
 
 	/**
-	 * Prüft ob ein String zu einem Integer kopiert werden sein
+	 * Prüft ob ein String zu einem Integer konvertiert werden kann
 	 * 
 	 * @param str
+	 *            String der Konvertiert werden soll
 	 * @return
 	 */
 	public static boolean isNumeric(String str) {

@@ -54,6 +54,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public Console(Game game) {
 		this.game = game;

@@ -43,6 +43,7 @@ public class Window extends JPanel implements WindowListener {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public Window(Game game) {
 		this.game = game;

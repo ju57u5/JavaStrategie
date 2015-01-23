@@ -41,6 +41,7 @@ public class Renderer {
 	 * Constructor
 	 * 
 	 * @param game
+	 *            Hauptklasse des Spiels
 	 */
 	public Renderer(Game game) {
 		this.game = game;
@@ -50,6 +51,8 @@ public class Renderer {
 	 * Registriert ein Entity und gibt den Index des Entities zurück.
 	 * 
 	 * @param pEntity
+	 *            Entity das Registriert wird
+	 * @return Index des Entitys
 	 */
 	public int registerEntity(Entity pEntity) {
 		entities.add(pEntity);
@@ -70,6 +73,7 @@ public class Renderer {
 	 * Rendert die Entities und GameObjects, die registriert wurden.
 	 * 
 	 * @param g
+	 *            Graphics2D Object des Spiels
 	 */
 	public void render(Graphics2D g) {
 		if (render) {
@@ -93,6 +97,7 @@ public class Renderer {
 	 * Rendert die Entitys, die registriert wurden
 	 * 
 	 * @param g
+	 *            Graphics2D Object des Spiels
 	 */
 	private void renderEntities(Graphics2D g) {
 		for (int c = 0; c < entities.size(); c++) {
@@ -106,6 +111,7 @@ public class Renderer {
 	 * Rendert die GameObjects, die registriert wurden
 	 * 
 	 * @param g
+	 *            Graphics2D Object des Spiels
 	 */
 	private void renderGameObjects(Graphics2D g) {
 		for (int c = 0; c < gameObjects.size(); c++) {
@@ -117,6 +123,7 @@ public class Renderer {
 	 * Soll gerendert werden?
 	 * 
 	 * @param render
+	 *            Status ob gerendert wird
 	 */
 	public void doRender(boolean render) {
 		this.render = render;
@@ -126,6 +133,7 @@ public class Renderer {
 	 * Soll ein Update gemacht werden?
 	 * 
 	 * @param update
+	 *            Status ob geupdated wird
 	 */
 	public void doUpdate(boolean update) {
 		this.update = update;
@@ -144,6 +152,7 @@ public class Renderer {
 	 * Entfernt das registrierte Entity e
 	 * 
 	 * @param e
+	 *            Entity das entfernt wird
 	 */
 	public void removeEntity(Entity e) {
 		entities.remove(e);
@@ -153,6 +162,7 @@ public class Renderer {
 	 * Entfernt das registrierte GameObject g
 	 * 
 	 * @param g
+	 *            GameObject das entfernt wird
 	 */
 	public void removeGameObject(GameObject g) {
 		entities.remove(g);
@@ -162,6 +172,7 @@ public class Renderer {
 	 * Registriert das Gameobject g
 	 * 
 	 * @param g
+	 *            GameObject das registriert wird
 	 */
 	public void registerGameObject(GameObject g) {
 		gameObjects.add(g);
