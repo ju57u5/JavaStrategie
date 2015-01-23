@@ -15,64 +15,64 @@ public class Game {
 	 * Kamera des Spiels
 	 */
 	protected Kamera kamera = new Kamera(this);
-	
+
 	/**
 	 * Fenster des Spiels
 	 */
 	protected Window window = new Window(this);
-	
+
 	/**
 	 * ResourcenManager des Spiels
 	 */
 	protected ResourceManager resourceManager = new ResourceManager(this);
-	
+
 	/**
 	 * Updater des Spiels
 	 */
 	protected Updater updater = new Updater(this, resourceManager.getBasePath());
-	
+
 	/**
 	 * Code Manager des Spiels
 	 */
 	protected CodeManager codeManager = new CodeManager(this);
-	
+
 	/**
 	 * Maus Input Handler des Spiels
 	 */
 	protected MouseHandler mouseHandler = new MouseHandler(this);
-	
+
 	/**
 	 * Tastatur Input Handler des Spiels
 	 */
 	protected BindHandler bindHandler = new BindHandler();
-	
+
 	/**
 	 * Player Object des Spiels
 	 */
 	protected Player player = new Player();
-	
+
 	/**
 	 * Map Loader des Spiels
 	 */
 	protected MapLoader mapLoader = new MapLoader(this);
-	
+
 	/**
 	 * Entwickler Konsole des Spiels
 	 */
 	protected Console console = new Console(this);
-	
+
 	/**
 	 * GameRunner des Spiels
 	 */
 	protected GameRunner gameRunner = new GameRunner(this);
 
-	//Methoden
+	// Methoden
 	/**
 	 * Constructor
 	 */
 	public Game() {
 	}
-	
+
 	/**
 	 * Intitialisiert das Game (ermöglicht Updaten und rendern)
 	 */
@@ -81,9 +81,9 @@ public class Game {
 		window.addMouseMotionListener(mouseHandler);
 		window.getFrame().addKeyListener(bindHandler);
 		resourceManager.checkConfig();
-		//Load Convars
+		// Load Convars
 		codeManager.processCFG("varsafe.cfg");
-		//Load Config
+		// Load Config
 		codeManager.processCFG("config.cfg");
 		mapLoader.loadMap("oakland.jar");
 		gameRunner.renderer.doUpdate(true);
@@ -92,6 +92,7 @@ public class Game {
 
 	/**
 	 * Gibt den Resourcen-Manager zurück
+	 * 
 	 * @return
 	 */
 	public ResourceManager getResourceManager() {
@@ -100,6 +101,7 @@ public class Game {
 
 	/**
 	 * Gibt den Resourcen-Manager zurück
+	 * 
 	 * @return
 	 */
 	public GameRunner getGameRunner() {
@@ -108,6 +110,7 @@ public class Game {
 
 	/**
 	 * Gibt das Main-Fenster zurück
+	 * 
 	 * @return
 	 */
 	public Window getWindow() {
@@ -116,14 +119,16 @@ public class Game {
 
 	/**
 	 * Gibt die Kamera zurück
+	 * 
 	 * @return
 	 */
 	public Kamera getKamera() {
 		return kamera;
 	}
-	
+
 	/**
 	 * Gibt den Bind-Handler zurück
+	 * 
 	 * @return
 	 */
 	public BindHandler getBindHandler() {
@@ -132,6 +137,7 @@ public class Game {
 
 	/**
 	 * Gibt den Code-Manager zurück
+	 * 
 	 * @return
 	 */
 	public CodeManager getCodeManager() {
@@ -140,6 +146,7 @@ public class Game {
 
 	/**
 	 * Gibt den Updater zurück
+	 * 
 	 * @return
 	 */
 	public Updater getUpdater() {
@@ -148,6 +155,7 @@ public class Game {
 
 	/**
 	 * Gibt die EntwicklerConsole zurück zurück
+	 * 
 	 * @return
 	 */
 	public Console getConsole() {
@@ -156,10 +164,11 @@ public class Game {
 
 	/**
 	 * Gibt den MapLoader zurück
+	 * 
 	 * @return
 	 */
 	public MapLoader getMapLoader() {
 		return mapLoader;
 	}
-	
+
 }

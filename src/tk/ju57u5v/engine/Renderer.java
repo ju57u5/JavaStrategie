@@ -1,35 +1,60 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
  * Rendert alle Resourcen und Verwaltet zu rendernde Objecte.
+ * 
  * @author Justus
  *
  */
 public class Renderer {
 
+	/**
+	 * ArrayList mit registrierten Entitys
+	 */
 	protected ArrayList<Entity> entities = new ArrayList<Entity>();
+
+	/**
+	 * ArrayList mit registrierten GameObjects
+	 */
 	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
+	/**
+	 * Gibt an ob gerendert wird
+	 */
 	private boolean render = false;
+
+	/**
+	 * Gibt an ob geupdated wird
+	 */
 	private boolean update = false;
+
+	/**
+	 * Verknüpfung zur Haupklasse
+	 */
 	private Game game;
 
+	// Methoden
+	/**
+	 * Constructor
+	 * 
+	 * @param game
+	 */
 	public Renderer(Game game) {
 		this.game = game;
 	}
 
 	/**
 	 * Registriert ein Entity und gibt den Index des Entities zurück.
+	 * 
 	 * @param pEntity
 	 */
 	public int registerEntity(Entity pEntity) {
 		entities.add(pEntity);
 		game.kamera.setRelativPostion(pEntity);
-		return entities.size()-1;
+		return entities.size() - 1;
 	}
 
 	/**
@@ -40,9 +65,10 @@ public class Renderer {
 			updateEntities();
 		}
 	}
-	
+
 	/**
-	 * Rendert die Entities und GameObjects, die Registriert wurden.
+	 * Rendert die Entities und GameObjects, die registriert wurden.
+	 * 
 	 * @param g
 	 */
 	public void render(Graphics2D g) {
@@ -52,30 +78,44 @@ public class Renderer {
 		}
 	}
 
+	/**
+	 * Updated die Entitys, die registriert wurden
+	 */
 	private void updateEntities() {
-		for (int c = 0; c < entities.size();c++) {
+		for (int c = 0; c < entities.size(); c++) {
 			entities.get(c).animationManager.setTick(game.gameRunner.ticks);
 			entities.get(c).updateMovement();
 			entities.get(c).update();
 		}
 	}
 
+	/**
+	 * Rendert die Entitys, die registriert wurden
+	 * 
+	 * @param g
+	 */
 	private void renderEntities(Graphics2D g) {
-		for (int c = 0; c < entities.size();c++) {
+		for (int c = 0; c < entities.size(); c++) {
 			if (game.kamera.isRenderNeeded(entities.get(c))) {
 				entities.get(c).render(g);
 			}
 		}
 	}
 
+	/**
+	 * Rendert die GameObjects, die registriert wurden
+	 * 
+	 * @param g
+	 */
 	private void renderGameObjects(Graphics2D g) {
-		for (int c = 0; c < gameObjects.size();c++) {
+		for (int c = 0; c < gameObjects.size(); c++) {
 			gameObjects.get(c).render(g);
 		}
 	}
 
 	/**
 	 * Soll gerendert werden?
+	 * 
 	 * @param render
 	 */
 	public void doRender(boolean render) {
@@ -84,24 +124,45 @@ public class Renderer {
 
 	/**
 	 * Soll ein Update gemacht werden?
+	 * 
 	 * @param update
 	 */
 	public void doUpdate(boolean update) {
 		this.update = update;
 	}
-	
+
+	/**
+	 * Gibt die registrierten Entitys in einer ArrayList zurück
+	 * 
+	 * @return
+	 */
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
-	
+
+	/**
+	 * Entfernt das registrierte Entity e
+	 * 
+	 * @param e
+	 */
 	public void removeEntity(Entity e) {
 		entities.remove(e);
 	}
-	
+
+	/**
+	 * Entfernt das registrierte GameObject g
+	 * 
+	 * @param g
+	 */
 	public void removeGameObject(GameObject g) {
 		entities.remove(g);
 	}
-	
+
+	/**
+	 * Registriert das Gameobject g
+	 * 
+	 * @param g
+	 */
 	public void registerGameObject(GameObject g) {
 		gameObjects.add(g);
 	}

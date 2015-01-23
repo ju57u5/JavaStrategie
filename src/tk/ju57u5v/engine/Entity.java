@@ -87,6 +87,7 @@ public class Entity extends GameObject {
 
 	/**
 	 * Bewegt das Entity zur Postion(x,y) mit der Geschwindigkeit speed
+	 * 
 	 * @param x
 	 * @param y
 	 * @param speed
@@ -133,6 +134,7 @@ public class Entity extends GameObject {
 
 	/**
 	 * Gibt zurück ob sich das Entity bewegt
+	 * 
 	 * @return
 	 */
 	public boolean isMoving() {
@@ -140,7 +142,9 @@ public class Entity extends GameObject {
 	}
 
 	/**
-	 * Speichert eine Animation des globalen Animationmanagers mit der query unter newQuery
+	 * Speichert eine Animation des globalen Animationmanagers mit der query
+	 * unter newQuery
+	 * 
 	 * @param newQuery
 	 * @param query
 	 */

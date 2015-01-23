@@ -4,16 +4,36 @@ import java.util.ArrayList;
 
 public class GameRunner extends Thread {
 
+	/**
+	 * Verknüpfung zur Hauptklasse
+	 */
 	protected Game game;
+
+	/**
+	 * Renderer des Spiels
+	 */
 	Renderer renderer;
+
+	/**
+	 * Gesamtanzahl der Ticks des Spiels
+	 */
 	long ticks = 0;
-	
+
+	// Methoden
+	/**
+	 * Constructor
+	 * 
+	 * @param game
+	 */
 	public GameRunner(Game game) {
 		this.game = game;
 		renderer = new Renderer(game);
 		this.start();
 	}
 
+	/**
+	 * <b>Main Thread</b> Updated alle Spielkomponenten
+	 */
 	public void run() {
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
@@ -34,11 +54,11 @@ public class GameRunner extends Thread {
 					delta--;
 					ticks++;
 				}
-				
-				if (System.currentTimeMillis() - timer >1000) {
+
+				if (System.currentTimeMillis() - timer > 1000) {
 					timer += 1000;
 					game.window.setUps(updates);
-					updates=0;
+					updates = 0;
 				}
 			}
 		}
@@ -51,24 +71,47 @@ public class GameRunner extends Thread {
 
 	}
 
+	/**
+	 * Pausiert die Gameupdates
+	 * 
+	 * @param pause
+	 */
 	public void setPause(boolean pause) {
-		// this.pause=pause;
 		renderer.doUpdate(!pause); // Wenn Pause an ist werden die Entitys nicht
 									// geupdated.
 	}
 
+	/**
+	 * Gibt alle Entitys in einer ArrayList zurück
+	 * 
+	 * @return
+	 */
 	public ArrayList<Entity> getEntities() {
 		return this.renderer.entities;
 	}
 
+	/**
+	 * Gibt alle GameObjects in einer ArrayList zurück
+	 * 
+	 * @return
+	 */
 	public ArrayList<GameObject> getGameObjects() {
 		return this.renderer.gameObjects;
 	}
 
+	/**
+	 * Gibt den Renderer zurück
+	 * 
+	 * @return
+	 */
 	public Renderer getRenderer() {
 		return renderer;
 	}
-	
+
+	/**
+	 * Update Methode des Gamerunners<br>
+	 * Öffnet die Console
+	 */
 	private void update() {
 		if (game.bindHandler.bindActive("+console")) {
 			game.console.getFrame().setVisible(true);
