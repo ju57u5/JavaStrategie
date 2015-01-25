@@ -7,6 +7,8 @@ import tk.ju57u5v.engine.console.CodeManager;
 import tk.ju57u5v.engine.console.Console;
 import tk.ju57u5v.engine.input.BindHandler;
 import tk.ju57u5v.engine.input.MouseHandler;
+import tk.ju57u5v.engine.netcode.Client;
+import tk.ju57u5v.engine.netcode.Server;
 import tk.ju57u5v.engine.world.MapLoader;
 
 public class Game {
@@ -66,6 +68,9 @@ public class Game {
 	 */
 	protected GameRunner gameRunner = new GameRunner(this);
 
+	protected Server server;// = new Server(this);
+	
+	protected Client client;// = new Client(this, "127.0.0.1", 27015);
 	// Methoden
 	/**
 	 * Constructor

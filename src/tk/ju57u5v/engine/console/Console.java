@@ -196,10 +196,10 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 */
 	private void history(String direction) {
 		if (direction.equals("UP")) {
-			if (!(historyPointer == 0)) {
+			if (!(historyPointer <= 0)) {
 				historyPointer--;
+				consoleInput.setText(history.get(historyPointer));
 			}
-			consoleInput.setText(history.get(historyPointer));
 		} else {
 			if ((historyPointer == history.size() - 1)) {
 				consoleInput.setText("");

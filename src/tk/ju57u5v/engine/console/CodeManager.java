@@ -242,9 +242,9 @@ public class CodeManager {
 		
 		addCommand("/hack", (game, pCode, parts) -> {
 			game.getWindow().setTitle("<INSERT_GOOD_NAME_HERE>   |   Olaf was here");
-			game.getConsole().log("--------------------------------------------------------------------------------------");
-			game.getConsole().log("OLAF WAS HERE! FUCK YOU HACKER! WOW! GET REKT!");
-			game.getConsole().log("--------------------------------------------------------------------------------------");
+			game.getConsole().log("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			game.getConsole().log("OLAF WAS HERE! FUCK YOU HACKER! WOW! GET REKT! WER BENUTZT EIGENTLICH SLASH IN DER CONSOLE?");
+			game.getConsole().log("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		});
 	}
 
