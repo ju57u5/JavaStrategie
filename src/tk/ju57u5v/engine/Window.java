@@ -132,4 +132,14 @@ public class Window extends JPanel implements WindowListener {
 	public void windowDeactivated(WindowEvent e) {
 		game.bindHandler.unactiveAll();
 	}
+
+	/**
+	 * Setzt den Titel des Fensters
+	 * 
+	 * @param title
+	 *            Titel
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
 }
