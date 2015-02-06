@@ -63,4 +63,56 @@ public class TwoDMath {
 		}
 		return true;
 	}
+
+	/**
+	 * Kartesische in isometrische Koordinate
+	 * 
+	 * @param x
+	 *            kartesisches x
+	 * @param y
+	 *            kartesisches y
+	 * @return isometrisches x
+	 */
+	public static int toIsoX(int x, int y) {
+		return x - y;
+	}
+
+	/**
+	 * Kartesische in isometrische Koordinate
+	 * 
+	 * @param x
+	 *            kartesisches x
+	 * @param y
+	 *            kartesisches y
+	 * @return isometrisches x
+	 */
+	public static int toIsoY(int x, int y) {
+		return (x + y) / 2;
+	}
+
+	/**
+	 * Isometrische in kartesische Koordinate
+	 * 
+	 * @param x
+	 *            kartesisches x
+	 * @param y
+	 *            kartesisches y
+	 * @return isometrisches x
+	 */
+	public static int toCartX(int x, int y) {
+		return (2 * y + x) / 2;
+	}
+
+	/**
+	 * Isometrische in kartesische Koordinate
+	 * 
+	 * @param x
+	 *            kartesisches x
+	 * @param y
+	 *            kartesisches y
+	 * @return isometrisches y
+	 */
+	public static int toCartY(int x, int y) {
+		return (2 * y - x) / 2;
+	}
 }

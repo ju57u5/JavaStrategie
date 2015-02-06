@@ -8,7 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+
+import static java.nio.file.StandardCopyOption.*;
 
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
@@ -154,6 +158,13 @@ public class Updater extends JFrame {
 				}
 			}
 			game.getConsole().set("currentVersion", game.console.getString("version"));
+			game.getConsole().getConVarManager().safeVars();
+			
+			try {
+				game.startUpdatedJar();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		this.dispose();
 	}
@@ -194,5 +205,15 @@ public class Updater extends JFrame {
 		}
 		return size;
 	}
-
+	
+	public void copyUpdate () {
+		File update = new File(basePath,"/update/Game.jar");
+		File game = new File (basePath,"/Game.jar");
+		game.delete();
+		try {
+			Files.copy(update.toPath(), game.toPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -172,4 +172,22 @@ public class Position {
 	public void setRelativY(int relativY) {
 		this.relativY = relativY;
 	}
+
+	/**
+	 * Gibt die relative isometrische x-Koordinate zurück
+	 * 
+	 * @return relative isometrische x-Koordinate
+	 */
+	public int getRelativIsoX() {
+		return relativX - relativY;
+	}
+
+	/**
+	 * Gibt die relative isometrische y-Koordinate zurück
+	 * 
+	 * @return relative isometrische y-Koordinate
+	 */
+	public int getRelativIsoY() {
+		return (relativX + relativY) / 2;
+	}
 }

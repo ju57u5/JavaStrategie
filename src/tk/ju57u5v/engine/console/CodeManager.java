@@ -246,6 +246,14 @@ public class CodeManager {
 			game.getConsole().log("OLAF WAS HERE! FUCK YOU HACKER! WOW! GET REKT! WER BENUTZT EIGENTLICH SLASH IN DER CONSOLE?");
 			game.getConsole().log("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		});
+		
+		addCommand("restart", (game, pCode, parts) -> {
+			try {
+				Game.restartApplication(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	/**
