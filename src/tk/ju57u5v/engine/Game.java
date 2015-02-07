@@ -16,6 +16,7 @@ import tk.ju57u5v.engine.input.MouseHandler;
 import tk.ju57u5v.engine.netcode.Client;
 import tk.ju57u5v.engine.netcode.Server;
 import tk.ju57u5v.engine.world.MapLoader;
+import tk.ju57u5v.engine.world.TileManager;
 
 public class Game {
 
@@ -85,9 +86,20 @@ public class Game {
 	 */
 	protected GameRunner gameRunner = new GameRunner(this);
 
+	/**
+	 * Server-Object des Spiels
+	 */
 	protected Server server;// = new Server(this);
 
+	/**
+	 * Client-Object des Spiels
+	 */
 	protected Client client;// = new Client(this, "127.0.0.1", 27015);
+	
+	/**
+	 * TileManager des Spiels
+	 */
+	protected TileManager tileManager = new TileManager(this, 500, 500);
 
 	// Methoden
 	/**
