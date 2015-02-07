@@ -8,6 +8,11 @@ public class Kamera extends Position {
 	 * Verknüpfung zur Hauptklasse
 	 */
 	private Game game;
+	
+	/**
+	 * Isometrische Darstellung
+	 */
+	private boolean isometric=true;
 
 	// Methoden
 	/**
@@ -28,13 +33,11 @@ public class Kamera extends Position {
 	 */
 	private void updateRelativPositions() {
 		for (Entity entity : game.gameRunner.getEntities()) {
-			entity.setRelativX(entity.getX() - getX());
-			entity.setRelativY(entity.getY() - getY());
+			setRelativPostion(entity);
 		}
 
 		for (GameObject gameObject : game.gameRunner.getGameObjects()) {
-			gameObject.setRelativX(gameObject.getX() - getX());
-			gameObject.setRelativY(gameObject.getY() - getY());
+			setRelativPostion(gameObject);
 		}
 	}
 
@@ -45,6 +48,11 @@ public class Kamera extends Position {
 	 *            Entity
 	 */
 	public void setRelativPostion(Entity pEntity) {
+		if (isometric) {
+			pEntity.setRelativIsoX(pEntity.getIsoX() - getX());
+			pEntity.setRelativIsoY(pEntity.getIsoY() - getY());
+			return;
+		}
 		pEntity.setRelativX(pEntity.getX() - getX());
 		pEntity.setRelativY(pEntity.getY() - getY());
 	}
@@ -56,6 +64,11 @@ public class Kamera extends Position {
 	 *            GameObject
 	 */
 	public void setRelativPostion(GameObject pObject) {
+		if (isometric) {
+			pObject.setRelativIsoX(pObject.getIsoX() - getX());
+			pObject.setRelativIsoY(pObject.getIsoY() - getY());
+			return;
+		}
 		pObject.setRelativX(pObject.getX() - getX());
 		pObject.setRelativY(pObject.getY() - getY());
 	}
@@ -68,6 +81,8 @@ public class Kamera extends Position {
 	 * @return
 	 */
 	public boolean isRenderNeeded(Entity entity) {
+		if (isometric)
+			return TwoDMath.isRectInRect(entity.getRelativIsoX(), entity.getRelativIsoY(), entity.getWidth(), entity.getHeight(), 0, 0, this.getWidth(), this.getHeight());
 		return (TwoDMath.isRectInRect(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight(), this.getX(), this.getY(), this.getWidth(), this.getHeight()));
 	}
 
@@ -79,6 +94,8 @@ public class Kamera extends Position {
 	 * @return
 	 */
 	public boolean isRenderNeeded(GameObject gameObject) {
+		if (isometric)
+			return TwoDMath.isRectInRect(gameObject.getRelativIsoX(), gameObject.getRelativIsoY(), gameObject.getWidth(), gameObject.getHeight(), 0, 0, this.getWidth(), this.getHeight());
 		return (TwoDMath.isRectInRect(gameObject.getX(), gameObject.getY(), gameObject.getWidth(), gameObject.getHeight(), this.getX(), this.getY(), this.getWidth(), this.getHeight()));
 	}
 

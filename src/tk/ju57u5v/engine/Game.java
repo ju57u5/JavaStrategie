@@ -114,8 +114,6 @@ public class Game {
 		codeManager.processCFG("varsafe.cfg");
 		// Load Config
 		codeManager.processCFG("config.cfg");
-		// Laden der Testmap
-		mapLoader.loadMap("oakland.jar");
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);
 	}

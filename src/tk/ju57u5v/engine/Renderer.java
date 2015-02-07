@@ -77,8 +77,8 @@ public class Renderer {
 	 */
 	public void render(Graphics2D g) {
 		if (render) {
-			renderEntities(g);
 			renderGameObjects(g);
+			renderEntities(g);
 		}
 	}
 

@@ -13,6 +13,11 @@ public class Position {
 	private int y = 0;
 
 	/**
+	 * z-Koordinate
+	 */
+	private int z = 0;
+
+	/**
 	 * Breite
 	 */
 	private int width = 0;
@@ -31,6 +36,16 @@ public class Position {
 	 * relative y-Koordinate
 	 */
 	private int relativY = 0;
+
+	/**
+	 * relative isometrische x-Koordinate
+	 */
+	private int relativIsoX = 0;
+
+	/**
+	 * relative isometrische y-Koordinate
+	 */
+	private int relativIsoY = 0;
 
 	// Methoden
 	/**
@@ -179,7 +194,7 @@ public class Position {
 	 * @return relative isometrische x-Koordinate
 	 */
 	public int getRelativIsoX() {
-		return relativX - relativY;
+		return relativIsoX;
 	}
 
 	/**
@@ -188,6 +203,44 @@ public class Position {
 	 * @return relative isometrische y-Koordinate
 	 */
 	public int getRelativIsoY() {
-		return (relativX + relativY) / 2;
+		return relativIsoY;
+	}
+
+	/**
+	 * Gibt die isometrische y-Koordinate zurück
+	 * 
+	 * @return isometrische y-Koordinate
+	 */
+	public int getIsoX() {
+		return x - y;
+	}
+
+	/**
+	 * Gibt die isometrische y-Koordinate zurück
+	 * 
+	 * @return isometrische y-Koordinate
+	 */
+	public int getIsoY() {
+		return (x + y) / 2;
+	}
+
+	/**
+	 * Setzt die relative isometrische x-Koordinate
+	 * 
+	 * @param x
+	 *            relative isometrische x-Koordinate
+	 */
+	public void setRelativIsoX(int x) {
+		relativIsoX = x;
+	}
+
+	/**
+	 * Setzt die relative isometrische y-Koordinate
+	 * 
+	 * @param y
+	 *            relative isometrische y-Koordinate
+	 */
+	public void setRelativIsoY(int y) {
+		relativIsoY = y;
 	}
 }
