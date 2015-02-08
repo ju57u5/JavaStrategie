@@ -6,12 +6,10 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window extends JPanel implements WindowListener,ComponentListener {
+public class Window extends JPanel implements WindowListener, ComponentListener {
 
 	/**
 	 * Verknüpfung zur Hauptklasse
@@ -66,7 +64,8 @@ public class Window extends JPanel implements WindowListener,ComponentListener {
 	/**
 	 * Setzt die UPS (genutzt vom Gamerunner)
 	 * 
-	 * @param ups Updates per Second
+	 * @param ups
+	 *            Updates per Second
 	 */
 	protected void setUps(int ups) {
 		this.ups = ups;
@@ -130,7 +129,7 @@ public class Window extends JPanel implements WindowListener,ComponentListener {
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-
+		game.window.getFrame().setSize(game.kamera.getWidth(), game.kamera.getHeight());
 	}
 
 	@Override
@@ -155,16 +154,16 @@ public class Window extends JPanel implements WindowListener,ComponentListener {
 
 	@Override
 	public void componentMoved(ComponentEvent e) {
-		
+
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
-		
+
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
-		
+
 	}
 }
