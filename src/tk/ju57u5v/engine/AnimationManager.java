@@ -5,11 +5,6 @@ import java.util.HashMap;
 public class AnimationManager {
 
 	/**
-	 * Der aktuelle Tick des Games
-	 */
-	private long tick;
-
-	/**
 	 * Alle Animationen in einer Hashmap, aufrufbar per QueryString
 	 */
 	private HashMap<String, Animation> animations = new HashMap<String, Animation>();
@@ -18,8 +13,20 @@ public class AnimationManager {
 	 * Query des aktiven Animtationselements
 	 */
 	private String currentAnimation = "";
+	
+	/**
+	 * Verknüpfung zur Hauptklasse des Spiels
+	 */
+	private Game game;
 
 	// Methoden
+	/**
+	 * Constructor
+	 * @param game Object des Spiels
+	 */
+	public AnimationManager (Game game) {
+		this.game=game;
+	}
 	/**
 	 * Erstellt eine Animation und fügt sie dem Manager hinzu
 	 * 
@@ -51,19 +58,9 @@ public class AnimationManager {
 	 */
 	public String getcurrentPicture() {
 		if (animations.get(currentAnimation) != null) {
-			return animations.get(currentAnimation).getcurrentPicture(tick);
+			return animations.get(currentAnimation).getcurrentPicture(game.gameRunner.ticks);
 		}
 		return "";
-	}
-
-	/**
-	 * Setzt den Tick des Spiels im Manager
-	 * 
-	 * @param tick
-	 *            Tick des Spiels
-	 */
-	public void setTick(long tick) {
-		this.tick = tick;
 	}
 
 	/**

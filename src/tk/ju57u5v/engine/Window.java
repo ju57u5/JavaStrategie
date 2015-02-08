@@ -4,10 +4,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window extends JPanel implements WindowListener {
+public class Window extends JPanel implements WindowListener,WindowStateListener {
 
 	/**
 	 * Verknüpfung zur Hauptklasse
@@ -51,6 +53,7 @@ public class Window extends JPanel implements WindowListener {
 		frame.setTitle(title); // Fenstertitel setzen
 		frame.setSize(1200, 900);
 		frame.addWindowListener(this);
+		frame.addWindowStateListener(this);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setIgnoreRepaint(true);
@@ -61,7 +64,7 @@ public class Window extends JPanel implements WindowListener {
 	/**
 	 * Setzt die UPS (genutzt vom Gamerunner)
 	 * 
-	 * @param ups
+	 * @param ups Updates per Second
 	 */
 	protected void setUps(int ups) {
 		this.ups = ups;
@@ -91,7 +94,7 @@ public class Window extends JPanel implements WindowListener {
 	/**
 	 * Gibt das SpielFenster zurück
 	 * 
-	 * @return
+	 * @return Fenster des Spiels
 	 */
 	public JFrame getFrame() {
 		return frame;
@@ -141,5 +144,10 @@ public class Window extends JPanel implements WindowListener {
 	 */
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	@Override
+	public void windowStateChanged(WindowEvent e) {
+		game.kamera.setDimensions(e.getWindow().getWidth(), e.getWindow().getHeight());
 	}
 }

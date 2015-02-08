@@ -221,7 +221,7 @@ public class Position {
 	 * @return isometrische y-Koordinate
 	 */
 	public int getIsoY() {
-		return (x + y) / 2;
+		return (x + y) / 2 - z;
 	}
 
 	/**
@@ -242,5 +242,24 @@ public class Position {
 	 */
 	public void setRelativIsoY(int y) {
 		relativIsoY = y;
+	}
+
+	/**
+	 * Setzt die z-Koordinate
+	 * 
+	 * @param z
+	 *            z-Koordinate
+	 */
+	public void setZ(int z) {
+		this.z = z;
+	}
+
+	/**
+	 * Gibt die z-Koordinate zurück
+	 * 
+	 * @return z z-Koordinate
+	 */
+	public int getZ() {
+		return z;
 	}
 }

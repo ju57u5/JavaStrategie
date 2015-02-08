@@ -33,18 +33,32 @@ public class TileManager {
 	
 	public void generateWorld () {
 		long seed = Math.round(Math.random() * 100 * Math.random() * 10); // Seed
-		seed=50;
+		
 		PerlinGenerator generator = new PerlinGenerator();
 		generator.setSeed(seed);
 		float[][] heights = generator.genSmoothNoise(generator.genWhiteNoise(getTileWidth(), getTileHeight()), 5);
 		
 		for (int c = 0; c < getTileWidth(); c += 1) {
 			for (int i = 0; i < getTileHeight(); i += 1) {
+				Tile tile;
 				if (Math.abs(heights[c][i])<0.3) {
-					placeTile(new Tile(game, 3), c, i);
+					tile = new Tile(game, 3);
+					placeTile(tile, c, i);
+					tile.setZ((int) (0.3*500));
+				} else if (Math.abs(heights[c][i])<0.35){
+					tile = new Tile(game, 2);
+					placeTile(tile, c, i);
+					tile.setZ((int) (heights[c][i]*500));
+				}else if (Math.abs(heights[c][i])>0.8){
+					tile = new Tile(game, 1);
+					placeTile(tile, c, i);
+					tile.setZ((int) (heights[c][i]*500));
 				} else {
-					placeTile(new Tile(game, 0), c, i);
+					tile = new Tile(game, 0);
+					placeTile(tile, c, i);
+					tile.setZ((int) (heights[c][i]*500));
 				}
+				//System.out.println((int) (heights[c][i]*Tile.TILEHEIGHT));
 			}
 		}
 	}

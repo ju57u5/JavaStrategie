@@ -13,7 +13,7 @@ public class GameObject extends Position {
 	/**
 	 * Animation Manager des GameObjects
 	 */
-	protected AnimationManager animationManager = new AnimationManager();
+	protected AnimationManager animationManager = new AnimationManager(game);
 
 	// Methoden
 	/**
