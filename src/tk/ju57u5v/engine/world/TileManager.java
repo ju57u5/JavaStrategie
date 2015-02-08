@@ -44,19 +44,19 @@ public class TileManager {
 				if (Math.abs(heights[c][i])<0.3) {
 					tile = new Tile(game, 3);
 					placeTile(tile, c, i);
-					tile.setZ((int) (0.3*500));
+					tile.setZ((int) (0.3*400));
 				} else if (Math.abs(heights[c][i])<0.35){
 					tile = new Tile(game, 2);
 					placeTile(tile, c, i);
-					tile.setZ((int) (heights[c][i]*500));
+					tile.setZ((int) (heights[c][i]*400));
 				}else if (Math.abs(heights[c][i])>0.8){
 					tile = new Tile(game, 1);
 					placeTile(tile, c, i);
-					tile.setZ((int) (heights[c][i]*500));
+					tile.setZ((int) (heights[c][i]*400));
 				} else {
 					tile = new Tile(game, 0);
 					placeTile(tile, c, i);
-					tile.setZ((int) (heights[c][i]*500));
+					tile.setZ((int) (heights[c][i]*400));
 				}
 				//System.out.println((int) (heights[c][i]*Tile.TILEHEIGHT));
 			}

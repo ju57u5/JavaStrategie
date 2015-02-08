@@ -2,6 +2,8 @@ package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
@@ -9,7 +11,7 @@ import java.awt.event.WindowStateListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window extends JPanel implements WindowListener,WindowStateListener {
+public class Window extends JPanel implements WindowListener,ComponentListener {
 
 	/**
 	 * Verknüpfung zur Hauptklasse
@@ -53,7 +55,7 @@ public class Window extends JPanel implements WindowListener,WindowStateListener
 		frame.setTitle(title); // Fenstertitel setzen
 		frame.setSize(1200, 900);
 		frame.addWindowListener(this);
-		frame.addWindowStateListener(this);
+		this.addComponentListener(this);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setIgnoreRepaint(true);
@@ -147,7 +149,22 @@ public class Window extends JPanel implements WindowListener,WindowStateListener
 	}
 
 	@Override
-	public void windowStateChanged(WindowEvent e) {
-		game.kamera.setDimensions(e.getWindow().getWidth(), e.getWindow().getHeight());
+	public void componentResized(ComponentEvent e) {
+		game.kamera.setDimensions(e.getComponent().getWidth(), e.getComponent().getHeight());
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		
 	}
 }
