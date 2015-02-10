@@ -60,7 +60,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 		this.game = game;
 
 		conVarManager = new ConVarManager(game);
-
+		frame.setUndecorated(true);
 		frame.setTitle("Console"); // Fenstertitel setzen
 		frame.setSize(900, 600);
 		frame.addWindowListener(this);

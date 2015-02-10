@@ -126,7 +126,6 @@ public class Game {
 		codeManager.processCFG("varsafe.cfg");
 		// Load Config
 		codeManager.processCFG("config.cfg");
-		window.goFullScreen();
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);
 	}

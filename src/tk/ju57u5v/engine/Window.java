@@ -100,6 +100,7 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 		if (System.currentTimeMillis() - timer > 1000) {
 			timer += 1000;
 			frame.setTitle(title + "   |   " + ups + " ups " + frames + " fps");
+			game.console.getFrame().setTitle("Console" + "   |   " + ups + " ups " + frames + " fps");
 			frames = 0;
 		}
 		repaint();
@@ -190,23 +191,17 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 		DisplayMode oldDisplayMode = myDevice.getDisplayMode();
 
 		if (myDevice.isFullScreenSupported()) {
-			try {
-				frame.dispose();
-				frame.setUndecorated(true);
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				frame.setSize((int) screenSize.getWidth(), (int) screenSize.getHeight());
-				frame.setResizable(false);
-				game.kamera.setDimensions((int) screenSize.getWidth(), (int) screenSize.getHeight());
-				frame.setLocationRelativeTo(null);
-				frame.repaint();
-				myDevice.setFullScreenWindow(frame);
-				fullscreen = true;
-			} finally {
-				myDevice.setDisplayMode(oldDisplayMode);
-				myDevice.setFullScreenWindow(null);
-				frame.setResizable(true);
-				fullscreen = false;
-			}
+			frame.dispose();
+			frame.setUndecorated(true);
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			frame.setSize((int) screenSize.getWidth(), (int) screenSize.getHeight());
+			frame.setResizable(false);
+			game.kamera.setDimensions((int) screenSize.getWidth(), (int) screenSize.getHeight());
+
+			frame.repaint();
+			myDevice.setFullScreenWindow(frame);
+			myDevice.setDisplayMode(new DisplayMode((int) screenSize.getWidth(), (int) screenSize.getHeight(), oldDisplayMode.getBitDepth(), 144));
+			fullscreen = true;
 		}
 	}
 

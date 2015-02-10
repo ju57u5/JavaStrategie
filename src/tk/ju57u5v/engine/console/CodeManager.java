@@ -254,6 +254,10 @@ public class CodeManager {
 				e.printStackTrace();
 			}
 		});
+		
+		addCommand("fullscreen", (game, pCode, parts) -> {
+			game.getWindow().goFullScreen();
+		});
 	}
 
 	/**
