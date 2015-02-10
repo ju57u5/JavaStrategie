@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class PerlinGenerator {
 	Random r;
+	boolean cosine = true;
 
 	public PerlinGenerator() {
 		r = new Random();
@@ -26,7 +27,7 @@ public class PerlinGenerator {
 		for (int i = 0; i < arr.length; i++) {
 			for (int n = 0; n < arr[0].length; n++) {
 				float a = arr[i][n];
-				if (a < 0.4) {
+				if (a < 0.6) {
 					System.out.print("W");
 				} else {
 					System.out.print("L");
@@ -125,7 +126,9 @@ public class PerlinGenerator {
 
 	// linear average between two points
 	float Interpolate(float x0, float x1, float alpha) {
-		return Cosine_Interpolate(x0, x1, alpha);
+		if (cosine) 
+			return Cosine_Interpolate(x0, x1, alpha);
+		return Linear_Interpolate(x0, x1, alpha);
 	}
 
 	// Linear Interpolation

@@ -1,11 +1,18 @@
 package tk.ju57u5v.engine;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.DisplayMode;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -40,6 +47,11 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 	 * Titel des Fensters
 	 */
 	private String title = "Strategie-JavaGame";
+
+	/**
+	 * Gibt an ob Fullscreen an ist
+	 */
+	private boolean fullscreen = false;
 
 	/**
 	 * Constructor
@@ -78,7 +90,8 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 	protected void paintComponent(Graphics g) {
 		if (game.gameRunner != null) {
 			if (game.gameRunner.renderer != null) {
-				g.clearRect(0, 0, getWidth(), getHeight());
+				g.setColor(getBackground());
+				g.fillRect(0, 0, getWidth(), getHeight());
 				game.gameRunner.renderer.render((Graphics2D) g);
 				game.mouseHandler.drawDrag((Graphics2D) g);
 			}
@@ -129,7 +142,8 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		game.window.getFrame().setSize(game.kamera.getWidth(), game.kamera.getHeight());
+		if (game.window != null && game.kamera != null && !fullscreen)
+			game.window.getFrame().setSize(game.kamera.getWidth(), game.kamera.getHeight());
 	}
 
 	@Override
@@ -149,7 +163,8 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		game.kamera.setDimensions(e.getComponent().getWidth(), e.getComponent().getHeight());
+		if (!fullscreen)
+			game.kamera.setDimensions(e.getComponent().getWidth(), e.getComponent().getHeight());
 	}
 
 	@Override
@@ -165,5 +180,42 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 	@Override
 	public void componentHidden(ComponentEvent e) {
 
+	}
+
+	/**
+	 * Aktiviert den FullscreenModus
+	 */
+	public void goFullScreen() {
+		GraphicsDevice myDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		DisplayMode oldDisplayMode = myDevice.getDisplayMode();
+
+		if (myDevice.isFullScreenSupported()) {
+			try {
+				frame.dispose();
+				frame.setUndecorated(true);
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				frame.setSize((int) screenSize.getWidth(), (int) screenSize.getHeight());
+				frame.setResizable(false);
+				game.kamera.setDimensions((int) screenSize.getWidth(), (int) screenSize.getHeight());
+				frame.setLocationRelativeTo(null);
+				frame.repaint();
+				myDevice.setFullScreenWindow(frame);
+				fullscreen = true;
+			} finally {
+				myDevice.setDisplayMode(oldDisplayMode);
+				myDevice.setFullScreenWindow(null);
+				frame.setResizable(true);
+				fullscreen = false;
+			}
+		}
+	}
+
+	/**
+	 * Gibt zurück ob der Fullscreen Modus angeschaltet ist.
+	 * 
+	 * @return Fullscreen Modus
+	 */
+	public boolean isFullscreen() {
+		return fullscreen;
 	}
 }

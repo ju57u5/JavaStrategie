@@ -126,6 +126,7 @@ public class Game {
 		codeManager.processCFG("varsafe.cfg");
 		// Load Config
 		codeManager.processCFG("config.cfg");
+		window.goFullScreen();
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);
 	}
@@ -209,6 +210,22 @@ public class Game {
 	 */
 	public MapLoader getMapLoader() {
 		return mapLoader;
+	}
+
+	/**
+	 * Gibt den TileManager zurück
+	 * @return TileManager
+	 */
+	public TileManager getTileManager() {
+		return tileManager;
+	}
+
+	/**
+	 * Setzt den TileManager
+	 * @param tileManager TileManager
+	 */
+	public void setTileManager(TileManager tileManager) {
+		this.tileManager = tileManager;
 	}
 
 	/**

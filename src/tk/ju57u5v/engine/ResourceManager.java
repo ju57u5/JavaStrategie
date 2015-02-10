@@ -204,7 +204,7 @@ public class ResourceManager {
 		GraphicsDevice device = env.getDefaultScreenDevice();
 		GraphicsConfiguration config = device.getDefaultConfiguration();
 
-		// Schein auf Schulpcs zu Problemen zu kommen wenn es nicht eingehalten
+		// Scheint auf Schulpcs zu Problemen zu kommen wenn es nicht eingehalten
 		// wird
 		if (env == null || device == null || config == null)
 			return;
@@ -212,7 +212,7 @@ public class ResourceManager {
 		if (getResource(pQuery).getColorModel().equals(config.getColorModel()))
 			return;
 
-		BufferedImage buffy = config.createCompatibleImage(getResource(pQuery).getWidth(), getResource(pQuery).getHeight(), getResource(pQuery).getTransparency());
+		BufferedImage buffy = config.createCompatibleImage(getResource(pQuery).getWidth(), getResource(pQuery).getHeight(), Transparency.TRANSLUCENT);
 
 		Graphics2D g = (Graphics2D) buffy.getGraphics();
 		g.drawImage(getResource(pQuery), 0, 0, null);

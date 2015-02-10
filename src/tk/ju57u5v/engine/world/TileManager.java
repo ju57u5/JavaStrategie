@@ -1,8 +1,16 @@
 package tk.ju57u5v.engine.world;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+
 import tk.ju57u5v.engine.Game;
+import tk.ju57u5v.engine.Kamera;
 
 public class TileManager {
 	
@@ -31,35 +39,59 @@ public class TileManager {
 		return tiles[(int) x/Tile.TILEWIDTH][(int) y/Tile.TILEHEIGHT];
 	}
 	
-	public void generateWorld () {
-		long seed = Math.round(Math.random() * 100 * Math.random() * 10); // Seed
-		
+	public BufferedImage generateWorld (long seed) {
 		PerlinGenerator generator = new PerlinGenerator();
 		generator.setSeed(seed);
+		//Erste Methode
 		float[][] heights = generator.genSmoothNoise(generator.genWhiteNoise(getTileWidth(), getTileHeight()), 5);
+		//Zweite Methode
+		heights = generator.GeneratePerlinNoise(generator.genWhiteNoise(getTileWidth(), getTileHeight()), 2, 0.001f);
+		heights = generator.genSmoothNoise(heights, 5);
+		//generator.printOutTerrain(heights);
+		
+		BufferedImage map = new BufferedImage(getTileWidth(), getTileHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = map.createGraphics();
 		
 		for (int c = 0; c < getTileWidth(); c += 1) {
 			for (int i = 0; i < getTileHeight(); i += 1) {
-				Tile tile;
-				if (Math.abs(heights[c][i])<0.3) {
-					tile = new Tile(game, 3);
-					placeTile(tile, c, i);
-					tile.setZ((int) (0.3*400));
-				} else if (Math.abs(heights[c][i])<0.35){
-					tile = new Tile(game, 2);
-					placeTile(tile, c, i);
-					tile.setZ((int) (heights[c][i]*400));
-				}else if (Math.abs(heights[c][i])>0.8){
-					tile = new Tile(game, 1);
-					placeTile(tile, c, i);
-					tile.setZ((int) (heights[c][i]*400));
-				} else {
-					tile = new Tile(game, 0);
-					placeTile(tile, c, i);
-					tile.setZ((int) (heights[c][i]*400));
-				}
-				//System.out.println((int) (heights[c][i]*Tile.TILEHEIGHT));
+				handleHeight(c, i, heights[c][i], g);
 			}
+		}
+		game.getKamera().setPosition(-400, -400);
+		return map;
+	}
+	
+	public void handleHeight(int x,int y, float height, Graphics2D g){
+		
+		Tile tile;
+		if (Math.abs(height)<0.6) {
+			tile = new Tile(game, 3);
+			placeTile(tile, x, y);
+			tile.setZ((int) (0.6*400));
+			
+			g.setColor(Color.BLUE);
+			g.drawRect(x, y, 1, 1);
+		} else if (Math.abs(height)<0.63){
+			tile = new Tile(game, 2);
+			placeTile(tile, x, y);
+
+			g.setColor(Color.YELLOW);
+			g.drawRect(x, y, 1, 1);
+			tile.setZ((int) (height*400));
+		}else if (Math.abs(height)>0.8){
+			tile = new Tile(game, 1);
+			placeTile(tile, x, y);
+			tile.setZ((int) (height*400));
+
+			g.setColor(Color.LIGHT_GRAY);
+			g.drawRect(x, y, 1, 1);
+		} else {
+			tile = new Tile(game, 0);
+			placeTile(tile, x, y);
+			tile.setZ((int) (height*400));
+
+			g.setColor(Color.GREEN);
+			g.drawRect(x, y, 1, 1);
 		}
 	}
 }
