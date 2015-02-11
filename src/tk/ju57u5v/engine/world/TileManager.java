@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.Kamera;
+import tk.ju57u5v.engine.TwoDMath;
 
 public class TileManager {
 	
@@ -47,9 +48,8 @@ public class TileManager {
 		//Zweite Methode
 		heights = generator.GeneratePerlinNoise(generator.genWhiteNoise(getTileWidth(), getTileHeight()), 2, 0.001f);
 		heights = generator.genSmoothNoise(heights, 5);
-		//generator.printOutTerrain(heights);
 		
-		BufferedImage map = new BufferedImage(getTileWidth(), getTileHeight(), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage map = new BufferedImage(getTileWidth()*2, getTileHeight()*2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = map.createGraphics();
 		
 		for (int c = 0; c < getTileWidth(); c += 1) {
@@ -57,7 +57,7 @@ public class TileManager {
 				handleHeight(c, i, heights[c][i], g);
 			}
 		}
-		game.getKamera().setPosition(-400, -400);
+		game.getKamera().setPosition(0, 0);
 		return map;
 	}
 	
@@ -68,15 +68,13 @@ public class TileManager {
 			tile = new Tile(game, 3);
 			placeTile(tile, x, y);
 			tile.setZ((int) (0.6*400));
-			
+
 			g.setColor(Color.BLUE);
-			g.drawRect(x, y, 1, 1);
 		} else if (Math.abs(height)<0.63){
 			tile = new Tile(game, 2);
 			placeTile(tile, x, y);
 
 			g.setColor(Color.YELLOW);
-			g.drawRect(x, y, 1, 1);
 			tile.setZ((int) (height*400));
 		}else if (Math.abs(height)>0.8){
 			tile = new Tile(game, 1);
@@ -84,14 +82,13 @@ public class TileManager {
 			tile.setZ((int) (height*400));
 
 			g.setColor(Color.LIGHT_GRAY);
-			g.drawRect(x, y, 1, 1);
 		} else {
 			tile = new Tile(game, 0);
 			placeTile(tile, x, y);
 			tile.setZ((int) (height*400));
 
 			g.setColor(Color.GREEN);
-			g.drawRect(x, y, 1, 1);
 		}
+		g.drawRect(TwoDMath.toIsoX(x, y)+tiles.length, TwoDMath.toIsoY(x, y), 1, 1);
 	}
 }
