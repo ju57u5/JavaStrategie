@@ -2,6 +2,8 @@ package tk.ju57u5v.engine;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
@@ -11,6 +13,7 @@ import com.sun.tracing.dtrace.ArgsAttributes;
 
 import tk.ju57u5v.engine.console.CodeManager;
 import tk.ju57u5v.engine.console.Console;
+import tk.ju57u5v.engine.gui.GuiHandler;
 import tk.ju57u5v.engine.input.BindHandler;
 import tk.ju57u5v.engine.input.MouseHandler;
 import tk.ju57u5v.engine.netcode.Client;
@@ -100,6 +103,11 @@ public class Game {
 	 * TileManager des Spiels
 	 */
 	protected TileManager tileManager = new TileManager(this, 500, 500);
+	
+	/**
+	 * GuiHandler des Spiels
+	 */
+	protected GuiHandler guiHandler = new GuiHandler(this);
 
 	// Methoden
 	/**
@@ -110,17 +118,19 @@ public class Game {
 	}
 
 	/**
-	 * Intitialisiert das Game (ermöglicht Updaten und rendern)
+	 * Intitialisiert das Game (Muss aufgeführt werden, damit der Renderer Überschrieben werden kann.)
 	 */
 	public void initalizeGame() {
 		window.addMouseListener(mouseHandler);
 		window.addMouseMotionListener(mouseHandler);
 		window.getFrame().addKeyListener(bindHandler);
+		//Prüfe ob eine Config da ist.
 		resourceManager.checkConfig();
-		//Copy Update
 		for (String arg : args) {
-			if (arg.equals("update"))
-				updater.copyUpdate();
+			String[] commands = arg.split(";");
+			for (String command : commands) {
+				codeManager.processCode(command);
+			}
 		}
 		// Load Convars
 		codeManager.processCFG("varsafe.cfg");
@@ -128,6 +138,8 @@ public class Game {
 		codeManager.processCFG("config.cfg");
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);
+		gameRunner.renderer.doGuiRender(true);
+		//window.goFullScreen();
 	}
 
 	/**
@@ -209,6 +221,14 @@ public class Game {
 	 */
 	public MapLoader getMapLoader() {
 		return mapLoader;
+	}
+
+	/**
+	 * Gibt den MouseHandler zurück
+	 * @return
+	 */
+	public MouseHandler getMouseHandler() {
+		return mouseHandler;
 	}
 
 	/**
@@ -327,7 +347,7 @@ public class Game {
 				cmd.append(" ");
 				cmd.append(mainCommand[i]);
 			}
-			cmd.append(" update");
+			cmd.append("\"copyupdate;\"");
 			// execute the command in a shutdown hook, to be sure that all the
 			// resources have been disposed before restarting the application
 			Runtime.getRuntime().addShutdownHook(new Thread() {

@@ -59,7 +59,10 @@ public class ConVarManager {
 	 *            Beschreibung der Convar
 	 */
 	public void def(String name, String defaultValue, String description) {
-		vars.put(name, defaultValue);
+		// Habe mich gegen ein Setzen entschieden, da so def möglich ist ohne
+		// den Wert der Convar zu verändern. Das ist toll, denn so können wir
+		// eine Datei mit allen nötigen Convars erstellen, die auch nach dem
+		// Varsafe ausgeführt werden kann.
 		defaults.put(name, defaultValue);
 		descriptions.put(name, description);
 	}
@@ -86,8 +89,13 @@ public class ConVarManager {
 		try {
 			return Integer.parseInt(vars.get(name));
 		} catch (NumberFormatException e) {
-			if (getDefaultValue(name) != null)
-				return Integer.parseInt(defaults.get(name));
+			if (getDefaultValue(name) != null) {
+				try {
+					return Integer.parseInt(defaults.get(name));
+				} catch (NumberFormatException ex) {
+					game.getConsole().log(name+" is no int. Returning 0.");
+				}
+			}
 			return 0;
 		}
 	}
@@ -103,8 +111,13 @@ public class ConVarManager {
 		try {
 			return Double.parseDouble(vars.get(name));
 		} catch (NumberFormatException e) {
-			if (getDefaultValue(name) != null)
-				return Double.parseDouble(defaults.get(name));
+			if (getDefaultValue(name) != null) {
+				try {
+					return Double.parseDouble(defaults.get(name));
+				} catch (NumberFormatException ex) {
+					game.getConsole().log(name+" is no double. Returning 0.");
+				}
+			}
 			return 0.0;
 		}
 	}

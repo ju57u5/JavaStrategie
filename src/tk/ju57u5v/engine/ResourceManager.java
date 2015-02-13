@@ -20,6 +20,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import tk.ju57u5v.engine.gui.GuiElement;
+
 /**
  * Managed die Resourcen der Engine.
  * 
@@ -162,6 +164,18 @@ public class ResourceManager {
 	 *            GameObject dessen Dimensionen gesetzt werden
 	 */
 	public void setDimensionsFromResource(String pQuery, GameObject e) {
+		e.setDimensions(getResourceWidth(pQuery), getResourceHeight(pQuery));
+	}
+
+	/**
+	 * Setzt die Dimensionen eines GuiElements anhand seiner Textur
+	 * 
+	 * @param pQuery
+	 *            Query der Textur
+	 * @param e
+	 *            GuiElement dessen Dimensionen gesetzt werden
+	 */
+	public void setDimensionsFromResource(String pQuery, GuiElement e) {
 		e.setDimensions(getResourceWidth(pQuery), getResourceHeight(pQuery));
 	}
 

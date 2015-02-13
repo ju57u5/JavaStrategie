@@ -258,6 +258,10 @@ public class CodeManager {
 		addCommand("fullscreen", (game, pCode, parts) -> {
 			game.getWindow().goFullScreen();
 		});
+		
+		addCommand("copyupdate", (game, pCode, parts) -> {
+			game.getUpdater().copyUpdate();
+		});
 	}
 
 	/**

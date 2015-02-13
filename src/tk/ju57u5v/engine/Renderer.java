@@ -3,6 +3,8 @@ package tk.ju57u5v.engine;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import tk.ju57u5v.engine.gui.GuiElement;
+
 /**
  * Rendert alle Resourcen und Verwaltet zu rendernde Objecte.
  * 
@@ -22,6 +24,11 @@ public class Renderer {
 	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
 	/**
+	 * ArrayList mit registrierten GuiElmenten
+	 */
+	protected ArrayList<GuiElement> guiElements = new ArrayList<GuiElement>();
+
+	/**
 	 * Gibt an ob gerendert wird
 	 */
 	private boolean render = false;
@@ -30,6 +37,11 @@ public class Renderer {
 	 * Gibt an ob geupdated wird
 	 */
 	private boolean update = false;
+
+	/**
+	 * Gibt an ob das Gui gerendert wird
+	 */
+	private boolean guiRender = false;
 
 	/**
 	 * Verknüpfung zur Haupklasse
@@ -80,6 +92,8 @@ public class Renderer {
 			renderGameObjects(g);
 			renderEntities(g);
 		}
+		if (guiRender)
+			renderGuiElements(g);
 	}
 
 	/**
@@ -120,6 +134,12 @@ public class Renderer {
 		}
 	}
 
+	private void renderGuiElements(Graphics2D g) {
+		for (int c = 0; c < guiElements.size(); c++) {
+			guiElements.get(c).render(g);
+		}
+	}
+
 	/**
 	 * Soll gerendert werden?
 	 * 
@@ -141,12 +161,39 @@ public class Renderer {
 	}
 
 	/**
-	 * Gibt die registrierten Entitys in einer ArrayList zurück
+	 * Soll das Gui gerendert werden.
 	 * 
-	 * @return
+	 * @param guiRender
+	 */
+	public void doGuiRender(boolean guiRender) {
+		this.guiRender = guiRender;
+	}
+
+	/**
+	 * Gibt die registrierten Entitys in einer ArrayList zurück.
+	 * 
+	 * @return Entities
 	 */
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+
+	/**
+	 * Gibt die alle registrierten GameObjects in einer ArrayList zurück.
+	 * 
+	 * @return GameObjects
+	 */
+	public ArrayList<GameObject> getGameObjects() {
+		return gameObjects;
+	}
+
+	/**
+	 * Gibt die alle registrierten GuiElmente in einer ArrayList zurück.
+	 * 
+	 * @return
+	 */
+	public ArrayList<GuiElement> getGuiElements() {
+		return guiElements;
 	}
 
 	/**
@@ -170,6 +217,16 @@ public class Renderer {
 	}
 
 	/**
+	 * Entfernt das registrierte GuiElement
+	 * 
+	 * @param g
+	 *            GuiElement das entfernt wird
+	 */
+	public void removeGuiElement(GuiElement g) {
+		guiElements.remove(g);
+	}
+
+	/**
 	 * Registriert das Gameobject g
 	 * 
 	 * @param g
@@ -177,5 +234,15 @@ public class Renderer {
 	 */
 	public void registerGameObject(GameObject g) {
 		gameObjects.add(g);
+	}
+
+	/**
+	 * Registriert ein GuiElement
+	 * 
+	 * @param g
+	 *            GuiElement das registriert wird
+	 */
+	public void registerGuiElement(GuiElement g) {
+		guiElements.add(g);
 	}
 }
