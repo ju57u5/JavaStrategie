@@ -1,24 +1,38 @@
 package tk.ju57u5v.engine.netcode;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import tk.ju57u5v.engine.netcode.Packet.*;
+
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.minlog.Log;
 import tk.ju57u5v.engine.Game;
 
 public class Server {
-
-	private ExecutorService pool = Executors.newCachedThreadPool();
-	private ServerSocket serverSocket;
 	
+	private com.esotericsoftware.kryonet.Server server;
 	
 	public Server (Game game) {
+		//DEBUG
+		Log.set(Log.LEVEL_DEBUG);
+		
+		server = new com.esotericsoftware.kryonet.Server();
+		registerPackets();
+		server.addListener(new NetworkListener());
+		server.start();
 		try {
-			serverSocket = new ServerSocket(27015);
-			new Thread(new NetworkService(pool, serverSocket, game)).start();
+			server.bind(27015);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void registerPackets() {
+		Kryo kyro = server.getKryo();
+		kyro.register(Packet0LoginRequest.class);
+		kyro.register(Packet1LoginAnswer.class);
+		kyro.register(Packet2PingRequest.class);
+		kyro.register(Packet3PingAnswer.class);
+		kyro.register(Packet4Message.class);
 	}
 }

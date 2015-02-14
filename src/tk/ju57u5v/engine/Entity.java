@@ -107,7 +107,6 @@ public class Entity extends GameObject {
 		radian = Math.atan2(yDifference, xDifference);
 		movement = true;
 		//TEST
-		game.client.sendMessage("hey Server ich habe eine Katze bewegt");
 	}
 
 	/**
