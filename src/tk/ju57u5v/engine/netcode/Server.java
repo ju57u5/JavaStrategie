@@ -33,6 +33,6 @@ public class Server {
 		kyro.register(Packet1LoginAnswer.class);
 		kyro.register(Packet2PingRequest.class);
 		kyro.register(Packet3PingAnswer.class);
-		kyro.register(Packet4Message.class);
+		kyro.register(Packet4CreateNewEnity.class);
 	}
 }

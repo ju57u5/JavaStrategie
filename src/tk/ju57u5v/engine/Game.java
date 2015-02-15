@@ -1,15 +1,9 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.List;
-
-import com.sun.tracing.dtrace.ArgsAttributes;
 
 import tk.ju57u5v.engine.console.CodeManager;
 import tk.ju57u5v.engine.console.Console;
@@ -68,11 +62,6 @@ public class Game {
 	 * Tastatur Input Handler des Spiels
 	 */
 	protected BindHandler bindHandler = new BindHandler();
-
-	/**
-	 * Player Object des Spiels
-	 */
-	protected Player player = new Player();
 
 	/**
 	 * Map Loader des Spiels
