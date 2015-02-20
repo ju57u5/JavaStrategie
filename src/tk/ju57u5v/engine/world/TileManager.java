@@ -60,6 +60,20 @@ public class TileManager {
 		game.getKamera().setPosition(0, 0);
 		return map;
 	}
+	
+	public BufferedImage generateWorld2(long seed) {
+		BufferedImage map = new BufferedImage(getTileWidth() * 2, getTileHeight() * 2, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = map.createGraphics();
+
+		double[][] heights = DiamondSquare.diamondSquare(1025, (double) seed);
+		for (int c = 0; c < getTileWidth(); c += 1) {
+			for (int i = 0; i < getTileHeight(); i += 1) {
+				handleHeight(c, i, (float) heights[c][i], g);
+			}
+		}
+		game.getKamera().setPosition(0, 0);
+		return map;
+	}
 
 	public void handleHeight(int x, int y, float height, Graphics2D g) {
 

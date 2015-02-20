@@ -19,6 +19,12 @@ public class NetworkListener extends Listener {
 			handleNewEntity(c, (Packet4CreateNewEnity) o);
 		} else if (o instanceof Packet5CreateNewGameObject) {
 			handleNewGameObject(c, (Packet5CreateNewGameObject) o);
+		} else if (o instanceof Packet6SetPosition) {
+			handleSetPosition(c, (Packet6SetPosition) o);
+		} else if (o instanceof Packet7MoveEntity) {
+			handleMoveEnity(c, (Packet7MoveEntity) o);
+		} else if (o instanceof Packet8Disconnect) {
+			handleDisconnect(c, (Packet8Disconnect) o);
 		}
 	}
 
@@ -51,13 +57,31 @@ public class NetworkListener extends Listener {
 
 	private void handleNewEntity(Connection c, Packet4CreateNewEnity packet) {
 		packet.ownerID = c.getID();
-		for (Connection connection : connections) {
-			connection.sendTCP(packet);
-		}
+		sendToAllClients(packet);
 	}
 
 	private void handleNewGameObject(Connection c, Packet5CreateNewGameObject packet) {
 		packet.ownerID = c.getID();
+		sendToAllClients(packet);
+	}
+	
+	private void handleSetPosition(Connection c, Packet6SetPosition packet) {
+		packet.ownerId = c.getID();
+		sendToAllClients(packet);
+	}
+	
+	private void handleMoveEnity(Connection c, Packet7MoveEntity packet) {
+		packet.ownerId = c.getID();
+		sendToAllClients(packet);
+	}
+	
+	private void handleDisconnect(Connection c, Packet8Disconnect packet) {
+		packet.playerID = c.getID();
+		sendToAllClients(packet);
+		connections.remove(c);
+	}
+	
+	private void sendToAllClients(Object packet) {
 		for (Connection connection : connections) {
 			connection.sendTCP(packet);
 		}

@@ -17,7 +17,7 @@ public class GameRunner extends Thread {
 	/**
 	 * Gesamtanzahl der Ticks des Spiels
 	 */
-	long ticks = 0;
+	private long ticks = 0;
 
 	// Methoden
 	/**
@@ -120,4 +120,12 @@ public class GameRunner extends Thread {
 		}
 	}
 
+	/**
+	 * Gibt die Tick-Anzahl des Gamerunners seit Start des Spiels zurück.
+	 * 
+	 * @return Anzahl der Ticks
+	 */
+	public long getTicks() {
+		return ticks;
+	}
 }

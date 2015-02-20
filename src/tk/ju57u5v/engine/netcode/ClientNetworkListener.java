@@ -33,13 +33,13 @@ public class ClientNetworkListener extends Listener {
 		} else if (o instanceof Packet5CreateNewGameObject) {
 			handleNewGameObject((Packet5CreateNewGameObject) o);
 		} else if (o instanceof Packet6SetPosition) {
-
+			handleSetPosition((Packet6SetPosition) o);
 		} else if (o instanceof Packet7MoveEntity) {
-
+			handleMoveEntity((Packet7MoveEntity) o);
 		} else if (o instanceof Packet8Disconnect) {
 			handleDisconnect((Packet8Disconnect) o);
 		} else if (o instanceof Packet9Kick) {
-			//Nothing
+			game.getConsole().log("Player Kicked: "+((Packet9Kick)o).reason);
 		} else if (o instanceof Packet10NewPlayer) {
 			handleNewPlayer((Packet10NewPlayer) o);
 		}
@@ -47,13 +47,13 @@ public class ClientNetworkListener extends Listener {
 
 	@Override
 	public void connected(Connection arg0) {
-		System.out.println("You Connected");
+		game.getConsole().log("Connected to " + arg0.getRemoteAddressTCP());
 		client.sendTCP(new Packet0LoginRequest());
 	}
 
 	@Override
 	public void disconnected(Connection arg0) {
-		System.out.println("You Disconnected");
+		game.getConsole().log("Disconnected");
 	}
 
 	private Object createClass(String className) {
@@ -78,14 +78,14 @@ public class ClientNetworkListener extends Listener {
 	}
 
 	private Player getPlayer(int id) {
-		for (int c=0;c<players.size();c++) {
-			if (players.get(c).getPlayerID()==id) {
+		for (int c = 0; c < players.size(); c++) {
+			if (players.get(c).getPlayerID() == id) {
 				return players.get(c);
 			}
 		}
 		return null;
 	}
-	
+
 	private void handleNewPlayer(Packet10NewPlayer packet) {
 		Player player = new Player();
 		player.setPlayerID(packet.playerid);
@@ -106,7 +106,7 @@ public class ClientNetworkListener extends Listener {
 	private void handleDisconnect(Packet8Disconnect packet) {
 		players.remove(packet.playerID);
 	}
-	
+
 	private void handleLoginAnswer(Connection c, Packet1LoginAnswer packet) {
 		if (packet.accepted) {
 			Player player = new Player();
@@ -114,6 +114,25 @@ public class ClientNetworkListener extends Listener {
 			players.add(player);
 		} else {
 			c.close();
+		}
+	}
+
+	private void handleSetPosition(Packet6SetPosition packet) {
+		if (packet.type.equals("gameObject")) {
+			players.get(packet.ownerId).getGameObjects().get(packet.objectId).setPosition(packet.x, packet.y);
+		} else {
+			players.get(packet.ownerId).getEntities().get(packet.objectId).setPosition(packet.x, packet.y);
+		}
+	}
+
+	private void handleMoveEntity(Packet7MoveEntity packet) {
+		Entity e = players.get(packet.ownerId).getEntities().get(packet.objectId);
+		e.moveTo(packet.x, packet.y, packet.speed);
+		long tick = game.getGameRunner().getTicks();
+		// Wir füren die Anzahl der Movements aus, die durch den Ping verloren
+		// gegangen sind, damit alles einigermaßen gleich aussieht.
+		for (long c = packet.tick; c < tick; c++) {
+			e.updateMovement();
 		}
 	}
 }

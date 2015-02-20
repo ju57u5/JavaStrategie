@@ -58,7 +58,7 @@ public class AnimationManager {
 	 */
 	public String getcurrentPicture() {
 		if (animations.get(currentAnimation) != null) {
-			return animations.get(currentAnimation).getcurrentPicture(game.gameRunner.ticks);
+			return animations.get(currentAnimation).getcurrentPicture(game.gameRunner.getTicks());
 		}
 		return "";
 	}

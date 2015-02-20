@@ -40,7 +40,8 @@ public class Packet {
 		 * GameObject oder Entity
 		 */
 		String type="gameObject";
-		int id;
+		int ownerId;
+		int objectId;
 	}
 	
 	public static class Packet7MoveEntity {
@@ -48,6 +49,8 @@ public class Packet {
 		int x;
 		int y;
 		int speed;
+		int ownerId;
+		int objectId;
 	}
 	
 	public static class Packet8Disconnect {
