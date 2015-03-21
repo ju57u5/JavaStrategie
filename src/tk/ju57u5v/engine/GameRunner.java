@@ -48,7 +48,7 @@ public class GameRunner extends Thread {
 				delta += (now - lastTime) / waitTime;
 				lastTime = now;
 				while (delta >= 1) {
-					game.gameRunner.renderer.update();
+					Game.gameRunner.renderer.update();
 					update();
 					work();
 					updates++;
@@ -58,7 +58,7 @@ public class GameRunner extends Thread {
 
 				if (System.currentTimeMillis() - timer > 1000) {
 					timer += 1000;
-					game.window.setUps(updates);
+					Game.window.setUps(updates);
 					updates = 0;
 				}
 			}
@@ -115,8 +115,8 @@ public class GameRunner extends Thread {
 	 * Öffnet die Console
 	 */
 	private void update() {
-		if (game.bindHandler.bindActive("+console")) {
-			game.console.getFrame().setVisible(true);
+		if (Game.bindHandler.bindActive("+console")) {
+			Game.console.getFrame().setVisible(true);
 		}
 	}
 

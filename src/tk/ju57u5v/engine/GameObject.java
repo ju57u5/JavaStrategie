@@ -1,14 +1,9 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
+import static tk.ju57u5v.engine.Game.*;
 
 public class GameObject extends Position {
-
-	/**
-	 * Zugriff auf das Spiel
-	 */
-	protected Game game;
 
 	/**
 	 * Animation Manager des GameObjects
@@ -21,8 +16,7 @@ public class GameObject extends Position {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public GameObject(Game game) {
-		this.game = game;
+	public GameObject() {
 	}
 
 	/**
@@ -31,7 +25,7 @@ public class GameObject extends Position {
 	@Override
 	public void setPosition(int x, int y) {
 		super.setPosition(x, y);
-		game.kamera.setRelativPostion(this);
+		kamera.setRelativPostion(this);
 	}
 
 	/**
@@ -40,7 +34,7 @@ public class GameObject extends Position {
 	@Override
 	public void setX(int x) {
 		super.setX(x);
-		game.kamera.setRelativPostion(this);
+		kamera.setRelativPostion(this);
 	}
 
 	/**
@@ -49,7 +43,7 @@ public class GameObject extends Position {
 	@Override
 	public void setY(int y) {
 		super.setY(y);
-		game.kamera.setRelativPostion(this);
+		kamera.setRelativPostion(this);
 	}
 
 	/**
@@ -74,13 +68,13 @@ public class GameObject extends Position {
 	 * Entlädt das GameObject
 	 */
 	public void unload() {
-		game.gameRunner.renderer.removeGameObject(this);
+		gameRunner.renderer.removeGameObject(this);
 	}
 
 	/**
 	 * Initialisiert das GameObject
 	 */
 	protected void initialise() {
-		game.gameRunner.renderer.registerGameObject(this);
+		gameRunner.renderer.registerGameObject(this);
 	}
 }

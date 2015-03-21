@@ -39,7 +39,7 @@ public class ClientNetworkListener extends Listener {
 		} else if (o instanceof Packet8Disconnect) {
 			handleDisconnect((Packet8Disconnect) o);
 		} else if (o instanceof Packet9Kick) {
-			game.getConsole().log("Player Kicked: "+((Packet9Kick)o).reason);
+			Game.getConsole().log("Player Kicked: "+((Packet9Kick)o).reason);
 		} else if (o instanceof Packet10NewPlayer) {
 			handleNewPlayer((Packet10NewPlayer) o);
 		}
@@ -47,13 +47,13 @@ public class ClientNetworkListener extends Listener {
 
 	@Override
 	public void connected(Connection arg0) {
-		game.getConsole().log("Connected to " + arg0.getRemoteAddressTCP());
+		Game.getConsole().log("Connected to " + arg0.getRemoteAddressTCP());
 		client.sendTCP(new Packet0LoginRequest());
 	}
 
 	@Override
 	public void disconnected(Connection arg0) {
-		game.getConsole().log("Disconnected");
+		Game.getConsole().log("Disconnected");
 	}
 
 	private Object createClass(String className) {
@@ -128,7 +128,7 @@ public class ClientNetworkListener extends Listener {
 	private void handleMoveEntity(Packet7MoveEntity packet) {
 		Entity e = players.get(packet.ownerId).getEntities().get(packet.objectId);
 		e.moveTo(packet.x, packet.y, packet.speed);
-		long tick = game.getGameRunner().getTicks();
+		long tick = Game.getGameRunner().getTicks();
 		// Wir füren die Anzahl der Movements aus, die durch den Ping verloren
 		// gegangen sind, damit alles einigermaßen gleich aussieht.
 		for (long c = packet.tick; c < tick; c++) {

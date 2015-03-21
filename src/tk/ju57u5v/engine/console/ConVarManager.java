@@ -93,7 +93,7 @@ public class ConVarManager {
 				try {
 					return Integer.parseInt(defaults.get(name));
 				} catch (NumberFormatException ex) {
-					game.getConsole().log(name+" is no int. Returning 0.");
+					Game.getConsole().log(name+" is no int. Returning 0.");
 				}
 			}
 			return 0;
@@ -115,7 +115,7 @@ public class ConVarManager {
 				try {
 					return Double.parseDouble(defaults.get(name));
 				} catch (NumberFormatException ex) {
-					game.getConsole().log(name+" is no double. Returning 0.");
+					Game.getConsole().log(name+" is no double. Returning 0.");
 				}
 			}
 			return 0.0;
@@ -179,6 +179,6 @@ public class ConVarManager {
 			String varName = entry.getKey();
 			commands += "def " + varName + " " + getDefaultValue(varName) + " " + getDescription(varName) + ";\n" + "set " + varName + " " + getString(varName) + ";\n";
 		}
-		game.getResourceManager().writeToFile("varsafe.cfg", commands);
+		Game.getResourceManager().writeToFile("varsafe.cfg", commands);
 	}
 }

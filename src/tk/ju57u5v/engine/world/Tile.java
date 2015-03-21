@@ -3,6 +3,7 @@ package tk.ju57u5v.engine.world;
 import java.awt.Graphics2D;
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.GameObject;
+import static tk.ju57u5v.engine.Game.*;
 
 public class Tile extends GameObject {
 
@@ -12,8 +13,8 @@ public class Tile extends GameObject {
 	private int texture = 1;
 	private String tileTexture="tile_grass";
 
-	public Tile(Game game, int texture) {
-		super(game);
+	public Tile(int texture) {
+		super();
 
 		initialise();
 		
@@ -34,12 +35,12 @@ public class Tile extends GameObject {
 			tileTexture="tile_stone";
 			break;
 		}
-		game.getResourceManager().setDimensionsFromResource(tileTexture, this);
+		Game.getResourceManager().setDimensionsFromResource(tileTexture, this);
 	}
 
 	@Override
 	public void render(Graphics2D g) {
-		g.drawImage(game.getResourceManager().getResource(tileTexture), getRelativIsoX(), getRelativIsoY(), null);
+		g.drawImage(getResourceManager().getResource(tileTexture), getRelativIsoX(), getRelativIsoY(), null);
 	}
 
 	public boolean isWalkable() {

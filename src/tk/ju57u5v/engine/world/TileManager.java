@@ -16,10 +16,8 @@ import tk.ju57u5v.engine.TwoDMath;
 public class TileManager {
 
 	private Tile[][] tiles;
-	protected Game game;
 
-	public TileManager(Game game, int width, int height) {
-		this.game = game;
+	public TileManager(int width, int height) {
 		tiles = new Tile[width][height];
 	}
 
@@ -57,7 +55,7 @@ public class TileManager {
 				handleHeight(c, i, heights[c][i], g);
 			}
 		}
-		game.getKamera().setPosition(0, 0);
+		Game.getKamera().setPosition(0, 0);
 		return map;
 	}
 	
@@ -71,7 +69,7 @@ public class TileManager {
 				handleHeight(c, i, (float) heights[c][i], g);
 			}
 		}
-		game.getKamera().setPosition(0, 0);
+		Game.getKamera().setPosition(0, 0);
 		return map;
 	}
 

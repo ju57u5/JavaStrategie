@@ -3,28 +3,23 @@ package tk.ju57u5v.engine.gui;
 import java.awt.Graphics2D;
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.Position;
+import static tk.ju57u5v.engine.Game.*;
 
 public class GuiElement extends Position {
-
-	/**
-	 * Verknüpfung zur Hauptklasse des Spiels
-	 */
-	protected Game game;
 
 	/**
 	 * Konstruktor
 	 * 
 	 * @param game
 	 */
-	public GuiElement(Game game) {
-		this.game = game;
+	public GuiElement() {
 	}
 
 	/**
 	 * Intitialisiert das GuiElement
 	 */
 	protected void initialise() {
-		game.getGameRunner().getRenderer().registerGuiElement(this);
+		Game.getGameRunner().getRenderer().registerGuiElement(this);
 	}
 
 	/**

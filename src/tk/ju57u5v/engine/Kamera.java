@@ -32,11 +32,11 @@ public class Kamera extends Position {
 	 * Updated alle relativen Positionen der GameObjects und Entitys
 	 */
 	private void updateRelativPositions() {
-		for (Entity entity : game.gameRunner.getEntities()) {
+		for (Entity entity : Game.gameRunner.getEntities()) {
 			setRelativPostion(entity);
 		}
 
-		for (GameObject gameObject : game.gameRunner.getGameObjects()) {
+		for (GameObject gameObject : Game.gameRunner.getGameObjects()) {
 			setRelativPostion(gameObject);
 		}
 	}
@@ -109,8 +109,8 @@ public class Kamera extends Position {
 	 * @return
 	 */
 	public BufferedImage scaleResource(BufferedImage resource) {
-		double scaleX = ((double) getWidth() / (double) game.window.getWidth());
-		double scaleY = ((double) getHeight() / (double) game.window.getHeight());
+		double scaleX = ((double) getWidth() / (double) Game.window.getWidth());
+		double scaleY = ((double) getHeight() / (double) Game.window.getHeight());
 
 		return ResourceManager.scale(resource, resource.getType(), (int) (resource.getWidth() * scaleX), (int) (resource.getHeight() * scaleY), scaleX, scaleY);
 	}

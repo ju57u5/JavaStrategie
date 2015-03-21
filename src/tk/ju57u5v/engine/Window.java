@@ -1,6 +1,5 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.Graphics;
@@ -88,19 +87,19 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 	 */
 	@Override
 	protected void paintComponent(Graphics g) {
-		if (game.gameRunner != null) {
-			if (game.gameRunner.renderer != null) {
+		if (Game.gameRunner != null) {
+			if (Game.gameRunner.renderer != null) {
 				g.setColor(getBackground());
 				g.fillRect(0, 0, getWidth(), getHeight());
-				game.gameRunner.renderer.render((Graphics2D) g);
-				game.mouseHandler.drawDrag((Graphics2D) g);
+				Game.gameRunner.renderer.render((Graphics2D) g);
+				Game.mouseHandler.drawDrag((Graphics2D) g);
 			}
 		}
 		frames++;
 		if (System.currentTimeMillis() - timer > 1000) {
 			timer += 1000;
 			frame.setTitle(title + "   |   " + ups + " ups " + frames + " fps");
-			game.console.getFrame().setTitle("Console" + "   |   " + ups + " ups " + frames + " fps");
+			Game.console.getFrame().setTitle("Console" + "   |   " + ups + " ups " + frames + " fps");
 			frames = 0;
 		}
 		repaint();
@@ -143,13 +142,13 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		if (game.window != null && game.kamera != null && !fullscreen)
-			game.window.getFrame().setSize(game.kamera.getWidth(), game.kamera.getHeight());
+		if (Game.window != null && Game.kamera != null && !fullscreen)
+			Game.window.getFrame().setSize(Game.kamera.getWidth(), Game.kamera.getHeight());
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		game.bindHandler.unactiveAll();
+		Game.bindHandler.unactiveAll();
 	}
 
 	/**
@@ -165,7 +164,7 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 	@Override
 	public void componentResized(ComponentEvent e) {
 		if (!fullscreen)
-			game.kamera.setDimensions(e.getComponent().getWidth(), e.getComponent().getHeight());
+			Game.kamera.setDimensions(e.getComponent().getWidth(), e.getComponent().getHeight());
 	}
 
 	@Override
@@ -196,7 +195,7 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			frame.setSize((int) screenSize.getWidth(), (int) screenSize.getHeight());
 			frame.setResizable(false);
-			game.kamera.setDimensions((int) screenSize.getWidth(), (int) screenSize.getHeight());
+			Game.kamera.setDimensions((int) screenSize.getWidth(), (int) screenSize.getHeight());
 
 			frame.repaint();
 			myDevice.setFullScreenWindow(frame);

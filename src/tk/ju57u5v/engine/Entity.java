@@ -1,7 +1,8 @@
 package tk.ju57u5v.engine;
 
-public class Entity extends GameObject {
+import static tk.ju57u5v.engine.Game.*;
 
+public class Entity extends GameObject {
 	/**
 	 * x-Position, zu der sich das Entity bewegt
 	 */
@@ -54,8 +55,8 @@ public class Entity extends GameObject {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public Entity(Game game) {
-		super(game);
+	public Entity() {
+		super();
 	}
 
 	/**
@@ -76,14 +77,14 @@ public class Entity extends GameObject {
 	 * Intitialisiert das Entity
 	 */
 	protected void initialise() {
-		game.gameRunner.renderer.registerEntity(this);
+		gameRunner.renderer.registerEntity(this);
 	}
 
 	/**
 	 * Entlädt das Entity
 	 */
 	public void unload() {
-		game.gameRunner.renderer.removeEntity(this);
+		gameRunner.renderer.removeEntity(this);
 	}
 
 	/**
@@ -156,6 +157,6 @@ public class Entity extends GameObject {
 	 *            Query im globalen Manager
 	 */
 	protected void getSavedAnimation(String newQuery, String query) {
-		animationManager.putAnimationString(newQuery, game.resourceManager.getAnimation(query));
+		animationManager.putAnimationString(newQuery, resourceManager.getAnimation(query));
 	}
 }

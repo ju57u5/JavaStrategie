@@ -44,15 +44,15 @@ public class MapLoader {
 			currentMap.onUnLoad();
 
 		try {
-			File mapFile = new File(game.getResourceManager().getBasePath(), "maps/" + name);
+			File mapFile = new File(Game.getResourceManager().getBasePath(), "maps/" + name);
 
 			URL fileURL = mapFile.toURI().toURL();
 			String jarURL = "jar:" + fileURL + "!/";
 			URL urls[] = { new URL(jarURL) };
 
 			URLClassLoader classLoader = new URLClassLoader(urls);
-			game.getCodeManager().processCFG(classLoader.getResourceAsStream("map.cfg"));
-			String className = game.getConsole().getString("mapClass");
+			Game.getCodeManager().processCFG(classLoader.getResourceAsStream("map.cfg"));
+			String className = Game.getConsole().getString("mapClass");
 
 			try {
 				Constructor<?> mapConstructor;

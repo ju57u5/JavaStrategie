@@ -68,7 +68,7 @@ public class Renderer {
 	 */
 	public int registerEntity(Entity pEntity) {
 		entities.add(pEntity);
-		game.kamera.setRelativPostion(pEntity);
+		Game.kamera.setRelativPostion(pEntity);
 		return entities.size() - 1;
 	}
 
@@ -114,7 +114,7 @@ public class Renderer {
 	 */
 	private void renderEntities(Graphics2D g) {
 		for (int c = 0; c < entities.size(); c++) {
-			if (game.kamera.isRenderNeeded(entities.get(c))) {
+			if (Game.kamera.isRenderNeeded(entities.get(c))) {
 				entities.get(c).render(g);
 			}
 		}
@@ -128,7 +128,7 @@ public class Renderer {
 	 */
 	private void renderGameObjects(Graphics2D g) {
 		for (int c = 0; c < gameObjects.size(); c++) {
-			if (game.kamera.isRenderNeeded(gameObjects.get(c))) {
+			if (Game.kamera.isRenderNeeded(gameObjects.get(c))) {
 				gameObjects.get(c).render(g);
 			}
 		}

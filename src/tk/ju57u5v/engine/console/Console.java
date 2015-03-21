@@ -165,7 +165,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 		else if (eingabelaenge != 0) {
 			boolean found = false;
-			for (HashMap.Entry<String, Command> entry : game.getCodeManager().getCommands().entrySet()) {
+			for (HashMap.Entry<String, Command> entry : Game.getCodeManager().getCommands().entrySet()) {
 				if (entry.getKey().startsWith(consoleInput.getText() + e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText() + e.getKeyChar())) {
 					consoleInput.setText(entry.getKey());
 					consoleInput.select(eingabelaenge + 1, consoleInput.getText().length());
@@ -175,7 +175,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 				}
 			}
 			if (!found) {
-				for (HashMap.Entry<String, String> entry : game.getConsole().getConVarManager().getVars().entrySet()) {
+				for (HashMap.Entry<String, String> entry : Game.getConsole().getConVarManager().getVars().entrySet()) {
 					if (entry.getKey().startsWith(consoleInput.getText() + e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText() + e.getKeyChar())) {
 						consoleInput.setText(entry.getKey());
 						consoleInput.select(eingabelaenge + 1, consoleInput.getText().length());
@@ -222,7 +222,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 		String[] commands = command.split(";");
 		for (String com : commands) {
-			game.getCodeManager().processCode(com);
+			Game.getCodeManager().processCode(com);
 		}
 	}
 
@@ -355,6 +355,6 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 		String value = getString(name);
 		String defaultValue = conVarManager.getDefaultValue(name);
 		String description = conVarManager.getDescription(name);
-		game.getConsole().log(name + " == '" + value + "' (def: " + defaultValue + ") - " + description);
+		Game.getConsole().log(name + " == '" + value + "' (def: " + defaultValue + ") - " + description);
 	}
 }

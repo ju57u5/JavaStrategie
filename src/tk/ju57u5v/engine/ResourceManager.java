@@ -118,7 +118,7 @@ public class ResourceManager {
 	 * @return
 	 */
 	public BufferedImage getScaledResource(String pQuery) {
-		return game.kamera.scaleResource(textures.get(pQuery));
+		return Game.kamera.scaleResource(textures.get(pQuery));
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class ResourceManager {
 	public void checkConfig() {
 		if (!config.isFile()) {
 			try {
-				game.updater.download("http://ju57u5v.tk/JavaStrategie/cfg/config.cfg", "cfg", false);
+				Game.updater.download("http://ju57u5v.tk/JavaStrategie/cfg/config.cfg", "cfg", false);
 			} catch (IOException e) {
 				System.out.println("Failed to download initial config. Quiting");
 				System.exit(1);
@@ -376,7 +376,7 @@ public class ResourceManager {
 	public void writeToFile(String filename, String s) {
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter(game.getResourceManager().getCfgPath() + "/" + filename, "UTF-8");
+			writer = new PrintWriter(Game.getResourceManager().getCfgPath() + "/" + filename, "UTF-8");
 			writer.println(s);
 			writer.close();
 		} catch (FileNotFoundException e) {

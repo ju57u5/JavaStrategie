@@ -142,7 +142,7 @@ public class Updater extends JFrame {
 	 *            Wird das Update erzwungen
 	 */
 	public void updateFiles(boolean forceUpdate) {
-		if (game.console.getInt("version") > game.console.getInt("currentVersion") || forceUpdate) {
+		if (Game.console.getInt("version") > Game.console.getInt("currentVersion") || forceUpdate) {
 			progressBar = new JProgressBar(0, getUpdateSize());
 			progressBar.setValue(0);
 			progressBar.setStringPainted(true);
@@ -152,16 +152,16 @@ public class Updater extends JFrame {
 			for (int c = 0; c < downloadUrls.size(); c++) {
 				try {
 					download(downloadUrls.get(c), downloadPaths.get(c), true);
-					game.console.log("Download of " + downloadUrls.get(c) + " done!");
+					Game.console.log("Download of " + downloadUrls.get(c) + " done!");
 				} catch (IOException e) {
-					game.console.log("Download of " + downloadUrls.get(c) + " failed!");
+					Game.console.log("Download of " + downloadUrls.get(c) + " failed!");
 				}
 			}
-			game.getConsole().set("currentVersion", game.console.getString("version"));
-			game.getConsole().getConVarManager().safeVars();
+			Game.getConsole().set("currentVersion", Game.console.getString("version"));
+			Game.getConsole().getConVarManager().safeVars();
 			
 			try {
-				game.startUpdatedJar();
+				Game.game.startUpdatedJar();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

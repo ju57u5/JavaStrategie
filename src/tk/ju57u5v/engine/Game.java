@@ -29,74 +29,79 @@ public class Game {
 	protected String[] args;
 	
 	/**
+	 * Hauptklasse des Spiels
+	 */
+	protected static Game game;
+	
+	/**
 	 * Kamera des Spiels
 	 */
-	protected Kamera kamera = new Kamera(this);
+	protected static Kamera kamera = new Kamera(game);
 
 	/**
 	 * Fenster des Spiels
 	 */
-	protected Window window = new Window(this);
+	protected static Window window = new Window(game);
 
 	/**
 	 * ResourcenManager des Spiels
 	 */
-	protected ResourceManager resourceManager = new ResourceManager(this);
+	protected static ResourceManager resourceManager = new ResourceManager(game);
 
 	/**
 	 * Updater des Spiels
 	 */
-	protected Updater updater = new Updater(this, resourceManager.getBasePath());
+	protected static Updater updater = new Updater(game, resourceManager.getBasePath());
 
 	/**
 	 * Code Manager des Spiels
 	 */
-	protected CodeManager codeManager = new CodeManager(this);
+	protected static CodeManager codeManager = new CodeManager(game);
 
 	/**
 	 * Maus Input Handler des Spiels
 	 */
-	protected MouseHandler mouseHandler = new MouseHandler(this);
+	protected static MouseHandler mouseHandler = new MouseHandler(game);
 
 	/**
 	 * Tastatur Input Handler des Spiels
 	 */
-	protected BindHandler bindHandler = new BindHandler();
+	protected static BindHandler bindHandler = new BindHandler();
 
 	/**
 	 * Map Loader des Spiels
 	 */
-	protected MapLoader mapLoader = new MapLoader(this);
+	protected static MapLoader mapLoader = new MapLoader(game);
 
 	/**
 	 * Entwickler Konsole des Spiels
 	 */
-	protected Console console = new Console(this);
+	protected static Console console = new Console(game);
 
 	/**
 	 * GameRunner des Spiels
 	 */
-	protected GameRunner gameRunner = new GameRunner(this);
+	protected static GameRunner gameRunner = new GameRunner(game);
 
 	/**
 	 * Server-Object des Spiels
 	 */
-	protected Server server;// = new Server(this);
+	protected static Server server;// = new Server(this);
 
 	/**
 	 * Client-Object des Spiels
 	 */
-	protected Client client;// = new Client(this, "127.0.0.1", 27015);
+	protected static Client client;// = new Client(this, "127.0.0.1", 27015);
 	
 	/**
 	 * TileManager des Spiels
 	 */
-	protected TileManager tileManager = new TileManager(this, 500, 500);
+	protected static TileManager tileManager = new TileManager(500, 500);
 	
 	/**
 	 * GuiHandler des Spiels
 	 */
-	protected GuiHandler guiHandler = new GuiHandler(this);
+	protected static GuiHandler guiHandler = new GuiHandler(game);
 
 	// Methoden
 	/**
@@ -104,6 +109,14 @@ public class Game {
 	 */
 	public Game(String[] args) {
 		this.args=args;
+	}
+	
+	/**
+	 * Builder des Spiels
+	 */
+	public static Game build(Game game) {
+		Game.game = game;
+		return game;
 	}
 
 	/**
@@ -136,7 +149,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public ResourceManager getResourceManager() {
+	public static ResourceManager getResourceManager() {
 		return resourceManager;
 	}
 
@@ -145,7 +158,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public GameRunner getGameRunner() {
+	public static GameRunner getGameRunner() {
 		return gameRunner;
 	}
 
@@ -154,7 +167,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public Window getWindow() {
+	public static Window getWindow() {
 		return window;
 	}
 
@@ -163,7 +176,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public Kamera getKamera() {
+	public static Kamera getKamera() {
 		return kamera;
 	}
 
@@ -172,7 +185,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public BindHandler getBindHandler() {
+	public static BindHandler getBindHandler() {
 		return bindHandler;
 	}
 
@@ -181,7 +194,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public CodeManager getCodeManager() {
+	public static CodeManager getCodeManager() {
 		return codeManager;
 	}
 
@@ -190,7 +203,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public Updater getUpdater() {
+	public static Updater getUpdater() {
 		return updater;
 	}
 
@@ -199,7 +212,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public Console getConsole() {
+	public static Console getConsole() {
 		return console;
 	}
 
@@ -208,7 +221,7 @@ public class Game {
 	 * 
 	 * @return
 	 */
-	public MapLoader getMapLoader() {
+	public static MapLoader getMapLoader() {
 		return mapLoader;
 	}
 
@@ -216,7 +229,7 @@ public class Game {
 	 * Gibt den MouseHandler zurück
 	 * @return
 	 */
-	public MouseHandler getMouseHandler() {
+	public static MouseHandler getMouseHandler() {
 		return mouseHandler;
 	}
 
@@ -224,7 +237,7 @@ public class Game {
 	 * Gibt den TileManager zurück
 	 * @return TileManager
 	 */
-	public TileManager getTileManager() {
+	public static TileManager getTileManager() {
 		return tileManager;
 	}
 
@@ -232,8 +245,16 @@ public class Game {
 	 * Setzt den TileManager
 	 * @param tileManager TileManager
 	 */
-	public void setTileManager(TileManager tileManager) {
-		this.tileManager = tileManager;
+	public static void setTileManager(TileManager tileManager) {
+		Game.tileManager = tileManager;
+	}
+
+	/**
+	 * Gibt die Hauptklasse des Spiels zurück
+	 * @return
+	 */
+	public static Game getGame() {
+		return game;
 	}
 
 	/**
