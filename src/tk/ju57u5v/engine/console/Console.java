@@ -16,11 +16,6 @@ import tk.ju57u5v.engine.Game;
 public class Console extends JPanel implements KeyListener, WindowListener {
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	private Game game;
-
-	/**
 	 * Frame des Updaters
 	 */
 	private JFrame frame = new JFrame();
@@ -56,10 +51,8 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public Console(Game game) {
-		this.game = game;
-
-		conVarManager = new ConVarManager(game);
+	public Console() {
+		conVarManager = new ConVarManager();
 		frame.setUndecorated(true);
 		frame.setTitle("Console"); // Fenstertitel setzen
 		frame.setSize(900, 600);

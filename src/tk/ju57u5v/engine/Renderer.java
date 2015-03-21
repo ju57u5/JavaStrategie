@@ -43,11 +43,6 @@ public class Renderer {
 	 */
 	private boolean guiRender = false;
 
-	/**
-	 * Verknüpfung zur Haupklasse
-	 */
-	private Game game;
-
 	// Methoden
 	/**
 	 * Constructor
@@ -55,8 +50,7 @@ public class Renderer {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public Renderer(Game game) {
-		this.game = game;
+	public Renderer() {
 	}
 
 	/**

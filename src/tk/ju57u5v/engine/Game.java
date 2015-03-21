@@ -36,32 +36,32 @@ public class Game {
 	/**
 	 * Kamera des Spiels
 	 */
-	protected static Kamera kamera = new Kamera(game);
+	protected static Kamera kamera = new Kamera();
 
 	/**
 	 * Fenster des Spiels
 	 */
-	protected static Window window = new Window(game);
+	protected static Window window = new Window();
 
 	/**
 	 * ResourcenManager des Spiels
 	 */
-	protected static ResourceManager resourceManager = new ResourceManager(game);
+	protected static ResourceManager resourceManager = new ResourceManager();
 
 	/**
 	 * Updater des Spiels
 	 */
-	protected static Updater updater = new Updater(game, resourceManager.getBasePath());
+	protected static Updater updater = new Updater();
 
 	/**
 	 * Code Manager des Spiels
 	 */
-	protected static CodeManager codeManager = new CodeManager(game);
+	protected static CodeManager codeManager = new CodeManager();
 
 	/**
 	 * Maus Input Handler des Spiels
 	 */
-	protected static MouseHandler mouseHandler = new MouseHandler(game);
+	protected static MouseHandler mouseHandler = new MouseHandler();
 
 	/**
 	 * Tastatur Input Handler des Spiels
@@ -71,17 +71,17 @@ public class Game {
 	/**
 	 * Map Loader des Spiels
 	 */
-	protected static MapLoader mapLoader = new MapLoader(game);
+	protected static MapLoader mapLoader = new MapLoader();
 
 	/**
 	 * Entwickler Konsole des Spiels
 	 */
-	protected static Console console = new Console(game);
+	protected static Console console = new Console();
 
 	/**
 	 * GameRunner des Spiels
 	 */
-	protected static GameRunner gameRunner = new GameRunner(game);
+	protected static GameRunner gameRunner = new GameRunner();
 
 	/**
 	 * Server-Object des Spiels
@@ -101,7 +101,7 @@ public class Game {
 	/**
 	 * GuiHandler des Spiels
 	 */
-	protected static GuiHandler guiHandler = new GuiHandler(game);
+	protected static GuiHandler guiHandler = new GuiHandler();
 
 	// Methoden
 	/**

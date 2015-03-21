@@ -9,15 +9,12 @@ import tk.ju57u5v.engine.input.MouseListener;
 
 public class GuiHandler implements MouseListener {
 
-	private Game game;
-
 	/**
 	 * Konstruktor
 	 * 
 	 * @param game
 	 */
-	public GuiHandler(Game game) {
-		this.game = game;
+	public GuiHandler() {
 		Game.getMouseHandler().addMouseListener(this);
 	}
 

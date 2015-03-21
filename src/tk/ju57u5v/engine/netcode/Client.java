@@ -11,14 +11,12 @@ import tk.ju57u5v.engine.netcode.Packet.*;
 public class Client {
 
 	private com.esotericsoftware.kryonet.Client client;
-	private Game game;
 
-	public Client(Game game) {
-		this.game = game;
+	public Client() {
 		client = new com.esotericsoftware.kryonet.Client();
 		registerPackets();
 		ClientNetworkListener networkListener = new ClientNetworkListener();
-		networkListener.init(client, game);
+		networkListener.init(client);
 		client.addListener(networkListener);
 		connect("127.0.0.1", 27015);
 	}

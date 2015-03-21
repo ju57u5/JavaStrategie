@@ -1,6 +1,5 @@
 package tk.ju57u5v.engine;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
@@ -65,11 +64,6 @@ public class ResourceManager {
 	 */
 	private File config = new File(gamePath, "/cfg/config.cfg");
 
-	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	private Game game;
-
 	// Methoden
 	/**
 	 * Constructor
@@ -77,8 +71,7 @@ public class ResourceManager {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public ResourceManager(Game game) {
-		this.game = game;
+	public ResourceManager() {
 		checkFolders();
 	}
 

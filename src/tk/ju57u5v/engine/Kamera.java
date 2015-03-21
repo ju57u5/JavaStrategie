@@ -5,11 +5,6 @@ import java.awt.image.BufferedImage;
 public class Kamera extends Position {
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	private Game game;
-	
-	/**
 	 * Isometrische Darstellung
 	 */
 	private boolean isometric=true;
@@ -21,11 +16,9 @@ public class Kamera extends Position {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public Kamera(Game game) {
-		this.game = game;
+	public Kamera() {
 		setWidth(1200);
 		setHeight(900);
-
 	}
 
 	/**

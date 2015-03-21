@@ -80,11 +80,6 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	int dragButton = 0;
 
 	/**
-	 * Verknüpfung zum Haupelement der Engine
-	 */
-	private Game game;
-
-	/**
 	 * ArrayList mit allen MouseListenern, die registriert wurden
 	 */
 	ArrayList<tk.ju57u5v.engine.input.MouseListener> listeners = new ArrayList<tk.ju57u5v.engine.input.MouseListener>();
@@ -96,8 +91,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public MouseHandler(Game game) {
-		this.game = game;
+	public MouseHandler() {
 	}
 
 	@Override

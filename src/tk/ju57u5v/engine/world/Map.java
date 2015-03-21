@@ -24,18 +24,12 @@ public class Map {
 	protected ArrayList<GameObject> mapGameObjects = new ArrayList<GameObject>();
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	protected Game game;
-
-	/**
 	 * Constructor
 	 * 
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public Map(Game game) {
-		this.game = game;
+	public Map() {
 	}
 
 	/**

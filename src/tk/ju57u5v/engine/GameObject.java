@@ -8,7 +8,7 @@ public class GameObject extends Position {
 	/**
 	 * Animation Manager des GameObjects
 	 */
-	protected AnimationManager animationManager = new AnimationManager(game);
+	protected AnimationManager animationManager = new AnimationManager();
 
 	// Methoden
 	/**

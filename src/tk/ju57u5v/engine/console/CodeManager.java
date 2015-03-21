@@ -11,11 +11,6 @@ import tk.ju57u5v.engine.TwoDMath;
 public class CodeManager {
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	protected Game game;
-
-	/**
 	 * Speicher alle Kommandos
 	 */
 	private HashMap<String, Command> commands = new HashMap<String, Command>();
@@ -26,8 +21,7 @@ public class CodeManager {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public CodeManager(Game game) {
-		this.game = game;
+	public CodeManager() {
 		registerCommands();
 	}
 
@@ -79,7 +73,7 @@ public class CodeManager {
 
 		for (HashMap.Entry<String, Command> entry : commands.entrySet()) {
 			if (entry.getKey().equals(parts[0])) {
-				commands.get(entry.getKey()).call(game, pCode, parts);
+				commands.get(entry.getKey()).call(Game.getGame(), pCode, parts);
 				executed = true;
 				break; // Wir wollen nicht alle Commandos durchgehen
 			}

@@ -12,7 +12,7 @@ public class Server {
 	
 	private com.esotericsoftware.kryonet.Server server;
 	
-	public Server (Game game) {
+	public Server () {
 		//DEBUG
 		Log.set(Log.LEVEL_DEBUG);
 		

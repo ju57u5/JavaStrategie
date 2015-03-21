@@ -16,12 +16,10 @@ import com.esotericsoftware.kryonet.Listener;
 public class ClientNetworkListener extends Listener {
 
 	private Client client;
-	private Game game;
 	ArrayList<Player> players = new ArrayList<Player>();
 
-	public void init(Client client, Game game) {
+	public void init(Client client) {
 		this.client = client;
-		this.game = game;
 	}
 
 	@Override
@@ -60,7 +58,7 @@ public class ClientNetworkListener extends Listener {
 		try {
 			Class<?> newClass = Class.forName(className);
 			Constructor<?> constructor = newClass.getDeclaredConstructor(Game.class);
-			return constructor.newInstance(game);
+			return constructor.newInstance();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {

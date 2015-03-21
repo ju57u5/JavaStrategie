@@ -20,11 +20,6 @@ import javax.swing.JProgressBar;
 public class Updater extends JFrame {
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	private Game game;
-
-	/**
 	 * Anzahl der gedownloadeten Bytes des Updates
 	 */
 	private int downloadedBytes = 0;
@@ -70,9 +65,8 @@ public class Updater extends JFrame {
 	 * @param basePath
 	 *            BasisPfad des Spiels
 	 */
-	public Updater(Game game, String basePath) {
-		this.game = game;
-		this.basePath = basePath;
+	public Updater() {
+		this.basePath = Game.resourceManager.getBasePath();
 		setTitle("Updating");
 		setSize(200, 100);
 		setLocationRelativeTo(null);

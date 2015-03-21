@@ -13,11 +13,6 @@ import tk.ju57u5v.engine.Game;
 public class MapLoader {
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	private Game game;
-
-	/**
 	 * Aktuelle Map
 	 */
 	private Map currentMap;
@@ -28,8 +23,7 @@ public class MapLoader {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public MapLoader(Game game) {
-		this.game = game;
+	public MapLoader() {
 	}
 
 	/**
@@ -60,7 +54,7 @@ public class MapLoader {
 				mapConstructor = Class.forName(className, true, classLoader).getDeclaredConstructor(Game.class);
 				mapConstructor.setAccessible(true);
 
-				currentMap = (Map) mapConstructor.newInstance(game);
+				currentMap = (Map) mapConstructor.newInstance();
 				currentMap.onLoad();
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();

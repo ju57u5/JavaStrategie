@@ -18,11 +18,6 @@ import javax.swing.JPanel;
 public class Window extends JPanel implements WindowListener, ComponentListener {
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	private Game game;
-
-	/**
 	 * Frame des Spiels
 	 */
 	private JFrame frame = new JFrame();
@@ -58,9 +53,7 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public Window(Game game) {
-		this.game = game;
-
+	public Window() {
 		frame.setTitle(title); // Fenstertitel setzen
 		frame.setSize(1200, 900);
 		frame.addWindowListener(this);

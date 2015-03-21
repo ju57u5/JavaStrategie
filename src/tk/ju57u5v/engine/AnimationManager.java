@@ -14,18 +14,12 @@ public class AnimationManager {
 	 */
 	private String currentAnimation = "";
 	
-	/**
-	 * Verknüpfung zur Hauptklasse des Spiels
-	 */
-	private Game game;
-
 	// Methoden
 	/**
 	 * Constructor
 	 * @param game Object des Spiels
 	 */
-	public AnimationManager (Game game) {
-		this.game=game;
+	public AnimationManager () {
 	}
 	/**
 	 * Erstellt eine Animation und fügt sie dem Manager hinzu

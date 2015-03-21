@@ -22,18 +22,12 @@ public class ConVarManager {
 	private HashMap<String, String> descriptions = new HashMap<String, String>();
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	private Game game;
-
-	/**
 	 * Constructor
 	 * 
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public ConVarManager(Game game) {
-		this.game = game;
+	public ConVarManager() {
 	}
 
 	/**

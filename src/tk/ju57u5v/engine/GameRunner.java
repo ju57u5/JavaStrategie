@@ -5,11 +5,6 @@ import java.util.ArrayList;
 public class GameRunner extends Thread {
 
 	/**
-	 * Verknüpfung zur Hauptklasse
-	 */
-	protected Game game;
-
-	/**
 	 * Renderer des Spiels
 	 */
 	Renderer renderer;
@@ -26,9 +21,8 @@ public class GameRunner extends Thread {
 	 * @param game
 	 *            Hauptklasse des Spiels
 	 */
-	public GameRunner(Game game) {
-		this.game = game;
-		renderer = new Renderer(game);
+	public GameRunner() {
+		renderer = new Renderer();
 		this.start();
 	}
 
