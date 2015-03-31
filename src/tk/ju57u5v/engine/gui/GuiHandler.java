@@ -1,8 +1,6 @@
 package tk.ju57u5v.engine.gui;
 
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.TwoDMath;
 import tk.ju57u5v.engine.input.MouseListener;

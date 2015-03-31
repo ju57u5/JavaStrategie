@@ -19,6 +19,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import tk.ju57u5v.engine.components.Entity;
+import tk.ju57u5v.engine.components.GameObject;
 import tk.ju57u5v.engine.gui.GuiElement;
 
 /**

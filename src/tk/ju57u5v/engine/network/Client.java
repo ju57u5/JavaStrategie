@@ -1,12 +1,9 @@
-package tk.ju57u5v.engine.netcode;
+package tk.ju57u5v.engine.network;
 
 import java.io.IOException;
-import java.util.Scanner;
-
 import com.esotericsoftware.kryo.Kryo;
 
-import tk.ju57u5v.engine.Game;
-import tk.ju57u5v.engine.netcode.Packet.*;
+import tk.ju57u5v.engine.network.Packet.*;
 
 public class Client {
 

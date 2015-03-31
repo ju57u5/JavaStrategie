@@ -6,8 +6,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.jar.JarFile;
-
 import tk.ju57u5v.engine.Game;
 
 public class MapLoader {
@@ -46,7 +44,7 @@ public class MapLoader {
 
 			URLClassLoader classLoader = new URLClassLoader(urls);
 			Game.getCodeManager().processCFG(classLoader.getResourceAsStream("map.cfg"));
-			String className = Game.getConsole().getString("mapClass");
+			String className = Game.getConsole().getConVar("mapClass").getString();
 
 			try {
 				Constructor<?> mapConstructor;

@@ -1,8 +1,8 @@
-package tk.ju57u5v.engine;
+package tk.ju57u5v.engine.components;
 
 import static tk.ju57u5v.engine.Game.*;
 
-public class Entity extends GameObject {
+public class Entity extends GameObject implements Updatetable{
 	/**
 	 * x-Position, zu der sich das Entity bewegt
 	 */
@@ -77,14 +77,14 @@ public class Entity extends GameObject {
 	 * Intitialisiert das Entity
 	 */
 	protected void initialise() {
-		gameRunner.renderer.registerEntity(this);
+		getGameRunner().getRenderer().registerEntity(this);
 	}
 
 	/**
 	 * Entlädt das Entity
 	 */
 	public void unload() {
-		gameRunner.renderer.removeEntity(this);
+		getGameRunner().getRenderer().removeEntity(this);
 	}
 
 	/**
@@ -157,6 +157,6 @@ public class Entity extends GameObject {
 	 *            Query im globalen Manager
 	 */
 	protected void getSavedAnimation(String newQuery, String query) {
-		animationManager.putAnimationString(newQuery, resourceManager.getAnimation(query));
+		animationManager.putAnimationString(newQuery, getResourceManager().getAnimation(query));
 	}
 }

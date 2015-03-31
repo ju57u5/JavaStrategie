@@ -1,17 +1,8 @@
 package tk.ju57u5v.engine.world;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
-
 import tk.ju57u5v.engine.Game;
-import tk.ju57u5v.engine.Kamera;
-import tk.ju57u5v.engine.TwoDMath;
 
 public class TileManager {
 

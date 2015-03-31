@@ -1,8 +1,9 @@
 package tk.ju57u5v.engine.world;
 
 import java.awt.Graphics2D;
+
 import tk.ju57u5v.engine.Game;
-import tk.ju57u5v.engine.GameObject;
+import tk.ju57u5v.engine.components.GameObject;
 import static tk.ju57u5v.engine.Game.*;
 
 public class Tile extends GameObject {

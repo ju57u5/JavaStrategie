@@ -33,7 +33,16 @@ public class CodeManager {
 	 */
 	public void processCFG(String pFileName) {
 		String content = Game.getResourceManager().getFile(pFileName);
+		processContent(content);
+	}
 
+	/**
+	 * Verarbeitet Code in content
+	 * 
+	 * @param content
+	 *            Code
+	 */
+	public void processContent(String content) {
 		String[] commands = content.split(";");
 		for (String command : commands) {
 			processCode(command);
@@ -48,11 +57,7 @@ public class CodeManager {
 	 */
 	public void processCFG(InputStream stream) {
 		String content = Game.getResourceManager().getFile(stream);
-
-		String[] commands = content.split(";");
-		for (String command : commands) {
-			processCode(command);
-		}
+		processContent(content);
 	}
 
 	/**
@@ -81,12 +86,12 @@ public class CodeManager {
 
 		// Handel Convars without set-Method
 		if (!executed) {
-			for (HashMap.Entry<String, String> entry : Game.getConsole().getConVarManager().getVars().entrySet()) {
+			for (HashMap.Entry<String, ConVar> entry : Game.getConsole().getConVarManager().getVars().entrySet()) {
 				if (entry.getKey().equals(parts[0])) {
 					if (parts.length < 2 || parts[1].trim().equals("")) {
-						Game.getConsole().logVarInfo(parts[0]);
+						entry.getValue().logVarInfo();
 					} else {
-						Game.getConsole().set(parts[0], parts[1]);
+						Game.getConsole().getConVar(parts[0]).setValue(parts[1]);
 					}
 					executed = true;
 					break; // Wir wollen nicht alle Commandos durchgehen
@@ -205,13 +210,19 @@ public class CodeManager {
 		});
 
 		addCommand("set", (game, pCode, parts) -> {
-			Game.getConsole().set(parts[1].trim(), parts[2].trim());
-			Game.getConsole().log(parts[1].trim() + " == '" + parts[2].trim() + "'");
-		});
+			ConVar var = Game.getConsole().getConVar(parts[1].trim());
+			// Wenn die Variable nicht existiert, erstellen wir sie.
+				if (var == null) {
+					Game.getConsole().def(parts[1].trim());
+					var = Game.getConsole().getConVar(parts[1].trim());
+				}
+				var.setValue(parts[2].trim());
+				Game.getConsole().log(parts[1].trim() + " == '" + parts[2].trim() + "'");
+			});
 
 		addCommand("def", (game, pCode, parts) -> {
 			Game.getConsole().def(parts[1].trim(), parts[2].trim(), recombine(parts, 3));
-			Game.getConsole().logVarInfo(parts[1]);
+			Game.getConsole().getConVar(parts[1]);
 		});
 
 		addCommand("startupdate", (game, pCode, parts) -> {
@@ -233,14 +244,14 @@ public class CodeManager {
 		addCommand("unloadmap", (game, pCode, parts) -> {
 			Game.getMapLoader().unloadMap();
 		});
-		
+
 		addCommand("/hack", (game, pCode, parts) -> {
 			Game.getWindow().setTitle("<INSERT_GOOD_NAME_HERE>   |   Olaf was here");
 			Game.getConsole().log("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			Game.getConsole().log("OLAF WAS HERE! FUCK YOU HACKER! WOW! GET REKT! WER BENUTZT EIGENTLICH SLASH IN DER CONSOLE?");
 			Game.getConsole().log("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		});
-		
+
 		addCommand("restart", (game, pCode, parts) -> {
 			try {
 				Game.restartApplication(null);
@@ -248,11 +259,11 @@ public class CodeManager {
 				e.printStackTrace();
 			}
 		});
-		
+
 		addCommand("fullscreen", (game, pCode, parts) -> {
 			Game.getWindow().goFullScreen();
 		});
-		
+
 		addCommand("copyupdate", (game, pCode, parts) -> {
 			Game.getUpdater().copyUpdate();
 		});

@@ -2,6 +2,8 @@ package tk.ju57u5v.engine;
 
 import java.util.ArrayList;
 
+import tk.ju57u5v.engine.components.Entity;
+
 public class EntityGroup {
 
 	/**

@@ -1,12 +1,11 @@
-package tk.ju57u5v.engine.netcode;
+package tk.ju57u5v.engine.network;
 
 import java.io.IOException;
 
-import tk.ju57u5v.engine.netcode.Packet.*;
+import tk.ju57u5v.engine.network.Packet.*;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.minlog.Log;
-import tk.ju57u5v.engine.Game;
 
 public class Server {
 	

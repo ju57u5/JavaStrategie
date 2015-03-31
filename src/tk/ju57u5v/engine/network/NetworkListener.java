@@ -1,8 +1,8 @@
-package tk.ju57u5v.engine.netcode;
+package tk.ju57u5v.engine.network;
 
 import java.util.ArrayList;
 
-import tk.ju57u5v.engine.netcode.Packet.*;
+import tk.ju57u5v.engine.network.Packet.*;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;

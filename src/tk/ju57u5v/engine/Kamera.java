@@ -2,7 +2,11 @@ package tk.ju57u5v.engine;
 
 import java.awt.image.BufferedImage;
 
-public class Kamera extends Position {
+import tk.ju57u5v.engine.components.Entity;
+import tk.ju57u5v.engine.components.GameObject;
+import tk.ju57u5v.engine.components.Rect;
+
+public class Kamera extends Rect {
 
 	/**
 	 * Isometrische Darstellung

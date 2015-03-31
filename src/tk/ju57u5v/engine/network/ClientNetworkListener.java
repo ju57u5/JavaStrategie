@@ -1,13 +1,13 @@
-package tk.ju57u5v.engine.netcode;
+package tk.ju57u5v.engine.network;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import tk.ju57u5v.engine.Entity;
 import tk.ju57u5v.engine.Game;
-import tk.ju57u5v.engine.GameObject;
-import tk.ju57u5v.engine.netcode.Packet.*;
+import tk.ju57u5v.engine.components.Entity;
+import tk.ju57u5v.engine.components.GameObject;
+import tk.ju57u5v.engine.network.Packet.*;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -57,7 +57,7 @@ public class ClientNetworkListener extends Listener {
 	private Object createClass(String className) {
 		try {
 			Class<?> newClass = Class.forName(className);
-			Constructor<?> constructor = newClass.getDeclaredConstructor(Game.class);
+			Constructor<?> constructor = newClass.getDeclaredConstructor();
 			return constructor.newInstance();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

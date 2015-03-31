@@ -2,12 +2,15 @@ package tk.ju57u5v.engine;
 
 import java.util.ArrayList;
 
+import tk.ju57u5v.engine.components.Entity;
+import tk.ju57u5v.engine.components.GameObject;
+
 public class GameRunner extends Thread {
 
 	/**
 	 * Renderer des Spiels
 	 */
-	Renderer renderer;
+	protected Renderer renderer;
 
 	/**
 	 * Gesamtanzahl der Ticks des Spiels

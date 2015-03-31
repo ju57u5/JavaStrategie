@@ -168,7 +168,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 				}
 			}
 			if (!found) {
-				for (HashMap.Entry<String, String> entry : Game.getConsole().getConVarManager().getVars().entrySet()) {
+				for (HashMap.Entry<String, ConVar> entry : Game.getConsole().getConVarManager().getVars().entrySet()) {
 					if (entry.getKey().startsWith(consoleInput.getText() + e.getKeyChar()) && !entry.getKey().equals(consoleInput.getText() + e.getKeyChar())) {
 						consoleInput.setText(entry.getKey());
 						consoleInput.select(eingabelaenge + 1, consoleInput.getText().length());
@@ -260,59 +260,14 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	}
 
 	/**
-	 * Gibt eine Convar als String zurück
+	 * Gibt die Convar nach dem Namen zurück. Existiert die Convar nicht wird
+	 * <code>null</code> zurückgegeben.
 	 * 
 	 * @param name
-	 *            Name der Convar
-	 * @return
+	 *            Name der ConVar
 	 */
-	public String getString(String name) {
-		return conVarManager.getString(name);
-	}
-
-	/**
-	 * Gibt eine Convar als Int zurück
-	 * 
-	 * @param name
-	 *            Name der Convar
-	 * @return
-	 */
-	public int getInt(String name) {
-		return conVarManager.getInt(name);
-	}
-
-	/**
-	 * Gibt eine Convar als Double zurück
-	 * 
-	 * @param name
-	 *            Name der Convar
-	 * @return
-	 */
-	public double getDouble(String name) {
-		return conVarManager.getDouble(name);
-	}
-
-	/**
-	 * Gibt eine Convar als Boolean zurück
-	 * 
-	 * @param name
-	 *            Name der Convar
-	 * @return
-	 */
-	public boolean getBoolean(String name) {
-		return conVarManager.getBoolean(name);
-	}
-
-	/**
-	 * Setzt eine Convar
-	 * 
-	 * @param name
-	 *            Name der Convar
-	 * @param value
-	 *            Wert der Convar
-	 */
-	public void set(String name, String value) {
-		conVarManager.set(name, value);
+	public ConVar getConVar(String name) {
+		return conVarManager.getConVar(name);
 	}
 
 	/**
@@ -339,15 +294,21 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 	}
 
 	/**
-	 * Loggt den Infotext einer Variable in der Console
+	 * Definiert eine Variable
 	 * 
 	 * @param name
 	 *            Name der Convar
 	 */
-	public void logVarInfo(String name) {
-		String value = getString(name);
-		String defaultValue = conVarManager.getDefaultValue(name);
-		String description = conVarManager.getDescription(name);
-		Game.getConsole().log(name + " == '" + value + "' (def: " + defaultValue + ") - " + description);
+	public void def(String name) {
+		conVarManager.def(name);
 	}
+	
+	/**
+	 * Prüft ob die Convar existiert.
+	 * @param name Name der Convar
+	 */
+	public boolean isConVar(String name) {
+		return getConVar(name) != null;
+	}
+
 }

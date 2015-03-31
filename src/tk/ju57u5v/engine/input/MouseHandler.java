@@ -6,8 +6,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-import tk.ju57u5v.engine.Game;
-
 public class MouseHandler implements MouseListener, MouseMotionListener {
 
 	/**
@@ -77,12 +75,12 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	/**
 	 * interne Variable, die angibt, mit welchem Button gedraggt wird
 	 */
-	int dragButton = 0;
+	private int dragButton = 0;
 
 	/**
 	 * ArrayList mit allen MouseListenern, die registriert wurden
 	 */
-	ArrayList<tk.ju57u5v.engine.input.MouseListener> listeners = new ArrayList<tk.ju57u5v.engine.input.MouseListener>();
+	private ArrayList<tk.ju57u5v.engine.input.MouseListener> listeners = new ArrayList<tk.ju57u5v.engine.input.MouseListener>();
 
 	// Methoden
 	/**

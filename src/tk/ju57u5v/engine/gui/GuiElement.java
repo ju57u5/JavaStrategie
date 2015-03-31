@@ -1,11 +1,11 @@
 package tk.ju57u5v.engine.gui;
 
 import java.awt.Graphics2D;
-import tk.ju57u5v.engine.Game;
-import tk.ju57u5v.engine.Position;
-import static tk.ju57u5v.engine.Game.*;
 
-public class GuiElement extends Position {
+import tk.ju57u5v.engine.Game;
+import tk.ju57u5v.engine.components.Rect;
+
+public class GuiElement extends Rect {
 
 	/**
 	 * Konstruktor

@@ -1,9 +1,11 @@
-package tk.ju57u5v.engine;
+package tk.ju57u5v.engine.components;
 
 import java.awt.Graphics2D;
+
+import tk.ju57u5v.engine.AnimationManager;
 import static tk.ju57u5v.engine.Game.*;
 
-public class GameObject extends Position {
+public class GameObject extends Rect implements Renderable{
 
 	/**
 	 * Animation Manager des GameObjects
@@ -25,7 +27,7 @@ public class GameObject extends Position {
 	@Override
 	public void setPosition(int x, int y) {
 		super.setPosition(x, y);
-		kamera.setRelativPostion(this);
+		getKamera().setRelativPostion(this);
 	}
 
 	/**
@@ -34,7 +36,7 @@ public class GameObject extends Position {
 	@Override
 	public void setX(int x) {
 		super.setX(x);
-		kamera.setRelativPostion(this);
+		getKamera().setRelativPostion(this);
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class GameObject extends Position {
 	@Override
 	public void setY(int y) {
 		super.setY(y);
-		kamera.setRelativPostion(this);
+		getKamera().setRelativPostion(this);
 	}
 
 	/**
@@ -68,13 +70,13 @@ public class GameObject extends Position {
 	 * Entlädt das GameObject
 	 */
 	public void unload() {
-		gameRunner.renderer.removeGameObject(this);
+		getGameRunner().getRenderer().removeGameObject(this);
 	}
 
 	/**
 	 * Initialisiert das GameObject
 	 */
 	protected void initialise() {
-		gameRunner.renderer.registerGameObject(this);
+		getGameRunner().getRenderer().registerGameObject(this);
 	}
 }

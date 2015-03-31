@@ -1,9 +1,9 @@
-package tk.ju57u5v.engine.netcode;
+package tk.ju57u5v.engine.network;
 
 import java.util.ArrayList;
 
-import tk.ju57u5v.engine.Entity;
-import tk.ju57u5v.engine.GameObject;
+import tk.ju57u5v.engine.components.Entity;
+import tk.ju57u5v.engine.components.GameObject;
 
 public class Player {
 

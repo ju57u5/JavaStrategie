@@ -1,4 +1,4 @@
-package tk.ju57u5v.engine.netcode;
+package tk.ju57u5v.engine.network;
 
 
 public class Packet {

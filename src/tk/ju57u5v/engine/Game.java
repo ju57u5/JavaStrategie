@@ -10,8 +10,8 @@ import tk.ju57u5v.engine.console.Console;
 import tk.ju57u5v.engine.gui.GuiHandler;
 import tk.ju57u5v.engine.input.BindHandler;
 import tk.ju57u5v.engine.input.MouseHandler;
-import tk.ju57u5v.engine.netcode.Client;
-import tk.ju57u5v.engine.netcode.Server;
+import tk.ju57u5v.engine.network.Client;
+import tk.ju57u5v.engine.network.Server;
 import tk.ju57u5v.engine.world.MapLoader;
 import tk.ju57u5v.engine.world.TileManager;
 
@@ -22,17 +22,17 @@ public class Game {
 	 * defined on non Hotspot VM implementations. Für den Restart
 	 */
 	public static final String SUN_JAVA_COMMAND = "sun.java.command";
-	
+
 	/**
 	 * Argumente des Spiels
 	 */
 	protected String[] args;
-	
+
 	/**
 	 * Hauptklasse des Spiels
 	 */
 	protected static Game game;
-	
+
 	/**
 	 * Kamera des Spiels
 	 */
@@ -86,18 +86,18 @@ public class Game {
 	/**
 	 * Server-Object des Spiels
 	 */
-	protected static Server server;// = new Server(this);
+	protected static Server server;// = new Server();
 
 	/**
 	 * Client-Object des Spiels
 	 */
-	protected static Client client;// = new Client(this, "127.0.0.1", 27015);
-	
+	protected static Client client;// = new Client();
+
 	/**
 	 * TileManager des Spiels
 	 */
 	protected static TileManager tileManager = new TileManager(500, 500);
-	
+
 	/**
 	 * GuiHandler des Spiels
 	 */
@@ -108,40 +108,48 @@ public class Game {
 	 * Constructor
 	 */
 	public Game(String[] args) {
-		this.args=args;
+		this.args = args;
 	}
-	
+
 	/**
 	 * Builder des Spiels
 	 */
 	public static Game build(Game game) {
 		Game.game = game;
+		game.startGame();
 		return game;
 	}
 
 	/**
-	 * Intitialisiert das Game (Muss aufgeführt werden, damit der Renderer Überschrieben werden kann.)
+	 * Intitialisiert das Game (Muss aufgeführt werden, damit der Renderer
+	 * Überschrieben werden kann.)
 	 */
 	public void initalizeGame() {
 		window.addMouseListener(mouseHandler);
 		window.addMouseMotionListener(mouseHandler);
 		window.getFrame().addKeyListener(bindHandler);
-		//Prüfe ob eine Config da ist.
-		resourceManager.checkConfig();
+
+		//Alle Argumente des Spiels werden als ConsoleCommands interpretiert
 		for (String arg : args) {
 			String[] commands = arg.split(";");
 			for (String command : commands) {
 				codeManager.processCode(command);
 			}
 		}
+	}
+
+	public void startGame() {
+		// Prüfe ob eine Config da ist.
+		resourceManager.checkConfig();
 		// Load Convars
 		codeManager.processCFG("varsafe.cfg");
 		// Load Config
 		codeManager.processCFG("config.cfg");
+		//Aktiviet Rendern und Updaten
 		gameRunner.renderer.doUpdate(true);
 		gameRunner.renderer.doRender(true);
 		gameRunner.renderer.doGuiRender(true);
-		//window.goFullScreen();
+		// window.goFullScreen();
 	}
 
 	/**
@@ -227,6 +235,7 @@ public class Game {
 
 	/**
 	 * Gibt den MouseHandler zurück
+	 * 
 	 * @return
 	 */
 	public static MouseHandler getMouseHandler() {
@@ -235,6 +244,7 @@ public class Game {
 
 	/**
 	 * Gibt den TileManager zurück
+	 * 
 	 * @return TileManager
 	 */
 	public static TileManager getTileManager() {
@@ -243,7 +253,9 @@ public class Game {
 
 	/**
 	 * Setzt den TileManager
-	 * @param tileManager TileManager
+	 * 
+	 * @param tileManager
+	 *            TileManager
 	 */
 	public static void setTileManager(TileManager tileManager) {
 		Game.tileManager = tileManager;
@@ -251,6 +263,7 @@ public class Game {
 
 	/**
 	 * Gibt die Hauptklasse des Spiels zurück
+	 * 
 	 * @return
 	 */
 	public static Game getGame() {

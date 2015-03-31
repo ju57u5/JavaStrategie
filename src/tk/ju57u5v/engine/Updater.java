@@ -9,10 +9,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-
-import static java.nio.file.StandardCopyOption.*;
 
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
@@ -136,7 +133,7 @@ public class Updater extends JFrame {
 	 *            Wird das Update erzwungen
 	 */
 	public void updateFiles(boolean forceUpdate) {
-		if (Game.console.getInt("version") > Game.console.getInt("currentVersion") || forceUpdate) {
+		if (!Game.console.isConVar("currentVersion") || Game.console.getConVar("version").getInt() > Game.console.getConVar("currentVersion").getInt() || forceUpdate) {
 			progressBar = new JProgressBar(0, getUpdateSize());
 			progressBar.setValue(0);
 			progressBar.setStringPainted(true);
@@ -151,11 +148,14 @@ public class Updater extends JFrame {
 					Game.console.log("Download of " + downloadUrls.get(c) + " failed!");
 				}
 			}
-			Game.getConsole().set("currentVersion", Game.console.getString("version"));
+			if (!Game.console.isConVar("currentVersion"))
+				Game.console.def("currentVersion");
+			Game.console.getConVar("currentVersion").setValue(Game.console.getConVar("version").getString());
 			Game.getConsole().getConVarManager().safeVars();
 			
 			try {
-				Game.game.startUpdatedJar();
+				if (false)
+					Game.game.startUpdatedJar();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

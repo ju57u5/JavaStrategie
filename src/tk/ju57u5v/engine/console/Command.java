@@ -14,5 +14,5 @@ public interface Command {
 	 * @param parts
 	 *            Kommando aufgeteil nach Leerzeichen
 	 */
-	public void call(Game game, String pCode, String[] parts);
+	public void call(Game game, String pCode, String[] args);
 }

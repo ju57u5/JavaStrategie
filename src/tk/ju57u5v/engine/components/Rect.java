@@ -1,6 +1,6 @@
-package tk.ju57u5v.engine;
+package tk.ju57u5v.engine.components;
 
-public class Position {
+public class Rect {
 
 	/**
 	 * x-Koordinate
