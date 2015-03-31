@@ -180,6 +180,13 @@ public class Rect {
 	public int getRelativIsoY() {
 		return (int) Math.floor(relativeIsoPosition.y);
 	}
+	
+	public Vec2 getIsoPosition() {
+		Vec2 isoPosition = new Vec2(0, 0);
+		isoPosition.x = position.x - position.y;
+		isoPosition.y = (position.x + position.y) / 2 - z;
+		return isoPosition;
+	}
 
 	/**
 	 * Gibt die isometrische y-Koordinate zurück
@@ -253,5 +260,20 @@ public class Rect {
 	public void setDimension(Vec2 dimension) {
 		this.dimension = dimension;
 	}
-	
+
+	public Vec2 getRelativePosition() {
+		return relativePosition;
+	}
+
+	public void setRelativePosition(Vec2 relativePosition) {
+		this.relativePosition = relativePosition;
+	}
+
+	public Vec2 getRelativeIsoPosition() {
+		return relativeIsoPosition;
+	}
+
+	public void setRelativeIsoPosition(Vec2 relativeIsoPosition) {
+		this.relativeIsoPosition = relativeIsoPosition;
+	}
 }

@@ -69,8 +69,17 @@ public class Entity extends GameObject implements Updatetable {
 	 *            Geschwindigkeit der Bewegung
 	 */
 	public void moveTo(double x, double y, double speed) {
-		movePosition.x=x;
-		movePosition.y=y;
+		//Move Position und aktuelle Postion sind gleich
+		if (new Vec2(x, y).minus(getPosition()).isNullVec()) {
+			return;
+		}
+		//System.out.println("ersetze "+movePosition.x+" durch "+x);
+		//movePosition.x=x;
+		//System.out.println("ist jetzt "+movePosition.x);
+		//movePosition.y=y;
+		//TODO: Herausfinden wieso man hier ein neues Object erstellen muss und nicht einfach x und y überschreiben kann O.o
+		movePosition = new Vec2(x, y);
+		//System.out.println(movePosition+" "+getPosition());
 		velocity = movePosition.minus(getPosition());
 		velocity = velocity.normalize();
 		velocity = velocity.multiply(speed);

@@ -46,12 +46,10 @@ public class Kamera extends Rect {
 	 */
 	public void setRelativPostion(Entity pEntity) {
 		if (isometric) {
-			pEntity.setRelativIsoX(pEntity.getIsoX() - getX());
-			pEntity.setRelativIsoY(pEntity.getIsoY() - getY());
+			pEntity.setRelativeIsoPosition(pEntity.getIsoPosition().minus(getPosition()));
 			return;
 		}
-		pEntity.setRelativX(pEntity.getX() - getX());
-		pEntity.setRelativY(pEntity.getY() - getY());
+		pEntity.setRelativePosition(pEntity.getPosition().minus(getPosition()));
 	}
 
 	/**
@@ -62,12 +60,10 @@ public class Kamera extends Rect {
 	 */
 	public void setRelativPostion(GameObject pObject) {
 		if (isometric) {
-			pObject.setRelativIsoX(pObject.getIsoX() - getX());
-			pObject.setRelativIsoY(pObject.getIsoY() - getY());
+			pObject.setRelativeIsoPosition(pObject.getIsoPosition().minus(getPosition()));
 			return;
 		}
-		pObject.setRelativX(pObject.getX() - getX());
-		pObject.setRelativY(pObject.getY() - getY());
+		pObject.setRelativePosition(pObject.getPosition().minus(getPosition()));
 	}
 
 	/**

@@ -120,11 +120,11 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 
 			// Wenn dragging von einer Maustaste nicht erfasst werden soll
 			// interpretiere es als klick
-			if (!leftDrag && e.getButton() == MouseEvent.BUTTON1) {
+			if (!leftDrag && e.getButton() == MouseEvent.BUTTON1 && (startx != endx || starty != endy)) {
 				notifyListeners("click", e);
 				return;
 			}
-			if (!rightDrag && e.getButton() == MouseEvent.BUTTON3) {
+			if (!rightDrag && e.getButton() == MouseEvent.BUTTON3 && (startx != endx || starty != endy)) {
 				notifyListeners("click", e);
 				return;
 			}
