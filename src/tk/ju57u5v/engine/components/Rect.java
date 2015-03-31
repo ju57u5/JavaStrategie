@@ -3,14 +3,9 @@ package tk.ju57u5v.engine.components;
 public class Rect {
 
 	/**
-	 * x-Koordinate
+	 * Position des Rects
 	 */
-	private int x = 0;
-
-	/**
-	 * y-Koordinate
-	 */
-	private int y = 0;
+	private Vec2 position = new Vec2(0, 0);
 
 	/**
 	 * z-Koordinate
@@ -18,47 +13,27 @@ public class Rect {
 	private int z = 0;
 
 	/**
-	 * Breite
+	 * Höhe und Breite des Rects
 	 */
-	private int width = 0;
+	private Vec2 dimension = new Vec2(0, 0);
 
 	/**
-	 * Höhe
+	 * Relative Positon des Rects
 	 */
-	private int height = 0;
+	private Vec2 relativePosition = new Vec2(0, 0);
 
 	/**
-	 * relative x-Koordinate
+	 * Relative Isometrische Position des Rects
 	 */
-	private int relativX = 0;
-
-	/**
-	 * relative y-Koordinate
-	 */
-	private int relativY = 0;
-
-	/**
-	 * relative isometrische x-Koordinate
-	 */
-	private int relativIsoX = 0;
-
-	/**
-	 * relative isometrische y-Koordinate
-	 */
-	private int relativIsoY = 0;
+	private Vec2 relativeIsoPosition = new Vec2(0, 0);
 
 	// Methoden
 	/**
 	 * Setzt die Position
-	 * 
-	 * @param x
-	 *            x-Koordinate
-	 * @param y
-	 *            y-Koordinate
 	 */
-	public void setPosition(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public void setPosition(double x, double y) {
+		position.x = x;
+		position.y = y;
 	}
 
 	/**
@@ -67,8 +42,8 @@ public class Rect {
 	 * @param x
 	 *            x-Koordinate
 	 */
-	public void setX(int x) {
-		this.x = x;
+	public void setX(double x) {
+		position.x = x;
 	}
 
 	/**
@@ -77,8 +52,8 @@ public class Rect {
 	 * @param y
 	 *            y-Koordinate
 	 */
-	public void setY(int y) {
-		this.y = y;
+	public void setY(double y) {
+		position.y = y;
 	}
 
 	/**
@@ -87,7 +62,7 @@ public class Rect {
 	 * @return
 	 */
 	public int getX() {
-		return x;
+		return (int) Math.floor(position.x);
 	}
 
 	/**
@@ -96,7 +71,7 @@ public class Rect {
 	 * @return
 	 */
 	public int getY() {
-		return y;
+		return (int) Math.floor(position.y);
 	}
 
 	/**
@@ -105,7 +80,7 @@ public class Rect {
 	 * @return
 	 */
 	public int getRelativX() {
-		return relativX;
+		return (int) Math.floor(relativePosition.x);
 	}
 
 	/**
@@ -114,7 +89,7 @@ public class Rect {
 	 * @return
 	 */
 	public int getRelativY() {
-		return relativY;
+		return (int) Math.floor(relativePosition.y);
 	}
 
 	/**
@@ -123,7 +98,7 @@ public class Rect {
 	 * @return
 	 */
 	public int getWidth() {
-		return width;
+		return (int) Math.floor(dimension.x);
 	}
 
 	/**
@@ -132,7 +107,7 @@ public class Rect {
 	 * @return
 	 */
 	public int getHeight() {
-		return height;
+		return (int) Math.floor(dimension.y);
 	}
 
 	/**
@@ -144,8 +119,8 @@ public class Rect {
 	 *            Höhe
 	 */
 	public void setDimensions(int width, int height) {
-		this.width = width;
-		this.height = height;
+		dimension.x=width;
+		dimension.y=height;
 	}
 
 	/**
@@ -155,7 +130,7 @@ public class Rect {
 	 *            Breite
 	 */
 	public void setWidth(int width) {
-		this.width = width;
+		dimension.x = width;
 	}
 
 	/**
@@ -165,7 +140,7 @@ public class Rect {
 	 *            Höhe
 	 */
 	public void setHeight(int height) {
-		this.height = height;
+		dimension.y = height;
 	}
 
 	/**
@@ -174,8 +149,8 @@ public class Rect {
 	 * @param relativX
 	 *            relative x-Koordinate
 	 */
-	public void setRelativX(int relativX) {
-		this.relativX = relativX;
+	public void setRelativX(double relativX) {
+		relativePosition.x = relativX;
 	}
 
 	/**
@@ -184,8 +159,8 @@ public class Rect {
 	 * @param relativY
 	 *            relative y-Koordinate
 	 */
-	public void setRelativY(int relativY) {
-		this.relativY = relativY;
+	public void setRelativY(double relativY) {
+		relativePosition.y = relativY;
 	}
 
 	/**
@@ -194,7 +169,7 @@ public class Rect {
 	 * @return relative isometrische x-Koordinate
 	 */
 	public int getRelativIsoX() {
-		return relativIsoX;
+		return (int) Math.floor(relativeIsoPosition.x);
 	}
 
 	/**
@@ -203,7 +178,7 @@ public class Rect {
 	 * @return relative isometrische y-Koordinate
 	 */
 	public int getRelativIsoY() {
-		return relativIsoY;
+		return (int) Math.floor(relativeIsoPosition.y);
 	}
 
 	/**
@@ -212,7 +187,7 @@ public class Rect {
 	 * @return isometrische y-Koordinate
 	 */
 	public int getIsoX() {
-		return x - y;
+		return (int) Math.floor(position.x - position.y);
 	}
 
 	/**
@@ -221,7 +196,7 @@ public class Rect {
 	 * @return isometrische y-Koordinate
 	 */
 	public int getIsoY() {
-		return (x + y) / 2 - z;
+		return (int) Math.floor((position.x + position.y) / 2 - z);
 	}
 
 	/**
@@ -230,8 +205,8 @@ public class Rect {
 	 * @param x
 	 *            relative isometrische x-Koordinate
 	 */
-	public void setRelativIsoX(int x) {
-		relativIsoX = x;
+	public void setRelativIsoX(double x) {
+		relativeIsoPosition.x = x;
 	}
 
 	/**
@@ -240,8 +215,8 @@ public class Rect {
 	 * @param y
 	 *            relative isometrische y-Koordinate
 	 */
-	public void setRelativIsoY(int y) {
-		relativIsoY = y;
+	public void setRelativIsoY(double y) {
+		relativeIsoPosition.y = y;
 	}
 
 	/**
@@ -262,4 +237,21 @@ public class Rect {
 	public int getZ() {
 		return z;
 	}
+
+	public Vec2 getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vec2 position) {
+		this.position = position;
+	}
+
+	public Vec2 getDimension() {
+		return dimension;
+	}
+
+	public void setDimension(Vec2 dimension) {
+		this.dimension = dimension;
+	}
+	
 }

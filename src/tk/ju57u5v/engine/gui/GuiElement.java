@@ -4,8 +4,9 @@ import java.awt.Graphics2D;
 
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.components.Rect;
+import tk.ju57u5v.engine.components.Renderable;
 
-public class GuiElement extends Rect {
+public class GuiElement extends Rect implements Renderable{
 
 	/**
 	 * Konstruktor

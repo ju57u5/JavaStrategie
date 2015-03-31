@@ -2,47 +2,18 @@ package tk.ju57u5v.engine.components;
 
 import static tk.ju57u5v.engine.Game.*;
 
-public class Entity extends GameObject implements Updatetable{
+public class Entity extends GameObject implements Updatetable {
+	
 	/**
-	 * x-Position, zu der sich das Entity bewegt
+	 * Position zu der das Entity bewegt wird.
 	 */
-	private int xMovePosition = 0;
+	private Vec2 movePosition = new Vec2(0, 0);
 
 	/**
-	 * y-Position, zu der sich das Entity bewegt
+	 * Bewegungsvektor des Entitys
 	 */
-	private int yMovePosition = 0;
-
-	/**
-	 * Geschwindigkeit, mit der sich das Entity bewegt
-	 */
-	private int movementSpeed = 2;
-
-	/**
-	 * Winkel, in dem sich das Entity bewegt im Bogenmaß
-	 */
-	private double radian = 0;
-
-	/**
-	 * aktuelle (temporäre) x-Position des Entitys während des Bewegens
-	 */
-	private double currentX = 0;
-
-	/**
-	 * aktuelle (temporäre) y-Position des Entitys während des Bewegens
-	 */
-	private double currentY = 0;
-
-	/**
-	 * gibt die x-Differenz zur xMovePosition an
-	 */
-	private int xDifference = 0;
-
-	/**
-	 * gibt die y-Differenz zur yMovePosition an
-	 */
-	private int yDifference = 0;
-
+	private Vec2 velocity = new Vec2(0, 0);
+	
 	/**
 	 * gibt an ob sich das Entity bewegt
 	 */
@@ -97,17 +68,14 @@ public class Entity extends GameObject implements Updatetable{
 	 * @param speed
 	 *            Geschwindigkeit der Bewegung
 	 */
-	public void moveTo(int x, int y, int speed) {
-		this.movementSpeed = speed;
-		this.xMovePosition = x;
-		this.yMovePosition = y;
-		xDifference = x - getX();
-		yDifference = y - getY();
-		currentX = getX();
-		currentY = getY();
-		radian = Math.atan2(yDifference, xDifference);
+	public void moveTo(double x, double y, double speed) {
+		movePosition.x=x;
+		movePosition.y=y;
+		velocity = movePosition.minus(getPosition());
+		velocity = velocity.normalize();
+		velocity = velocity.multiply(speed);
+		
 		movement = true;
-		//TEST
 	}
 
 	/**
@@ -115,26 +83,14 @@ public class Entity extends GameObject implements Updatetable{
 	 */
 	public void updateMovement() {
 		if (movement) {
-			currentX += Math.cos(radian) * movementSpeed;
-			currentY += Math.sin(radian) * movementSpeed;
+			setPosition(getPosition().plus(velocity));
 
-			if (xDifference > 0 && currentX > xMovePosition) {
-				currentX = xMovePosition;
-				movement = false;
-			} else if (xDifference < 0 && currentX < xMovePosition) {
-				currentX = xMovePosition;
-				movement = false;
+			Vec2 difference = movePosition.minus(getPosition());
+
+			if (difference.length()<velocity.length()) {
+				setPosition(movePosition);
+				movement=false;
 			}
-
-			if (yDifference > 0 && currentY > yMovePosition) {
-				currentY = yMovePosition;
-				movement = false;
-			} else if (yDifference < 0 && currentY < yMovePosition) {
-				currentY = yMovePosition;
-				movement = false;
-			}
-
-			setPosition((int) currentX, (int) currentY);
 		}
 	}
 
@@ -147,16 +103,4 @@ public class Entity extends GameObject implements Updatetable{
 		return movement;
 	}
 
-	/**
-	 * Speichert eine Animation des globalen Animationmanagers mit der query
-	 * unter newQuery
-	 * 
-	 * @param newQuery
-	 *            Query im lokalen Manager
-	 * @param query
-	 *            Query im globalen Manager
-	 */
-	protected void getSavedAnimation(String newQuery, String query) {
-		animationManager.putAnimationString(newQuery, getResourceManager().getAnimation(query));
-	}
 }

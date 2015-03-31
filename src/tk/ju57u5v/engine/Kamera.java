@@ -116,7 +116,7 @@ public class Kamera extends Rect {
 	 * Setzt die Position der Kamera
 	 */
 	@Override
-	public void setPosition(int x, int y) {
+	public void setPosition(double x, double y) {
 		super.setPosition(x, y);
 		updateRelativPositions();
 	}
