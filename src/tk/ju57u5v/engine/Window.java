@@ -81,10 +81,10 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 	@Override
 	protected void paintComponent(Graphics g) {
 		if (Game.gameRunner != null) {
-			if (Game.gameRunner.renderer != null) {
+			if (Game.renderer != null) {
 				g.setColor(getBackground());
 				g.fillRect(0, 0, getWidth(), getHeight());
-				Game.gameRunner.renderer.render((Graphics2D) g);
+				Game.renderer.render((Graphics2D) g);
 				Game.mouseHandler.drawDrag((Graphics2D) g);
 			}
 		}

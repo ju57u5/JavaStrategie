@@ -84,6 +84,10 @@ public class Game {
 	protected static GameRunner gameRunner = new GameRunner();
 
 	/**
+	 * Renderer des Spiels
+	 */
+	protected static Renderer renderer = new Renderer();
+	/**
 	 * Server-Object des Spiels
 	 */
 	protected static Server server;// = new Server();
@@ -125,8 +129,8 @@ public class Game {
 	 * Überschrieben werden kann.)
 	 */
 	public void initalizeGame() {
-		window.addMouseListener(mouseHandler);
-		window.addMouseMotionListener(mouseHandler);
+		window.addMouseListener(bindHandler);
+		window.addMouseMotionListener(bindHandler);
 		window.getFrame().addKeyListener(bindHandler);
 
 		//Alle Argumente des Spiels werden als ConsoleCommands interpretiert
@@ -146,10 +150,9 @@ public class Game {
 		// Load Config
 		codeManager.processCFG("config.cfg");
 		//Aktiviet Rendern und Updaten
-		gameRunner.renderer.doUpdate(true);
-		gameRunner.renderer.doRender(true);
-		gameRunner.renderer.doGuiRender(true);
-		// window.goFullScreen();
+		renderer.doUpdate(true);
+		renderer.doRender(true);
+		renderer.doGuiRender(true);
 	}
 
 	/**
@@ -268,6 +271,18 @@ public class Game {
 	 */
 	public static Game getGame() {
 		return game;
+	}
+
+	public static Server getServer() {
+		return server;
+	}
+
+	public static Client getClient() {
+		return client;
+	}
+
+	public static Renderer getRenderer() {
+		return renderer;
 	}
 
 	/**

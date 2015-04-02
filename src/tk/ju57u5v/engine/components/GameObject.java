@@ -76,14 +76,14 @@ public class GameObject extends Rect implements Renderable{
 	 * Entlädt das GameObject
 	 */
 	public void unload() {
-		getGameRunner().getRenderer().removeGameObject(this);
+		getRenderer().removeGameObject(this);
 	}
 
 	/**
 	 * Initialisiert das GameObject
 	 */
 	protected void initialise() {
-		getGameRunner().getRenderer().registerGameObject(this);
+		getRenderer().registerGameObject(this);
 	}
 	
 	/**

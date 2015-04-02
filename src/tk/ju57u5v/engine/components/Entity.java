@@ -48,14 +48,14 @@ public class Entity extends GameObject implements Updatetable {
 	 * Intitialisiert das Entity
 	 */
 	protected void initialise() {
-		getGameRunner().getRenderer().registerEntity(this);
+		getRenderer().registerEntity(this);
 	}
 
 	/**
 	 * Entlädt das Entity
 	 */
 	public void unload() {
-		getGameRunner().getRenderer().removeEntity(this);
+		getRenderer().removeEntity(this);
 	}
 
 	/**

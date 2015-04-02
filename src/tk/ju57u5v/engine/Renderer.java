@@ -239,6 +239,10 @@ public class Renderer {
 	 *            GuiElement das registriert wird
 	 */
 	public void registerGuiElement(GuiElement g) {
+		for(int c=0;c < guiElements.size();c++) {
+			System.out.println("a"+guiElements.get(c));
+		}
+		System.out.println(guiElements.size());
 		guiElements.add(g);
 	}
 }

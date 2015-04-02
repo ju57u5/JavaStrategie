@@ -45,6 +45,6 @@ public class Vec2 {
 	}
 
 	public boolean isNullVec() {
-		return (x == 0.0 && y == 0.0);
+		return (this.x == 0.0 && this.y == 0.0);
 	}
 }

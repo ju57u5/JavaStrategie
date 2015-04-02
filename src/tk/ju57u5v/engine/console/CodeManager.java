@@ -245,6 +245,10 @@ public class CodeManager {
 			Game.getMapLoader().unloadMap();
 		});
 
+		addCommand("connect", (game, pCode, parts) -> {
+			Game.getClient().connect(parts[1].trim(), 27015);
+		});
+
 		addCommand("/hack", (game, pCode, parts) -> {
 			Game.getWindow().setTitle("<INSERT_GOOD_NAME_HERE>   |   Olaf was here");
 			Game.getConsole().log("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");

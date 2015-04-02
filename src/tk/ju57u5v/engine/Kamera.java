@@ -29,11 +29,11 @@ public class Kamera extends Rect {
 	 * Updated alle relativen Positionen der GameObjects und Entitys
 	 */
 	private void updateRelativPositions() {
-		for (Entity entity : Game.gameRunner.getEntities()) {
+		for (Entity entity : Game.renderer.getEntities()) {
 			setRelativPostion(entity);
 		}
 
-		for (GameObject gameObject : Game.gameRunner.getGameObjects()) {
+		for (GameObject gameObject : Game.renderer.getGameObjects()) {
 			setRelativPostion(gameObject);
 		}
 	}

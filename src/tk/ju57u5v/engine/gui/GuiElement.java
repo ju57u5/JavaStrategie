@@ -1,12 +1,11 @@
 package tk.ju57u5v.engine.gui;
 
 import java.awt.Graphics2D;
-
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.components.Rect;
 import tk.ju57u5v.engine.components.Renderable;
 
-public class GuiElement extends Rect implements Renderable{
+public class GuiElement extends Rect implements Renderable {
 
 	/**
 	 * Konstruktor
@@ -14,13 +13,14 @@ public class GuiElement extends Rect implements Renderable{
 	 * @param game
 	 */
 	public GuiElement() {
+		initialise();
 	}
 
 	/**
 	 * Intitialisiert das GuiElement
 	 */
 	protected void initialise() {
-		Game.getGameRunner().getRenderer().registerGuiElement(this);
+		Game.getRenderer().registerGuiElement(this);
 	}
 
 	/**
@@ -33,8 +33,8 @@ public class GuiElement extends Rect implements Renderable{
 	}
 
 	/**
-	 * Wird beim Klick auf das GuiElement aufgerufen. Positionen gelten für das
-	 * Element und nicht den Bildschirm.
+	 * Wird beim Klick auf das GuiElement aufgerufen. Positionen gelten relativ
+	 * zum Element und nicht den Bildschirm.
 	 * 
 	 * @param x
 	 *            x Position auf dem GuiElement

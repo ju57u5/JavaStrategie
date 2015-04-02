@@ -203,14 +203,14 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	 *            Graphics2D Object des Spiels
 	 */
 	public void drawDrag(Graphics2D g) {
-		int firstx = startx < currentx ? startx : currentx;
+		/*int firstx = startx < currentx ? startx : currentx;
 		int firsty = starty < currenty ? starty : currenty;
 		int secondx = startx >= currentx ? startx : currentx;
 		int secondy = starty >= currenty ? starty : currenty;
 
 		if (dragging && drawDrag) {
 			g.drawRect(firstx, firsty, secondx - firstx, secondy - firsty);
-		}
+		}*/
 	}
 
 	/**
