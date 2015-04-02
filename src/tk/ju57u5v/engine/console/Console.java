@@ -16,6 +16,11 @@ import tk.ju57u5v.engine.Game;
 public class Console extends JPanel implements KeyListener, WindowListener {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Frame des Updaters
 	 */
 	private JFrame frame = new JFrame();

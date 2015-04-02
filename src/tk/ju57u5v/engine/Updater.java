@@ -17,6 +17,11 @@ import javax.swing.JProgressBar;
 public class Updater extends JFrame {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Anzahl der gedownloadeten Bytes des Updates
 	 */
 	private int downloadedBytes = 0;

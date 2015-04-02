@@ -18,6 +18,11 @@ import javax.swing.JPanel;
 public class Window extends JPanel implements WindowListener, ComponentListener {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Frame des Spiels
 	 */
 	private JFrame frame = new JFrame();

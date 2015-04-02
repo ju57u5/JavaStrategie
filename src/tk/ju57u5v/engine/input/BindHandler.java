@@ -143,6 +143,8 @@ public class BindHandler implements KeyListener,MouseListener,MouseMotionListene
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		mousePosition.x=e.getX();
+		mousePosition.y=e.getY();
 	}
 	
 	@Override
