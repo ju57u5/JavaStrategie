@@ -90,7 +90,6 @@ public class Window extends JPanel implements WindowListener, ComponentListener 
 				g.setColor(getBackground());
 				g.fillRect(0, 0, getWidth(), getHeight());
 				Game.renderer.render((Graphics2D) g);
-				Game.mouseHandler.drawDrag((Graphics2D) g);
 			}
 		}
 		frames++;

@@ -32,11 +32,6 @@ public class Updater extends JFrame {
 	private JProgressBar progressBar;
 
 	/**
-	 * Basis Pfad des Spiels
-	 */
-	private String basePath;
-
-	/**
 	 * Download Urls des Updates
 	 */
 	private ArrayList<String> downloadUrls = new ArrayList<String>();
@@ -68,7 +63,6 @@ public class Updater extends JFrame {
 	 *            BasisPfad des Spiels
 	 */
 	public Updater() {
-		this.basePath = Game.resourceManager.getBasePath();
 		setTitle("Updating");
 		setSize(200, 100);
 		setLocationRelativeTo(null);
@@ -86,11 +80,13 @@ public class Updater extends JFrame {
 	 * @throws IOException
 	 *             Fall die Datei nicht gespeichert werden kann
 	 */
-	public void download(String fileURL, String destinationDirectory, boolean processBarEnabled) throws IOException {
+	public void download(String fileURL, String destinationDirectory, boolean processBarEnabled, String fileName) throws IOException {
 		// File name that is being downloaded
 		String downloadedFileName = fileURL.substring(fileURL.lastIndexOf("/") + 1);
+		if (fileName!=null && !fileName.equals(""))
+			downloadedFileName=fileName;
 
-		File folder = new File(basePath + "/" + destinationDirectory + "/");
+		File folder = new File(Game.resourceManager.getBasePath() + "/" + destinationDirectory + "/");
 		if (!folder.isDirectory())
 			folder.mkdirs();
 
@@ -99,7 +95,7 @@ public class Updater extends JFrame {
 		InputStream is = url.openStream();
 
 		// Stream to the destionation file
-		FileOutputStream fos = new FileOutputStream(basePath + "/" + destinationDirectory + "/" + downloadedFileName);
+		FileOutputStream fos = new FileOutputStream(Game.resourceManager.getBasePath() + "/" + destinationDirectory + "/" + downloadedFileName);
 
 		// Read bytes from URL to the local file
 		byte[] buffer = new byte[4096];
@@ -147,7 +143,7 @@ public class Updater extends JFrame {
 
 			for (int c = 0; c < downloadUrls.size(); c++) {
 				try {
-					download(downloadUrls.get(c), downloadPaths.get(c), true);
+					download(downloadUrls.get(c), downloadPaths.get(c), true, null);
 					Game.console.log("Download of " + downloadUrls.get(c) + " done!");
 				} catch (IOException e) {
 					Game.console.log("Download of " + downloadUrls.get(c) + " failed!");
@@ -206,8 +202,8 @@ public class Updater extends JFrame {
 	}
 	
 	public void copyUpdate () {
-		File update = new File(basePath,"/update/Game.jar");
-		File game = new File (basePath,"/Game.jar");
+		File update = new File(Game.resourceManager.getBasePath(),"/update/Game.jar");
+		File game = new File (Game.resourceManager.getBasePath(),"/Game.jar");
 		game.delete();
 		try {
 			Files.copy(update.toPath(), game.toPath());

@@ -1,6 +1,8 @@
-package tk.ju57u5v.engine;
+package tk.ju57u5v.engine.animation;
 
 import java.util.HashMap;
+
+import tk.ju57u5v.engine.Game;
 
 public class AnimationManager {
 
@@ -52,7 +54,7 @@ public class AnimationManager {
 	 */
 	public String getcurrentPicture() {
 		if (animations.get(currentAnimation) != null) {
-			return animations.get(currentAnimation).getcurrentPicture(Game.gameRunner.getTicks());
+			return animations.get(currentAnimation).getcurrentPicture(Game.getGameRunner().getTicks());
 		}
 		return "";
 	}

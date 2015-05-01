@@ -2,7 +2,7 @@ package tk.ju57u5v.engine.components;
 
 import java.awt.Graphics2D;
 
-import tk.ju57u5v.engine.AnimationManager;
+import tk.ju57u5v.engine.animation.AnimationManager;
 import static tk.ju57u5v.engine.Game.*;
 
 public class GameObject extends Rect implements Renderable{

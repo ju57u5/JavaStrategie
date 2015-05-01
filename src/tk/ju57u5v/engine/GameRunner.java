@@ -63,6 +63,7 @@ public class GameRunner extends Thread {
 	 * Öffnet die Console
 	 */
 	private void update() {
+		Game.guiHandler.update();
 		if (Game.bindHandler.bindActive("+console")) {
 			Game.console.getFrame().setVisible(true);
 		}

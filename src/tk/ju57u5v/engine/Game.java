@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.List;
-
 import tk.ju57u5v.engine.console.CodeManager;
 import tk.ju57u5v.engine.console.Console;
 import tk.ju57u5v.engine.gui.GuiHandler;
 import tk.ju57u5v.engine.input.BindHandler;
-import tk.ju57u5v.engine.input.MouseHandler;
 import tk.ju57u5v.engine.network.Client;
 import tk.ju57u5v.engine.network.Server;
 import tk.ju57u5v.engine.world.MapLoader;
@@ -23,6 +21,11 @@ public class Game {
 	 */
 	public static final String SUN_JAVA_COMMAND = "sun.java.command";
 
+	/**
+	 * Name des Spiels
+	 */
+	protected static String name = "Engine";
+	
 	/**
 	 * Argumente des Spiels
 	 */
@@ -57,11 +60,6 @@ public class Game {
 	 * Code Manager des Spiels
 	 */
 	protected static CodeManager codeManager = new CodeManager();
-
-	/**
-	 * Maus Input Handler des Spiels
-	 */
-	protected static MouseHandler mouseHandler = new MouseHandler();
 
 	/**
 	 * Tastatur Input Handler des Spiels
@@ -119,6 +117,7 @@ public class Game {
 	 * Builder des Spiels
 	 */
 	public static Game build(Game game) {
+		Game.resourceManager.setupFiles();
 		Game.game = game;
 		game.startGame();
 		return game;
@@ -143,8 +142,6 @@ public class Game {
 	}
 
 	public void startGame() {
-		// Prüfe ob eine Config da ist.
-		resourceManager.checkConfig();
 		// Load Convars
 		codeManager.processCFG("varsafe.cfg");
 		// Load Config
@@ -237,15 +234,6 @@ public class Game {
 	}
 
 	/**
-	 * Gibt den MouseHandler zurück
-	 * 
-	 * @return
-	 */
-	public static MouseHandler getMouseHandler() {
-		return mouseHandler;
-	}
-
-	/**
 	 * Gibt den TileManager zurück
 	 * 
 	 * @return TileManager
@@ -255,13 +243,11 @@ public class Game {
 	}
 
 	/**
-	 * Setzt den TileManager
-	 * 
-	 * @param tileManager
-	 *            TileManager
+	 * Setzt den Namen des Spiels
+	 * @param name Name des Spiels
 	 */
-	public static void setTileManager(TileManager tileManager) {
-		Game.tileManager = tileManager;
+	public static void setName(String name) {
+		Game.name = name;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package tk.ju57u5v.engine;
+package tk.ju57u5v.engine.animation;
 
 public class Animation {
 

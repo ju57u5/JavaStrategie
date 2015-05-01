@@ -1,8 +1,6 @@
-package tk.ju57u5v.engine;
+package tk.ju57u5v.engine.components;
 
 import java.util.ArrayList;
-
-import tk.ju57u5v.engine.components.Entity;
 
 public class EntityGroup {
 

@@ -13,12 +13,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import tk.ju57u5v.engine.animation.Animation;
 import tk.ju57u5v.engine.components.Entity;
 import tk.ju57u5v.engine.components.GameObject;
 import tk.ju57u5v.engine.gui.GuiElement;
@@ -49,22 +52,22 @@ public class ResourceManager {
 	/**
 	 * BasisPfad des Spiels
 	 */
-	private File gamePath = new File(appdata, "/JavaStrategie");
+	private File gamePath;
 
 	/**
 	 * TexturenPfad des Spiels
 	 */
-	private File texturePath = new File(gamePath, "/textures");
+	private File texturePath;
 
 	/**
 	 * Config Dateien Pfad des Spiels
 	 */
-	private File cfgPath = new File(gamePath, "/cfg");
+	private File cfgPath;
 
 	/**
 	 * Config des Spiels
 	 */
-	private File config = new File(gamePath, "/cfg/config.cfg");
+	private File config;
 
 	// Methoden
 	/**
@@ -74,9 +77,16 @@ public class ResourceManager {
 	 *            Hauptklasse des Spiels
 	 */
 	public ResourceManager() {
-		checkFolders();
 	}
 
+	
+	public void setupFiles() {
+		gamePath = new File(appdata, "/"+Game.name);
+		texturePath = new File(gamePath, "/textures");
+		cfgPath = new File(gamePath, "/cfg");
+		config = new File(gamePath, "/cfg/config.cfg");
+		checkFolders();
+	}
 	/**
 	 * Gibt eine auf den Query geladene Resource als BufferedImage zurück.
 	 * 
@@ -102,6 +112,21 @@ public class ResourceManager {
 			textures.put(pQuery, ImageIO.read(imagePath));
 			convertToGoodFormat(pQuery);
 		} catch (IOException exeption) {
+		}
+	}
+	
+	/**
+	 * Lädt eine Image von einer Url
+	 * @param url URL des Images
+	 * @param query Query der Textur
+	 */
+	public void loadImageFromURL(String url, String query) {
+		try {
+			textures.put(query, ImageIO.read(new URL(url)));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -295,7 +320,7 @@ public class ResourceManager {
 	public void checkConfig() {
 		if (!config.isFile()) {
 			try {
-				Game.updater.download("http://ju57u5v.tk/JavaStrategie/cfg/config.cfg", "cfg", false);
+				Game.updater.download("http://ju57u5v.tk/JavaStrategie/cfg/config.cfg", "cfg", false, null);
 			} catch (IOException e) {
 				System.out.println("Failed to download initial config. Quiting");
 				System.exit(1);

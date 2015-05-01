@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-import tk.ju57u5v.engine.Animation;
 import tk.ju57u5v.engine.Game;
 import tk.ju57u5v.engine.TwoDMath;
+import tk.ju57u5v.engine.animation.Animation;
 
 public class CodeManager {
 
@@ -164,7 +164,7 @@ public class CodeManager {
 		addCommand("download", (game, pCode, parts) -> {
 			if (parts[2].equals("to")) {
 				try {
-					Game.getUpdater().download(parts[1], parts[3], false);
+					Game.getUpdater().download(parts[1], parts[3], false, null);
 					Game.getConsole().log("Download of " + parts[1] + " done!");
 				} catch (IOException e) {
 					Game.getConsole().log("Download of " + parts[1] + " failed!");
