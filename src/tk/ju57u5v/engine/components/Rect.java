@@ -250,7 +250,7 @@ public class Rect {
 	}
 
 	public void setPosition(Vec2 position) {
-		this.position = position;
+		this.position = new Vec2(position);
 	}
 
 	public Vec2 getDimension() {
@@ -258,7 +258,7 @@ public class Rect {
 	}
 
 	public void setDimension(Vec2 dimension) {
-		this.dimension = dimension;
+		this.dimension = new Vec2(dimension);
 	}
 
 	public Vec2 getRelativePosition() {
@@ -266,7 +266,7 @@ public class Rect {
 	}
 
 	public void setRelativePosition(Vec2 relativePosition) {
-		this.relativePosition = relativePosition;
+		this.relativePosition = new Vec2(relativePosition);
 	}
 
 	public Vec2 getRelativeIsoPosition() {
@@ -274,6 +274,6 @@ public class Rect {
 	}
 
 	public void setRelativeIsoPosition(Vec2 relativeIsoPosition) {
-		this.relativeIsoPosition = relativeIsoPosition;
+		this.relativeIsoPosition = new Vec2(relativeIsoPosition);
 	}
 }

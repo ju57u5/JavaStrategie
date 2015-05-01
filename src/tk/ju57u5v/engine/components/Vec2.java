@@ -8,6 +8,14 @@ public class Vec2 {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Vec2() {
+		this(0, 0);
+	}
+	
+	public Vec2(Vec2 other) {
+		this(other.x, other.y);
+	}
 
 	public Vec2 plus(Vec2 other) {
 		return new Vec2(this.x + other.x, this.y + other.y);

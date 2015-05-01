@@ -3,7 +3,7 @@ package tk.ju57u5v.engine.components;
 import static tk.ju57u5v.engine.Game.*;
 
 public class Entity extends GameObject implements Updatetable {
-	
+
 	/**
 	 * Position zu der das Entity bewegt wird.
 	 */
@@ -13,7 +13,7 @@ public class Entity extends GameObject implements Updatetable {
 	 * Bewegungsvektor des Entitys
 	 */
 	private Vec2 velocity = new Vec2(0, 0);
-	
+
 	/**
 	 * gibt an ob sich das Entity bewegt
 	 */
@@ -69,21 +69,20 @@ public class Entity extends GameObject implements Updatetable {
 	 *            Geschwindigkeit der Bewegung
 	 */
 	public void moveTo(double x, double y, double speed) {
-		//Move Position und aktuelle Postion sind gleich
+		// Move Position und aktuelle Postion sind gleich
 		if (new Vec2(x, y).minus(getPosition()).isNullVec()) {
 			return;
 		}
-		//System.out.println("ersetze "+movePosition.x+" durch "+x);
-		//movePosition.x=x;
-		//System.out.println("ist jetzt "+movePosition.x);
-		//movePosition.y=y;
-		//TODO: Herausfinden wieso man hier ein neues Object erstellen muss und nicht einfach x und y überschreiben kann O.o
+		// TODO: Herausfinden wieso man hier ein neues Object erstellen muss und
+		// nicht einfach x und y überschreiben kann O.o
 		movePosition = new Vec2(x, y);
-		//System.out.println(movePosition+" "+getPosition());
+		//movePosition.x=0;
+		//movePosition.y=0;
+
 		velocity = movePosition.minus(getPosition());
 		velocity = velocity.normalize();
 		velocity = velocity.multiply(speed);
-		
+
 		movement = true;
 	}
 
@@ -96,9 +95,9 @@ public class Entity extends GameObject implements Updatetable {
 
 			Vec2 difference = movePosition.minus(getPosition());
 
-			if (difference.length()<velocity.length()) {
+			if (difference.length() < velocity.length()) {
 				setPosition(movePosition);
-				movement=false;
+				movement = false;
 			}
 		}
 	}
