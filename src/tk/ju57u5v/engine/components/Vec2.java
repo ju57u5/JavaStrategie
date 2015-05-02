@@ -55,4 +55,12 @@ public class Vec2 {
 	public boolean isNullVec() {
 		return (this.x == 0.0 && this.y == 0.0);
 	}
+	
+	public int getX() {
+		return (int) Math.round(this.x);
+	}
+	
+	public int getY() {
+		return (int) Math.round(this.y);
+	}
 }

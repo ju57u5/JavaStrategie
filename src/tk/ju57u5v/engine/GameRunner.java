@@ -36,7 +36,7 @@ public class GameRunner extends Thread {
 				while (delta >= 1) {
 					Game.renderer.update();
 					update();
-					work();
+					tick();
 					updates++;
 					delta--;
 					ticks++;
@@ -54,7 +54,7 @@ public class GameRunner extends Thread {
 	/**
 	 * Wird bei jedem Update Ausgeführt; sollte überschrieben werden.
 	 */
-	public void work() {
+	public void tick() {
 
 	}
 

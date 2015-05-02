@@ -122,7 +122,7 @@ public class BindHandler implements KeyListener,MouseListener,MouseMotionListene
 	}
 
 	public Vec2 getMousePosition() {
-		return mousePosition;
+		return new Vec2(mousePosition);
 	}
 	
 	public boolean isMouseButtonDown(int button) {

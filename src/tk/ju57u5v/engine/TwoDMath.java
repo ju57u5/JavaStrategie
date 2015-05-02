@@ -1,5 +1,7 @@
 package tk.ju57u5v.engine;
 
+import tk.ju57u5v.engine.components.Vec2;
+
 public class TwoDMath {
 
 	/**
@@ -114,5 +116,27 @@ public class TwoDMath {
 	 */
 	public static int toCartY(int x, int y) {
 		return (2 * y - x) / 2;
+	}
+
+	/**
+	 * Isometrische Position in kartesische Postition
+	 * 
+	 * @param pos
+	 *            isometrischer Postitionsvektor
+	 * @return kartesischer Positionsvektor
+	 */
+	public static Vec2 toCartPosition(Vec2 pos) {
+		return new Vec2(toCartX(pos.getX(), pos.getY()), toCartY(pos.getX(), pos.getY()));
+	}
+
+	/**
+	 * Kartesische Position in isometrische Postition
+	 * 
+	 * @param pos
+	 *            kartesische Postitionsvektor
+	 * @return isometrischer Positionsvektor
+	 */
+	public static Vec2 toIsoPosition(Vec2 pos) {
+		return new Vec2(toIsoX(pos.getX(), pos.getY()), toIsoY(pos.getX(), pos.getY()));
 	}
 }

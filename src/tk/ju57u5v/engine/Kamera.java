@@ -5,13 +5,14 @@ import java.awt.image.BufferedImage;
 import tk.ju57u5v.engine.components.Entity;
 import tk.ju57u5v.engine.components.GameObject;
 import tk.ju57u5v.engine.components.Rect;
+import tk.ju57u5v.engine.components.Vec2;
 
 public class Kamera extends Rect {
 
 	/**
 	 * Isometrische Darstellung
 	 */
-	private boolean isometric=true;
+	private boolean isometric = true;
 
 	// Methoden
 	/**
@@ -153,5 +154,14 @@ public class Kamera extends Rect {
 	 */
 	public int toRealY(int y) {
 		return y + this.getY();
+	}
+
+	/**
+	 * Konvertiert eine realative Position in eine Reale
+	 * @param pos realtiver Positionsvektor
+	 * @return realer Positionsvektor
+	 */
+	public Vec2 toRealPosition(Vec2 pos) {
+		return new Vec2(pos.x + this.getPosition().x, pos.y + this.getPosition().y);
 	}
 }
