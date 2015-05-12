@@ -33,8 +33,8 @@ public class Vec2 {
 		return new Vec2(this.x * other, this.y * other);
 	}
 
-	public Vec2 div(Vec2 other) {
-		return new Vec2(this.x / other.x, this.y / other.y);
+	public Vec2 div(double other) {
+		return new Vec2(this.x / other, this.y / other);
 	}
 
 	public double length() {

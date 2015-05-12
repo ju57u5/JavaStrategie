@@ -164,4 +164,12 @@ public class Kamera extends Rect {
 	public Vec2 toRealPosition(Vec2 pos) {
 		return new Vec2(pos.x + this.getPosition().x, pos.y + this.getPosition().y);
 	}
+
+	public boolean isIsometric() {
+		return isometric;
+	}
+
+	public void setIsometric(boolean isometric) {
+		this.isometric = isometric;
+	}
 }
