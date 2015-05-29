@@ -276,4 +276,8 @@ public class Rect {
 	public void setRelativeIsoPosition(Vec2 relativeIsoPosition) {
 		this.relativeIsoPosition = new Vec2(relativeIsoPosition);
 	}
+	
+	public Vec2 getMiddel() {
+		return getPosition().minus(dimension.div(2));
+	}
 }

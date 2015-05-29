@@ -85,6 +85,10 @@ public class Entity extends GameObject implements Updatetable {
 
 		movement = true;
 	}
+	
+	public void moveTo(Vec2 pos, double speed) {
+		moveTo(pos.x, pos.y, speed);
+	}
 
 	/**
 	 * updated das Movement

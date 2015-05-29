@@ -51,4 +51,8 @@ public class Tile extends GameObject {
 	public void setWalkable(boolean walkable) {
 		this.walkable = walkable;
 	}
+
+	public int getTexture() {
+		return texture;
+	}
 }
