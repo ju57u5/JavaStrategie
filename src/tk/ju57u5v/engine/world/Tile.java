@@ -41,7 +41,7 @@ public class Tile extends GameObject {
 
 	@Override
 	public void render(Graphics2D g) {
-		g.drawImage(getResourceManager().getResource(tileTexture), getRelativIsoX(), getRelativIsoY(), null);
+		getResourceManager().getResource(tileTexture).draw(g, getRelativIsoX(), getRelativIsoY());
 	}
 
 	public boolean isWalkable() {

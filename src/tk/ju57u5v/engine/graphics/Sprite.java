@@ -20,5 +20,17 @@ public class Sprite {
 	public void draw (Graphics2D g, Vec2 position) {
 		draw(g, position.getX(), position.getY());
 	}
+	
+	public int getWidth() {
+		return image.getWidth();
+	}
+	
+	public int getHeight() {
+		return image.getHeight();
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
 
 }

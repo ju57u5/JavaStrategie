@@ -21,9 +21,12 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import com.sun.java.swing.plaf.windows.WindowsTreeUI.ExpandedIcon;
+
 import tk.ju57u5v.engine.animation.Animation;
 import tk.ju57u5v.engine.components.Entity;
 import tk.ju57u5v.engine.components.GameObject;
+import tk.ju57u5v.engine.graphics.Sprite;
 import tk.ju57u5v.engine.gui.GuiElement;
 
 /**
@@ -37,7 +40,7 @@ public class ResourceManager {
 	/**
 	 * Texturen in einer HashMap
 	 */
-	private Map<String, BufferedImage> textures = new HashMap<String, BufferedImage>();
+	private Map<String, Sprite> sprites = new HashMap<String, Sprite>();
 
 	/**
 	 * Animationen in einer HashMap
@@ -94,8 +97,8 @@ public class ResourceManager {
 	 *            Query der Textur
 	 * @return
 	 */
-	public BufferedImage getResource(String pQuery) {
-		return textures.get(pQuery);
+	public Sprite getResource(String pQuery) {
+		return sprites.get(pQuery);
 	}
 
 	/**
@@ -109,9 +112,10 @@ public class ResourceManager {
 	public void loadImage(String pResourceName, String pQuery) {
 		File imagePath = new File(texturePath, "/" + pResourceName);
 		try {
-			textures.put(pQuery, ImageIO.read(imagePath));
+			sprites.put(pQuery, new Sprite(ImageIO.read(imagePath)));
 			convertToGoodFormat(pQuery);
 		} catch (IOException exeption) {
+			exeption.printStackTrace();
 		}
 	}
 	
@@ -122,7 +126,7 @@ public class ResourceManager {
 	 */
 	public void loadImageFromURL(String url, String query) {
 		try {
-			textures.put(query, ImageIO.read(new URL(url)));
+			sprites.put(query, new Sprite(ImageIO.read(new URL(url))));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -130,16 +134,6 @@ public class ResourceManager {
 		}
 	}
 
-	/**
-	 * Gibt die Resource des Querys skaliert auf die akive Kamera zurück.
-	 * 
-	 * @param pQuery
-	 *            Query der Textur
-	 * @return
-	 */
-	public BufferedImage getScaledResource(String pQuery) {
-		return Game.kamera.scaleResource(textures.get(pQuery));
-	}
 
 	/**
 	 * Gibt die Breite einer Textur zurück
@@ -243,15 +237,15 @@ public class ResourceManager {
 		if (env == null || device == null || config == null)
 			return;
 
-		if (getResource(pQuery).getColorModel().equals(config.getColorModel()))
+		if (getResource(pQuery).getImage().getColorModel().equals(config.getColorModel()))
 			return;
 
 		BufferedImage buffy = config.createCompatibleImage(getResource(pQuery).getWidth(), getResource(pQuery).getHeight(), Transparency.TRANSLUCENT);
 
 		Graphics2D g = (Graphics2D) buffy.getGraphics();
-		g.drawImage(getResource(pQuery), 0, 0, null);
+		g.drawImage(getResource(pQuery).getImage(), 0, 0, null);
 		g.dispose();
-		textures.put(pQuery, buffy);
+		sprites.put(pQuery, new Sprite(buffy));
 
 	}
 

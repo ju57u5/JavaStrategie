@@ -13,7 +13,7 @@ import tk.ju57u5v.engine.network.Server;
 import tk.ju57u5v.engine.world.MapLoader;
 import tk.ju57u5v.engine.world.TileManager;
 
-public class Game {
+public abstract class Game {
 
 	/**
 	 * Sun property pointing the main class and its arguments. Might not be
@@ -270,6 +270,8 @@ public class Game {
 	public static Renderer getRenderer() {
 		return renderer;
 	}
+	
+	public abstract void tick();
 
 	/**
 	 * Restart the current Java application
