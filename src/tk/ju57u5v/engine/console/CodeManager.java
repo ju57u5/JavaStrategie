@@ -144,6 +144,7 @@ public class CodeManager {
 		addCommand("register", (game, pCode, parts) -> {
 			if (parts[2].equals("as")) {
 				Game.getResourceManager().loadImage(parts[1], parts[3]);
+				Game.getConsole().log("Registered "+parts[1]+" as "+ parts[3]);
 			} else {
 				Game.getConsole().log("Error, usage: register <Filename> as <Query>");
 			}

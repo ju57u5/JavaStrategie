@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -20,8 +21,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-
-import com.sun.java.swing.plaf.windows.WindowsTreeUI.ExpandedIcon;
 
 import tk.ju57u5v.engine.animation.Animation;
 import tk.ju57u5v.engine.components.Entity;
@@ -82,14 +81,14 @@ public class ResourceManager {
 	public ResourceManager() {
 	}
 
-	
 	public void setupFiles() {
-		gamePath = new File(appdata, "/"+Game.name);
+		gamePath = new File(appdata, "/" + Game.name);
 		texturePath = new File(gamePath, "/textures");
 		cfgPath = new File(gamePath, "/cfg");
 		config = new File(gamePath, "/cfg/config.cfg");
 		checkFolders();
 	}
+
 	/**
 	 * Gibt eine auf den Query geladene Resource als BufferedImage zurück.
 	 * 
@@ -97,43 +96,56 @@ public class ResourceManager {
 	 *            Query der Textur
 	 * @return
 	 */
-	public Sprite getResource(String pQuery) {
+	public Sprite getSprite(String pQuery) {
 		return sprites.get(pQuery);
 	}
 
 	/**
 	 * Lädt ein Image aus dem "texture" Ordner auf den Query String.
 	 * 
-	 * @param pResourceName
+	 * @param imageName
 	 *            Name der Textur
-	 * @param pQuery
+	 * @param query
 	 *            Query der Textur
 	 */
-	public void loadImage(String pResourceName, String pQuery) {
-		File imagePath = new File(texturePath, "/" + pResourceName);
-		try {
-			sprites.put(pQuery, new Sprite(ImageIO.read(imagePath)));
-			convertToGoodFormat(pQuery);
-		} catch (IOException exeption) {
-			exeption.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Lädt eine Image von einer Url
-	 * @param url URL des Images
-	 * @param query Query der Textur
-	 */
-	public void loadImageFromURL(String url, String query) {
-		try {
-			sprites.put(query, new Sprite(ImageIO.read(new URL(url))));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public void loadImage(String imageName, String query) {
+		File imagePath = new File(texturePath, "/" + imageName);
+		//Ordner vor Classpath
+		if (imagePath.isFile()) {
+			try {
+				sprites.put(query, new Sprite(ImageIO.read(imagePath)));
+				convertToGoodFormat(query);
+			} catch (IOException exeption) {
+				exeption.printStackTrace();
+				Game.console.log("");
+			}
+		} else {
+			System.out.println(imageName);
+			URL url = Game.game.getClass().getResource("/textures/"+imageName);
+			loadImageFromURL(url, query);
+			convertToGoodFormat(query);
 		}
 	}
 
+	/**
+	 * Lädt eine Image von einer Url
+	 * 
+	 * @param url
+	 *            URL des Images
+	 * @param query
+	 *            Query der Textur
+	 */
+	public void loadImageFromURL(URL url, String query) {
+		try {
+			sprites.put(query, new Sprite(ImageIO.read(url)));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			Game.console.log("URL is not valid!");
+		} catch (IOException e) {
+			e.printStackTrace();
+			Game.console.log("Couldn't download Image!");
+		}
+	}
 
 	/**
 	 * Gibt die Breite einer Textur zurück
@@ -143,7 +155,7 @@ public class ResourceManager {
 	 * @return
 	 */
 	public int getResourceWidth(String pQuery) {
-		return this.getResource(pQuery).getWidth();
+		return this.getSprite(pQuery).getWidth();
 	}
 
 	/**
@@ -154,7 +166,7 @@ public class ResourceManager {
 	 * @return
 	 */
 	public int getResourceHeight(String pQuery) {
-		return this.getResource(pQuery).getHeight();
+		return this.getSprite(pQuery).getHeight();
 	}
 
 	/**
@@ -237,16 +249,15 @@ public class ResourceManager {
 		if (env == null || device == null || config == null)
 			return;
 
-		if (getResource(pQuery).getImage().getColorModel().equals(config.getColorModel()))
+		if (getSprite(pQuery).getImage().getColorModel().equals(config.getColorModel()))
 			return;
 
-		BufferedImage buffy = config.createCompatibleImage(getResource(pQuery).getWidth(), getResource(pQuery).getHeight(), Transparency.TRANSLUCENT);
+		BufferedImage buffy = config.createCompatibleImage(getSprite(pQuery).getWidth(), getSprite(pQuery).getHeight(), Transparency.TRANSLUCENT);
 
 		Graphics2D g = (Graphics2D) buffy.getGraphics();
-		g.drawImage(getResource(pQuery).getImage(), 0, 0, null);
+		g.drawImage(getSprite(pQuery).getImage(), 0, 0, null);
 		g.dispose();
 		sprites.put(pQuery, new Sprite(buffy));
-
 	}
 
 	/**

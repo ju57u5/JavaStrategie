@@ -8,8 +8,8 @@ import static tk.ju57u5v.engine.Game.*;
 
 public class Tile extends GameObject {
 
-	public static int TILEWIDTH=30;
-	public static int TILEHEIGHT=30;
+	public static int TILEWIDTH=200;
+	public static int TILEHEIGHT=200;
 	private boolean walkable=true;
 	private int texture = 1;
 	private String tileTexture="tile_grass";
@@ -18,7 +18,7 @@ public class Tile extends GameObject {
 		super();
 
 		initialise();
-		
+		this.texture=texture;
 		switch (texture) {
 		case 0:
 			tileTexture="tile_grass";
@@ -41,7 +41,7 @@ public class Tile extends GameObject {
 
 	@Override
 	public void render(Graphics2D g) {
-		getResourceManager().getResource(tileTexture).draw(g, getRelativIsoX(), getRelativIsoY());
+		getResourceManager().getSprite(tileTexture).draw(g, getRelativX(), getRelativY());
 	}
 
 	public boolean isWalkable() {

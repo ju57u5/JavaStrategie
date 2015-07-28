@@ -29,6 +29,9 @@ public class Sprite {
 		return image.getHeight();
 	}
 
+	public Vec2 getDimensions() {
+		return new Vec2(getWidth(),getHeight());
+	}
 	public BufferedImage getImage() {
 		return image;
 	}

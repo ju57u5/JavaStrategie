@@ -278,6 +278,6 @@ public class Rect {
 	}
 	
 	public Vec2 getMiddel() {
-		return getPosition().minus(dimension.div(2));
+		return getPosition().plus(dimension.div(2));
 	}
 }

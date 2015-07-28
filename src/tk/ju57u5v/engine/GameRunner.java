@@ -55,7 +55,7 @@ public class GameRunner extends Thread {
 	 * Wird bei jedem Update Ausgeführt; sollte überschrieben werden.
 	 */
 	public void tick() {
-
+		Game.game.tick();
 	}
 
 	/**

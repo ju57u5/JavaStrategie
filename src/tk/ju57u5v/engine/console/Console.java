@@ -75,7 +75,7 @@ public class Console extends JPanel implements KeyListener, WindowListener {
 
 		consoleInput = new TextField(1);
 		consoleInput.setBounds(0, 540, 900, 20);
-		// Tab wechselt nicht den Focus
+		// Tab wechselt nicht den Focus (also nicht den Cursor)
 		consoleInput.setFocusTraversalKeysEnabled(false);
 
 		consoleInput.addKeyListener(this);

@@ -54,7 +54,7 @@ public class Entity extends GameObject implements Updatetable {
 	/**
 	 * Entlädt das Entity
 	 */
-	public void unload() {
+	public void destroy() {
 		getRenderer().removeEntity(this);
 	}
 

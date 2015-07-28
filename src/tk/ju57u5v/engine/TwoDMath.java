@@ -21,7 +21,7 @@ public class TwoDMath {
 	 *            Höhe des Rechteckes
 	 * @return
 	 */
-	public static boolean isInRect(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
+	public static boolean isInRect(double x, double y, double rectX, double rectY, double rectWidth, double rectHeight) {
 		return (x <= (rectX + rectWidth) && y <= (rectY + rectHeight) && x >= rectX && y >= rectY);
 	}
 
@@ -46,7 +46,7 @@ public class TwoDMath {
 	 *            Höhe des 2.Rechteckes
 	 * @return
 	 */
-	public static boolean isRectInRect(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2) {
+	public static boolean isRectInRect(double x1, double y1, double width1, double height1, double x2, double y2, double width2, double height2) {
 		return (x2 <= (x1 + width1) && (x2 + width2) >= x1 && (y1 + height1) >= y2 && y1 <= (y2 + height2));
 	}
 
@@ -138,5 +138,13 @@ public class TwoDMath {
 	 */
 	public static Vec2 toIsoPosition(Vec2 pos) {
 		return new Vec2(toIsoX(pos.getX(), pos.getY()), toIsoY(pos.getX(), pos.getY()));
+	}
+	
+	public static boolean isRectInRect(Vec2 pos1, Vec2 dim1, Vec2 pos2, Vec2 dim2) {
+		return isRectInRect(pos1.x, pos1.y, dim1.x, dim1.y, pos2.x, pos2.y, dim2.x, dim2.y);
+	}
+	
+	public static boolean isInRect(Vec2 pos1, Vec2 pos2, Vec2 dim2) {
+		return isInRect(pos1.x, pos1.y, pos2.x, pos2.y, dim2.x, dim2.y);
 	}
 }
